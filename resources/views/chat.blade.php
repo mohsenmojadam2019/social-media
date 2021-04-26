@@ -2,11 +2,11 @@
 @section('content')
     <div>
        <div>
-        <searchComponent/>
-        <firendsComponent/>
+        <search-component/>
+        <firends-component/>
        </div>
        <div>
-        <messageComponent/>
+        <message-component/>
        </div>
     </div>
 @endsection
