@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +17,9 @@ use Illuminate\Support\Str;
 
 Route::get('/', function () {
     return view('welcome');
-});Auth::routes();
+});
+Auth::routes();
 
-Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home',[HomeController::class, 'index'])->name('home');
 
+Route::get('chat',[HomeController::class, 'chat'])->name('route');
