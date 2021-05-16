@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ChatEvent;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -14,8 +15,8 @@ class ChatController extends Controller
     {
        return view('chat');
     }
-   public function send()
+   public function send(Request $request)
    {
-
+     event(new ChatEvent($user,$message))
    }
 }

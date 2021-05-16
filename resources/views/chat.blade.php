@@ -1,12 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <div>
-       <div>
-        <search-component/>
-        <firends-component/>
-       </div>
-       <div>
-        <message-component/>
-       </div>
+      <chat-component user-id="{{Auth::user()->id}}"> 
     </div>
 @endsection
