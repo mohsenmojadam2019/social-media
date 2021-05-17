@@ -23,7 +23,8 @@
                     <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">
                        Home
                     </a>
-                    <a href="{{route('chat')}}">chat</a>
+                    <a href="{{route('chat')}}" class="text-lg font-semibold text-gray-100 no-underline">chat</a>
+                    <span>notifications</span>
                 </div>
                 <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
                     @guest

@@ -14,13 +14,25 @@ export default {
     messages,
     friends
   },
-  props:['userId],
+  props:['userId'],
   data(){
    return{
     text:'',
-    message:{}
+    message:{},
     messages:[]
    }
+  },
+  mounted(){
+   Eco.join('chat')
+   .here(users=>{
+
+   })
+   .joining(user=>{
+
+   })
+   .leaving(user=>{
+
+   });
   },
   methods:{
    sendMessage(){
