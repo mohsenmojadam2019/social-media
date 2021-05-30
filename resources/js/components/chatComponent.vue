@@ -2,8 +2,7 @@
  <div>
   <friends-component />
   <messages-component/>
-  <input type="text" v-model="text" @keyup.enter="sendMessage"/>
-  <button @click="sendMessage" class="">send</button>
+  <active-component />
  </div>
 </template>
 <script>
@@ -23,21 +22,10 @@ export default {
    }
   },
   mounted(){
-   Eco.join('chat')
-   .here(users=>{
-
-   })
-   .joining(user=>{
-
-   })
-   .leaving(user=>{
-
-   });
+   
   },
   methods:{
-   sendMessage(){
-     
-   }
+   
   }
-};
+}
 </script>

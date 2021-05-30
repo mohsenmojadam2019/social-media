@@ -2,6 +2,8 @@
 
 namespace App\Notifications;
 use App\Models\User;
+use App\Models\Group;
+use App\Models\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -10,11 +12,15 @@ use Illuminate\Notifications\Notification;
 class NewGroupPost extends Notification
 {
     use Queueable;
+    public $group;
     public $user;
+    public $post;
     
-    public function __construct(User $user)
+    public function __construct(Group $group,User $user,Post $post)
     {
-       $this->user=$user;    
+       $this->group=$group;
+       $this->post=$user;
+       $this->post=$post;    
     }
     public function via($notifiable)
     {
@@ -27,7 +33,7 @@ class NewGroupPost extends Notification
     public function toArray($notifiable)
     {
       return [
-        'data'=>'notification'   
+        'data'=>$this->user->name.'to group '$this->group->name.' posted '.$this->post->title;   
       ];
     }
 }

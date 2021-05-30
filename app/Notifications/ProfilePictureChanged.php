@@ -27,7 +27,7 @@ class ProfilePictureChanged extends Notification
     public function toArray($notifiable)
     {
       return [
-        'data'=>'notification'   
+        'data'=>$this->user->name.' changed his profile picture'   
       ];
     }
 }

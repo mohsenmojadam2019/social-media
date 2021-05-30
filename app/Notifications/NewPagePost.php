@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Notifications;
-use App\Models\User;
+use App\Models\Post;
+use App\Models\Page;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -10,11 +11,13 @@ use Illuminate\Notifications\Notification;
 class NewPagePost extends Notification
 {
     use Queueable;
-    public $user;
+    public $page;
+    public $post;
     
-    public function __construct(User $user)
+    public function __construct(Page $page,Post $post)
     {
-       $this->user=$user;    
+       $this->page=$page; 
+       $this->post=$post;   
     }
     public function via($notifiable)
     {
@@ -27,7 +30,7 @@ class NewPagePost extends Notification
     public function toArray($notifiable)
     {
       return [
-        'data'=>'notification'   
+        'data'=>$this->page->name.' posted '.$this->post->title;   
       ];
     }
 }
