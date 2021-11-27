@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -64,6 +65,7 @@ Route::prefix('group')->group(function(){
 
   Route::prefix('chat')->group(function(){
     Route::get('/',[ChatController::class,'create']);
+    Route::post('message/send',[ChatController::class,'sendMessage']);
     Route::post('store',[ChatController::class,'store']);
     Route::get('edit/{id}',[ChatController::class,'edit']);
     Route::get('delete',[ChatController::class,'delete']);
