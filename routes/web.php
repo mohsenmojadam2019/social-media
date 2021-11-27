@@ -61,3 +61,10 @@ Route::prefix('group')->group(function(){
     Route::get('edit/{id}',[ProfileController::class,'edit']);
     Route::get('delete',[ProfileController::class,'delete']);
   });
+
+  Route::prefix('chat')->group(function(){
+    Route::get('/',[ChatController::class,'create']);
+    Route::post('store',[ChatController::class,'store']);
+    Route::get('edit/{id}',[ChatController::class,'edit']);
+    Route::get('delete',[ChatController::class,'delete']);
+  });
