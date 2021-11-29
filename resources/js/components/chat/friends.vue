@@ -9,12 +9,21 @@
 <script>
 export default {
   props:{
-
+   user:{
+     type:Object,
+     required:true
+   }
   },
   data(){
    return{
-
+    friends:[]
    }   
+  },
+  mounted(){
+    axios.get('/chat/friends',{params:{userId:this.user.id}})
+    .then(res=>{
+      this.friends=res.data.friends;
+    });
   },
   methods:{
       

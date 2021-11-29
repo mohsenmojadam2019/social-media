@@ -73,7 +73,7 @@ import notification from'./notification.vue';
 export default {
    props:{
     user:{
-     type:,
+     type:Object,
      required:true
     }
    },

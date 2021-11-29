@@ -20,7 +20,16 @@
 </template>
 <script>
 export default {
-  props:['userId','friendId'],
+  props:{
+    user:{
+     type:Object,
+     required:true
+    },
+    friend:{
+     type:Object,
+     required:true
+    }
+  },
     data(){
      return{
       text:'',
@@ -29,7 +38,7 @@ export default {
     },
     mounted()
     {
-      axios.get('/chat/messages',{params:{userId:this.userId,friendId:this.friendId}})
+      axios.get('/chat/messages',{params:{userId:this.user.id,friendId:this.friendId}})
       .then(res=>{
          this.messages=res.data.messages;
       })

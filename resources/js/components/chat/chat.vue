@@ -6,12 +6,14 @@
  </div>
 </template>
 <script>
-import { messages } from "./messagesComponent.vue";
-import { friends } from "./friendsComponent.vue";
+import messages from "./messages.vue";
+import friends from "./friends.vue";
+import active from "./active.vue"
 export default {
   components: {
     messages,
-    friends
+    friends,
+    active
   },
   props:['userId'],
   data(){
