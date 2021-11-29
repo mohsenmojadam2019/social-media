@@ -10,6 +10,7 @@
 .text-first{
  color: #3b5998;
 }
-border-first{
+.border-first{
+ --tw-border-opacity: 1;
  border-color: #3b5998;
 }

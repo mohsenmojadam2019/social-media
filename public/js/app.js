@@ -1861,6 +1861,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2048,18 +2050,27 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    axios.get('/chat/messages', {
-      params: {
-        userId: this.user.id,
-        friendId: this.friendId
-      }
-    }).then(function (res) {
-      _this.messages = res.data.messages;
-    });
+    this.getMessages();
+    this.listen();
   },
   methods: {
+    getMessages: function getMessages() {
+      var _this = this;
+
+      axios.get('/chat/messages', {
+        params: {
+          userId: this.user.id,
+          friendId: this.friendId
+        }
+      }).then(function (res) {
+        _this.messages = res.data.messages;
+      });
+    },
+    listen: function listen() {
+      Echo["private"]('chat').listen('.NewMessage', function (message) {
+        console.log(message);
+      });
+    },
     sendMessage: function sendMessage() {
       var _this2 = this;
 
@@ -2358,8 +2369,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
   broadcaster: 'pusher',
-  key: "",
-  cluster: "mt1",
+  key: "b1117a6fc6d6bb099ea4",
+  cluster: "ap2",
   forceTLS: true
 });
 
@@ -44375,22 +44386,41 @@ var render = function () {
     _c(
       "ul",
       _vm._l(_vm.activeUsers, function (active) {
-        return _c("li", { key: active.id, staticClass: "flex" }, [
-          _c("img", {
-            staticClass: "w-5 h-5 rounded-full m-1",
-            attrs: { src: "/storage/users/" + active.id },
-          }),
-          _vm._v(" "),
-          _c("p", { staticClass: "text-xl mx-1 my-auto" }, [
-            _vm._v(_vm._s(active.name)),
-          ]),
-        ])
+        return _c(
+          "li",
+          {
+            key: active.id,
+            staticClass:
+              "flex justify-between py-0.5 hover:bg-gray-200 cursor-pointer px-2",
+          },
+          [
+            _c("img", {
+              staticClass: "w-14 h-14 rounded-full mx-1",
+              attrs: {
+                src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
+              },
+            }),
+            _vm._v(" "),
+            _vm._m(0, true),
+          ]
+        )
       }),
       0
     ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "my-auto mx-2 space-y-2" }, [
+      _c("p", { staticClass: "text-lg font-medium my-auto" }, [
+        _vm._v("getachew fikadu"),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -44415,7 +44445,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "flex min-h-96 max-h-screen bg-white" },
+    { staticClass: "md:flex min-h-96 max-h-screen bg-white" },
     [
       _c("friends-component", {
         staticClass: "overflow-auto w-1/4",
@@ -44423,8 +44453,7 @@ var render = function () {
       }),
       _vm._v(" "),
       _c("messages-component", {
-        staticClass:
-          "w-1/2 overflow-auto border-r-2 border-l-2 border-gray-300",
+        staticClass: "w-1/2 overflow-auto border-r border-l border-gray-300",
         attrs: { user: _vm.user, friend: _vm.friend },
       }),
       _vm._v(" "),
@@ -44461,7 +44490,8 @@ var render = function () {
     [
       _c("div", [
         _c("input", {
-          staticClass: "text-lg w-full bg-gray-200 focus:bg-white py-2 px-3",
+          staticClass:
+            "text-gray-700 text-lg w-full bg-gray-200 focus:bg-white py-2 px-3",
           attrs: { type: "text", placeholder: "search" },
           on: { input: _vm.filterFriends },
         }),
@@ -44608,7 +44638,7 @@ var render = function () {
               },
             ],
             staticClass:
-              "outline-none border-b-2 border-white focus:border-first text-xl p-2.5 w-5/6",
+              "outline-none border-b-2 border-gray-300 focus:border-first text-xl p-2.5 w-5/6",
             attrs: {
               type: "text",
               required: "",

@@ -17,7 +17,7 @@
    </div>  
    <div class="absolute bottom-1 w-full">
     <form @submit.prevent="sendMessage" class="flex w-11/12 mx-auto my-1">
-      <input type="text" v-model="text" required placeholder="write a message..." class="outline-none border-b-2 border-white focus:border-first text-xl p-2.5 w-5/6">
+      <input type="text" v-model="text" required placeholder="write a message..." class="outline-none border-b-2 border-gray-300 focus:border-first text-xl p-2.5 w-5/6">
       <input type="submit" value="send" class="text-white bg-first rounded-r-3xl py-2 px-4 text-xl">
     </form>
    </div>  
