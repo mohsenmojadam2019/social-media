@@ -1,6 +1,12 @@
 <template>
-  <div>
+  <div class="relative">
    <div class="">
+     <div v-if="messages.length">
+          
+     </div>
+     <div v-else>
+      <p class="text-2xl text-gray-600 text-center my-auto">please select a chat to start messaging</p>
+     </div>
      <ul class="list-style-none">
        <li v-for="message in messages" :key="message.id">
          <img :src="message.user.imgSource" alt="" class="w-5 h-5 rounded-full">
@@ -9,13 +15,13 @@
         </p>
        </li>
      </ul>
-    </div>  
-  <div>
-    <form @submit.prevent="sendMessage" class="flex m-2">
-      <input type="text" v-model="text" required class="p-2.5 w-96">
-      <input type="submit" value="send" class="text-white bg-first rounded-r-lg py-2 px-5 text-xl">
+   </div>  
+   <div class="absolute bottom-1 w-full m-1">
+    <form @submit.prevent="sendMessage" class="flex w-full m-1">
+      <input type="text" v-model="text" required placeholder="write a message..." class="text-xl p-3 w-5/6">
+      <input type="submit" value="send" class="text-white bg-first rounded-r-3xl py-2 px-4 text-xl">
     </form>
-  </div>  
+   </div>  
   </div>  
 </template>
 <script>

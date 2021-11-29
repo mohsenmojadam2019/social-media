@@ -1952,6 +1952,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     user: {
@@ -1975,7 +1977,9 @@ __webpack_require__.r(__webpack_exports__);
       _this.friends = res.data.friends;
     });
   },
-  methods: {}
+  methods: {
+    showMessages: function showMessages(friend) {}
+  }
 });
 
 /***/ }),
@@ -1991,6 +1995,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -44424,8 +44434,32 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(10, function (x) {
-      return _c("div", { key: x }, [_vm._m(0, true)])
+    _vm._l(5, function (x) {
+      return _c("div", { key: x }, [
+        _c(
+          "div",
+          {
+            staticClass: "flex p-0.5 hover:bg-gray-200 cursor-pointer px-1",
+            on: {
+              click: function ($event) {
+                return _vm.showMessages()
+              },
+            },
+          },
+          [
+            _c("img", {
+              staticClass: "w-14 h-14 rounded-full mx-1",
+              attrs: {
+                src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
+              },
+            }),
+            _vm._v(" "),
+            _vm._m(0, true),
+            _vm._v(" "),
+            _vm._m(1, true),
+          ]
+        ),
+      ])
     }),
     0
   )
@@ -44435,17 +44469,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex p-2" }, [
-      _c("img", {
-        staticClass: "w-5 h-5 rounded-full m-1",
-        attrs: {
-          src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
-        },
-      }),
-      _vm._v(" "),
-      _c("p", { staticClass: "capitalize text-xl text-first my-auto" }, [
+    return _c("div", { staticClass: "my-auto mx-2 space-y-2" }, [
+      _c("p", { staticClass: "text-lg font-medium my-auto" }, [
         _vm._v("getachew fikadu"),
       ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "text-gray-600 text-base" }, [
+        _vm._v("last message"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("p", { staticClass: "tetx-gray-500 m-2" }, [_vm._v("12:45")]),
     ])
   },
 ]
@@ -44471,8 +44510,18 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "relative" }, [
     _c("div", {}, [
+      _vm.messages.length
+        ? _c("div")
+        : _c("div", [
+            _c(
+              "p",
+              { staticClass: "text-2xl text-gray-600 text-center my-auto" },
+              [_vm._v("please select a chat to start messaging")]
+            ),
+          ]),
+      _vm._v(" "),
       _c(
         "ul",
         { staticClass: "list-style-none" },
@@ -44501,11 +44550,11 @@ var render = function () {
       ),
     ]),
     _vm._v(" "),
-    _c("div", [
+    _c("div", { staticClass: "absolute bottom-1 w-full m-1" }, [
       _c(
         "form",
         {
-          staticClass: "flex m-2",
+          staticClass: "flex w-full m-1",
           on: {
             submit: function ($event) {
               $event.preventDefault()
@@ -44523,8 +44572,12 @@ var render = function () {
                 expression: "text",
               },
             ],
-            staticClass: "p-2.5 w-96",
-            attrs: { type: "text", required: "" },
+            staticClass: "text-xl p-3 w-5/6",
+            attrs: {
+              type: "text",
+              required: "",
+              placeholder: "write a message...",
+            },
             domProps: { value: _vm.text },
             on: {
               input: function ($event) {
@@ -44537,7 +44590,7 @@ var render = function () {
           }),
           _vm._v(" "),
           _c("input", {
-            staticClass: "text-white bg-first rounded-r-lg py-2 px-5 text-xl",
+            staticClass: "text-white bg-first rounded-r-3xl py-2 px-4 text-xl",
             attrs: { type: "submit", value: "send" },
           }),
         ]
@@ -44765,7 +44818,8 @@ var render = function () {
                     _c(
                       "svg",
                       {
-                        staticClass: "font-medium my-auto text-white h-8 w-6",
+                        staticClass:
+                          "my-auto font-medium my-auto text-white h-8 w-6",
                         attrs: {
                           xmlns: "http://www.w3.org/2000/svg",
                           fill: "none",
