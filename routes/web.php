@@ -64,7 +64,7 @@ Route::prefix('group')->group(function(){
   });
 
   Route::prefix('chat')->group(function(){
-    Route::get('/',[ChatController::class,'create']);
+    Route::get('/',[ChatController::class,'index'])->name('chat');
     Route::post('message/send',[ChatController::class,'sendMessage']);
     Route::post('store',[ChatController::class,'store']);
     Route::get('edit/{id}',[ChatController::class,'edit']);
