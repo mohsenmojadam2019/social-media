@@ -1,8 +1,8 @@
 <template>
- <div class="flex border-2 border-blue-500 w-96">
-  <friends-component :user="user" class="w-1/4 border-2 border-blue-500" />
-  <messages-component :user="user" :friend="friend" class="w-1/2" />
-  <active-component class="w-1/4 border-2 border-blue-500"/>
+ <div class="flex border-2 border-blue-500 max-h-screen bg-white">
+  <friends-component :user="user" class="overflow-auto w-1/4 border-2 border-blue-500" />
+  <messages-component :user="user" :friend="friend" class="w-1/2 overflow-auto" />
+  <active-component class="w-1/4 border-2 border-blue-500 overflow-auto"/>
  </div>
 </template>
 <script>

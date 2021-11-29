@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div v-for="x in 10" :key="x">
+      <div v-for="x in 20" :key="x">
         <div @click="showMessages()" class="flex p-0.5 hover:bg-gray-200 cursor-pointer px-1">
          <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-14 h-14 rounded-full mx-1">
          <div class="my-auto mx-2 space-y-2">

@@ -2020,7 +2020,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     user: {
@@ -44392,19 +44391,21 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "flex border-2 border-blue-500" },
+    { staticClass: "flex border-2 border-blue-500 max-h-screen bg-white" },
     [
       _c("friends-component", {
-        staticClass: "w-1/4 border-2 border-blue-500",
+        staticClass: "overflow-auto w-1/4 border-2 border-blue-500",
         attrs: { user: _vm.user },
       }),
       _vm._v(" "),
       _c("messages-component", {
-        staticClass: "w-1/2",
+        staticClass: "w-1/2 overflow-auto",
         attrs: { user: _vm.user, friend: _vm.friend },
       }),
       _vm._v(" "),
-      _c("active-component", { staticClass: "w-1/4 border-2 border-blue-500" }),
+      _c("active-component", {
+        staticClass: "w-1/4 border-2 border-blue-500 overflow-auto",
+      }),
     ],
     1
   )
@@ -44434,7 +44435,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(5, function (x) {
+    _vm._l(20, function (x) {
       return _c("div", { key: x }, [
         _c(
           "div",
@@ -44513,48 +44514,48 @@ var render = function () {
   return _c("div", { staticClass: "relative" }, [
     _c("div", {}, [
       _vm.messages.length
-        ? _c("div")
-        : _c("div", [
+        ? _c("div", [
+            _c(
+              "ul",
+              { staticClass: "list-style-none" },
+              _vm._l(_vm.messages, function (message) {
+                return _c("li", { key: message.id }, [
+                  _c("img", {
+                    staticClass: "w-5 h-5 rounded-full",
+                    attrs: { src: message.user.imgSource, alt: "" },
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      staticClass: "text-xl rounded",
+                      class: [
+                        message.user.id == _vm.userId
+                          ? "right-0 bg-green-100"
+                          : "bg-blue-100",
+                      ],
+                    },
+                    [_vm._v("\n        " + _vm._s(message.body) + "\n      ")]
+                  ),
+                ])
+              }),
+              0
+            ),
+          ])
+        : _c("div", { staticClass: "my-auto" }, [
             _c(
               "p",
               { staticClass: "text-2xl text-gray-600 text-center my-auto" },
               [_vm._v("please select a chat to start messaging")]
             ),
           ]),
-      _vm._v(" "),
-      _c(
-        "ul",
-        { staticClass: "list-style-none" },
-        _vm._l(_vm.messages, function (message) {
-          return _c("li", { key: message.id }, [
-            _c("img", {
-              staticClass: "w-5 h-5 rounded-full",
-              attrs: { src: message.user.imgSource, alt: "" },
-            }),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass: "text-xl rounded",
-                class: [
-                  message.user.id == _vm.userId
-                    ? "right-0 bg-green-100"
-                    : "bg-blue-100",
-                ],
-              },
-              [_vm._v("\n        " + _vm._s(message.body) + "\n      ")]
-            ),
-          ])
-        }),
-        0
-      ),
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "absolute bottom-1 w-full m-1" }, [
       _c(
         "form",
         {
-          staticClass: "flex w-full m-1",
+          staticClass: "flex w-11/12 mx-auto my-1",
           on: {
             submit: function ($event) {
               $event.preventDefault()
@@ -44572,7 +44573,8 @@ var render = function () {
                 expression: "text",
               },
             ],
-            staticClass: "text-xl p-3 w-5/6",
+            staticClass:
+              "outline-none border-b-2 border-first text-xl p-3 w-5/6",
             attrs: {
               type: "text",
               required: "",
