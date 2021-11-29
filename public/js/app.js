@@ -1924,7 +1924,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       text: '',
-      friend: {},
+      activeFriend: {},
       message: {},
       messages: []
     };
@@ -2029,9 +2029,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     user: {
@@ -2045,7 +2042,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      text: '',
+      message: '',
       messages: []
     };
   },
@@ -2074,13 +2071,15 @@ __webpack_require__.r(__webpack_exports__);
     sendMessage: function sendMessage() {
       var _this2 = this;
 
-      axios.post('chat/sendMessage', {
-        text: this.text,
-        from: this.userId
+      axios.post('/chat/message/send', {
+        message: this.message,
+        user: this.user
       }).then(function (res) {
         var message = res.data.message;
 
         _this2.messages.unshift(message);
+
+        _this2.message = "";
       });
     }
   }
@@ -44445,7 +44444,10 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "md:flex min-h-96 max-h-screen bg-white" },
+    {
+      staticClass:
+        "md:flex lg:flex xl:flex 2xl:flex min-h-96 max-h-screen bg-white",
+    },
     [
       _c("friends-component", {
         staticClass: "overflow-auto w-1/4",
@@ -44454,7 +44456,7 @@ var render = function () {
       _vm._v(" "),
       _c("messages-component", {
         staticClass: "w-1/2 overflow-auto border-r border-l border-gray-300",
-        attrs: { user: _vm.user, friend: _vm.friend },
+        attrs: { user: _vm.user, friend: _vm.activeFriend },
       }),
       _vm._v(" "),
       _c("active-component", { staticClass: "w-1/4 overflow-auto" }),
@@ -44583,24 +44585,10 @@ var render = function () {
               "ul",
               { staticClass: "list-style-none" },
               _vm._l(_vm.messages, function (message) {
-                return _c("li", { key: message.id }, [
-                  _c("img", {
-                    staticClass: "w-5 h-5 rounded-full",
-                    attrs: { src: message.user.imgSource, alt: "" },
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    {
-                      staticClass: "text-xl rounded",
-                      class: [
-                        message.user.id == _vm.userId
-                          ? "right-0 bg-green-100"
-                          : "bg-blue-100",
-                      ],
-                    },
-                    [_vm._v("\n        " + _vm._s(message.body) + "\n      ")]
-                  ),
+                return _c("li", { key: message }, [
+                  _c("p", { staticClass: "text-xl rounded" }, [
+                    _vm._v(_vm._s(message)),
+                  ]),
                 ])
               }),
               0
@@ -44633,24 +44621,24 @@ var render = function () {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.text,
-                expression: "text",
+                value: _vm.message,
+                expression: "message",
               },
             ],
             staticClass:
-              "outline-none border-b-2 border-gray-300 focus:border-first text-xl p-2.5 w-5/6",
+              "outline-none border-b-2 border-gray-300 focus:border-blue-500 text-xl p-2.5 w-5/6",
             attrs: {
               type: "text",
               required: "",
               placeholder: "write a message...",
             },
-            domProps: { value: _vm.text },
+            domProps: { value: _vm.message },
             on: {
               input: function ($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.text = $event.target.value
+                _vm.message = $event.target.value
               },
             },
           }),

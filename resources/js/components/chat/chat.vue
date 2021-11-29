@@ -1,7 +1,7 @@
 <template>
  <div class="md:flex lg:flex xl:flex 2xl:flex min-h-96 max-h-screen bg-white">
   <friends-component :user="user" class="overflow-auto w-1/4" />
-  <messages-component :user="user" :friend="friend" class="w-1/2 overflow-auto border-r border-l border-gray-300" />
+  <messages-component :user="user" :friend="activeFriend" class="w-1/2 overflow-auto border-r border-l border-gray-300" />
   <active-component class="w-1/4 overflow-auto"/>
  </div>
 </template>
@@ -24,7 +24,7 @@ export default {
   data(){
    return {
     text:'',
-    friend:{},
+    activeFriend:{},
     message:{},
     messages:[]
    }

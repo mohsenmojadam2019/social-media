@@ -68,8 +68,8 @@ Route::prefix('group')->group(function(){
     Route::get('/',[ChatController::class,'index'])->name('chat');
     Route::post('message/send',[ChatController::class,'sendMessage']);
     Route::post('store',[ChatController::class,'store']);
-    Route::get('edit/{id}',[ChatController::class,'edit']);
-    Route::get('delete',[ChatController::class,'delete']);
+    Route::get('message/edit',[ChatController::class,'edit']);
+    Route::get('message/delete',[ChatController::class,'delete']);
   });
 
   Route::prefix('user')->group(function(){

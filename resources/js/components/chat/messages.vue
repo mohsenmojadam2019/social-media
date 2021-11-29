@@ -3,11 +3,8 @@
    <div class="">
      <div v-if="messages.length">
       <ul class="list-style-none">
-       <li v-for="message in messages" :key="message.id">
-        <img :src="message.user.imgSource" alt="" class="w-5 h-5 rounded-full">
-        <p class="text-xl rounded" :class="[message.user.id==userId ? 'right-0 bg-green-100':'bg-blue-100']">
-          {{message.body}}
-        </p>
+       <li v-for="message in messages" :key="message">
+        <p class="text-xl rounded">{{message}}</p>
        </li>
       </ul>   
      </div>
@@ -60,10 +57,11 @@ export default {
         })  
       },
       sendMessage(){
-        axios.post('chat/sendMessage',{message:this.message,from:this.user.id})
+        axios.post('/chat/message/send',{message:this.message,user:this.user})
         .then(res=>{
           let message=res.data.message;
           this.messages.unshift(message);
+          this.message="";
         });
       }
     }
