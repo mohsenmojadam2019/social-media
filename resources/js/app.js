@@ -22,12 +22,12 @@ window.Vue = require('vue').default;
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('navigation-component', require('./components/navigation.vue').default);
 Vue.component('notification-component', require('./components/notification.vue').default);
-Vue.component('search-component', require('./components/search.vue').default);
+//Vue.component('search-component', require('./components/search.vue').default);
 
-// Vue.component('active-component', require('./components/chat/active.vue').default);
-// Vue.component('chat-component', require('./components/chat/chat.vue').default);
-// Vue.component('friends-component', require('./components/chat/friends.vue').default);
-// Vue.component('messages-component', require('./components/chat/messages.vue').default);
+Vue.component('active-component', require('./components/chat/active.vue').default);
+Vue.component('chat-component', require('./components/chat/chat.vue').default);
+Vue.component('friends-component', require('./components/chat/friends.vue').default);
+Vue.component('messages-component', require('./components/chat/messages.vue').default);
 
 // Vue.component('addfriend-component', require('./components/friend/addFriend.vue').default);
 // Vue.component('cancelfriend-component', require('./components/friend/cancelFriend.vue').default);
