@@ -3,3 +3,10 @@
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
+
+.bg-first{
+ background-color: #3b5998;
+}
+.text-first{
+ color: #3b5998;
+}

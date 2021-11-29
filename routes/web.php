@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,4 +70,9 @@ Route::prefix('group')->group(function(){
     Route::post('store',[ChatController::class,'store']);
     Route::get('edit/{id}',[ChatController::class,'edit']);
     Route::get('delete',[ChatController::class,'delete']);
+  });
+
+  Route::prefix('user')->group(function(){
+   Route::get('notifications',[UserController::class,'notifications']);
+   Route::post('notification/unread',[UserController::class,'unreadNotification']);
   });

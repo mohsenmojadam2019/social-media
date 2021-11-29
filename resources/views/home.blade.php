@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div>
-  <div>
+  {{-- <div>
    @foreach ($friends as $friend)
      <div>
       <img src="/storage/users/profilepicture/{{$user->profile->avatar}}" >
@@ -19,7 +19,7 @@
      <comment-component user-id="{{Auth::user()->id}}" post-id="{{$post->id}}"/>   
    </div>        
    @endforeach
-  </div>
+  </div> --}}
   <div>
    
   </div>

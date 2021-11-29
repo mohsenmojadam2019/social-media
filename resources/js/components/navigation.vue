@@ -20,14 +20,14 @@
     </div>
     <div class="font-medium my-auto text-white text-xl mx-5 hidden lg:inline xl:inline 2xl:inline">
      <ul class="flex list-style-none h-full">
-      <li class="my-auto mx-2 h-full p-1"><a href="/channel/create" class="text-2xl my-auto">create</a></li>
-      <li class=" my-auto mx-2 h-full p-1"><a href="/video/upload" class="text-2xl my-auto">upload</a></li>
+      <li class="my-auto mx-2 h-full p-1"><a href="/chat" class="text-2xl my-auto">chat</a></li>
+      <li class=" my-auto mx-2 h-full p-1"><a href="/video/upload" class="text-2xl my-auto"></a></li>
       <li class="my-auto mx-2 h-full p-1"><a href="/collection" class="text-2xl my-auto"></a></li>   
      </ul>   
     </div>
     <div class="my-auto hidden md:flex lg:flex xl:flex 2xl:flex mx-2">
       <div class="my-auto mx-3">
-       <notifications-component :user="user"/>   
+       <notification-component :user="user"/>   
       </div>   
     </div>
     <div class="block right-0 lg:hidden xl:hidden 2xl:hidden">
@@ -69,8 +69,17 @@
  </div>
 </template>
 <script>
+import notification from'./notification.vue';
 export default {
-   props:['user'],
+   props:{
+    user:{
+     type:object,
+     required:true
+    }
+   },
+   components:{
+    notification
+   },
    data(){
     return{
       searchQuery:'',

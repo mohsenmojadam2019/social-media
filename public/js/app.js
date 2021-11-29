@@ -1845,6 +1845,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _notification_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./notification.vue */ "./resources/js/components/notification.vue");
 //
 //
 //
@@ -1915,14 +1916,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['user'],
+  components: {
+    notification: _notification_vue__WEBPACK_IMPORTED_MODULE_0__.default
+  },
   data: function data() {
     return {
-      user: {},
       searchQuery: '',
       userDropdownMenu: false
     };
@@ -44037,7 +44038,31 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _vm._m(0),
+        _c(
+          "div",
+          {
+            staticClass:
+              "font-medium my-auto text-white text-xl mx-5 hidden lg:inline xl:inline 2xl:inline",
+          },
+          [
+            _c("ul", { staticClass: "flex list-style-none h-full" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("li", { staticClass: " my-auto mx-2 h-full p-1" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "text-2xl my-auto",
+                    attrs: { href: "/video/upload" },
+                  },
+                  [_vm._v(_vm._s(_vm.user.id))]
+                ),
+              ]),
+              _vm._v(" "),
+              _vm._m(1),
+            ]),
+          ]
+        ),
         _vm._v(" "),
         _c(
           "div",
@@ -44048,18 +44073,7 @@ var render = function () {
             _c(
               "div",
               { staticClass: "my-auto mx-3" },
-              [_c("collection-component", { attrs: { userId: _vm.userId } })],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "my-auto mx-3" },
-              [
-                _c("notifications-component", {
-                  attrs: { userId: _vm.userId },
-                }),
-              ],
+              [_c("notification-component", { attrs: { user: _vm.user } })],
               1
             ),
           ]
@@ -44082,7 +44096,7 @@ var render = function () {
                 _c(
                   "svg",
                   {
-                    staticClass: "text-green-500 h-10 w-14",
+                    staticClass: "text-white h-10 w-14",
                     attrs: {
                       xmlns: "http://www.w3.org/2000/svg",
                       fill: "none",
@@ -44108,7 +44122,7 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "mx-3 my-auto" }, [
-        _vm.userId
+        _vm.user
           ? _c(
               "div",
               { staticClass: "my-auto hidden lg:inline xl:inline 2xl:inline" },
@@ -44190,8 +44204,6 @@ var render = function () {
               { staticClass: "fixed z-20 text-xl bg-gray-100 top-2 right-2" },
               [
                 _c("ul", [
-                  _vm._m(1),
-                  _vm._v(" "),
                   _vm._m(2),
                   _vm._v(" "),
                   _vm._m(3),
@@ -44201,6 +44213,8 @@ var render = function () {
                   _vm._m(5),
                   _vm._v(" "),
                   _vm._m(6),
+                  _vm._v(" "),
+                  _vm._m(7),
                   _vm._v(" "),
                   _c("li", { staticClass: "hover:bg-blue-200 px-5 py-1" }, [
                     _c("button", { on: { click: _vm.logout } }, [
@@ -44232,45 +44246,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "font-medium my-auto text-white text-xl mx-5 hidden lg:inline xl:inline 2xl:inline",
-      },
-      [
-        _c("ul", { staticClass: "flex list-style-none h-full" }, [
-          _c("li", { staticClass: "my-auto mx-2 h-full p-1" }, [
-            _c(
-              "a",
-              {
-                staticClass: "text-2xl my-auto",
-                attrs: { href: "/channel/create" },
-              },
-              [_vm._v("create")]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: " my-auto mx-2 h-full p-1" }, [
-            _c(
-              "a",
-              {
-                staticClass: "text-2xl my-auto",
-                attrs: { href: "/video/upload" },
-              },
-              [_vm._v("upload")]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "my-auto mx-2 h-full p-1" }, [
-            _c("a", {
-              staticClass: "text-2xl my-auto",
-              attrs: { href: "/collection" },
-            }),
-          ]),
-        ]),
-      ]
-    )
+    return _c("li", { staticClass: "my-auto mx-2 h-full p-1" }, [
+      _c("a", { staticClass: "text-2xl my-auto", attrs: { href: "/chat" } }, [
+        _vm._v("chat"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "my-auto mx-2 h-full p-1" }, [
+      _c("a", {
+        staticClass: "text-2xl my-auto",
+        attrs: { href: "/collection" },
+      }),
+    ])
   },
   function () {
     var _vm = this
