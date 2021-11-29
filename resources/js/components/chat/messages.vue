@@ -1,7 +1,7 @@
 <template>
   <div>
    <div class="">
-     <ul class="list-style-none" v-chat-scroll>
+     <ul class="list-style-none">
        <li v-for="message in messages" :key="message.id">
          <img :src="message.user.imgSource" alt="" class="w-5 h-5 rounded-full">
         <p class="text-xl rounded" :class="[message.user.id==userId ? 'right-0 bg-green-100':'bg-blue-100']">
@@ -11,9 +11,9 @@
      </ul>
     </div>  
   <div>
-    <form @submit.prevent="sendMessage">
-      <input type="text" v-model="text" required>
-      <input type="submit" value="send" class="">
+    <form @submit.prevent="sendMessage" class="flex m-2">
+      <input type="text" v-model="text" required class="p-2.5 w-96">
+      <input type="submit" value="send" class="text-white bg-first rounded-r-lg py-2 px-5 text-xl">
     </form>
   </div>  
   </div>  
@@ -41,12 +41,9 @@ export default {
       axios.get('/chat/messages',{params:{userId:this.user.id,friendId:this.friendId}})
       .then(res=>{
          this.messages=res.data.messages;
-      })
-      .catch(err=>{
-        console.log('error in fetching messages');
       });
     },
-    methoids:{
+    methods:{
       sendMessage(){
         axios.post('chat/sendMessage',{text:this.text,from:this.userId})
         .then(res=>{

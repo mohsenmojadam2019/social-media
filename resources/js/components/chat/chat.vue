@@ -1,8 +1,8 @@
 <template>
- <div>
-  <friends-component />
-  <messages-component/>
-  <active-component />
+ <div class="flex border-2 border-blue-500">
+  <friends-component :user="user" class="w-1/4 border-2 border-blue-500" />
+  <messages-component :user="user" :friend="friend" class="w-1/2" />
+  <active-component class="w-1/4 border-2 border-blue-500"/>
  </div>
 </template>
 <script>
@@ -15,10 +15,16 @@ export default {
     friends,
     active
   },
-  props:['userId'],
+  props:{
+    user:{
+      type:Object,
+      required:true
+    }
+  },
   data(){
    return{
     text:'',
+    friend:{},
     message:{},
     messages:[]
    }

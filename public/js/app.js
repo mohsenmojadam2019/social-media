@@ -1854,15 +1854,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      activeusers: []
+      activeUsers: []
     };
   },
   mounted: function mounted() {
-    Eco.join('chat').here(function (users) {}).joining(function (user) {}).leaving(function (user) {});
-  }
+    var _this = this;
+
+    Echo.join('chat').here(function (users) {
+      _this.activeUsers = users;
+    }).joining(function (user) {
+      _this.activeUsers.unshfit(user);
+    }).leaving(function (user) {
+      _this.activeUsers.pop(user);
+    });
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -1897,10 +1907,16 @@ __webpack_require__.r(__webpack_exports__);
     friends: _friends_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     active: _active_vue__WEBPACK_IMPORTED_MODULE_2__.default
   },
-  props: ['userId'],
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
+  },
   data: function data() {
     return {
       text: '',
+      friend: {},
       message: {},
       messages: []
     };
@@ -1930,10 +1946,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {},
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
+  },
   data: function data() {
-    return {};
+    return {
+      friends: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/chat/friends', {
+      params: {
+        userId: this.user.id
+      }
+    }).then(function (res) {
+      _this.friends = res.data.friends;
+    });
   },
   methods: {}
 });
@@ -1972,7 +2012,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['userId', 'friendId'],
+  props: {
+    user: {
+      type: Object,
+      required: true
+    },
+    friend: {
+      type: Object,
+      required: true
+    }
+  },
   data: function data() {
     return {
       text: '',
@@ -1984,16 +2033,14 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get('/chat/messages', {
       params: {
-        userId: this.userId,
+        userId: this.user.id,
         friendId: this.friendId
       }
     }).then(function (res) {
       _this.messages = res.data.messages;
-    })["catch"](function (err) {
-      console.log('error in fetching messages');
     });
   },
-  methoids: {
+  methods: {
     sendMessage: function sendMessage() {
       axios.post('chat/sendMessage', {
         text: this.text,
@@ -44295,8 +44342,15 @@ var render = function () {
     _c(
       "ul",
       _vm._l(_vm.activeUsers, function (active) {
-        return _c("li", { key: active.id }, [
-          _c("p", [_vm._v(_vm._s(active.name))]),
+        return _c("li", { key: active.id, staticClass: "flex" }, [
+          _c("img", {
+            staticClass: "w-5 h-5 rounded-full m-1",
+            attrs: { src: "/storage/users/" + active.id },
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-xl mx-1 my-auto" }, [
+            _vm._v(_vm._s(active.name)),
+          ]),
         ])
       }),
       0
@@ -44328,12 +44382,19 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "flex border-2 border-blue-500" },
     [
-      _c("friends-component"),
+      _c("friends-component", {
+        staticClass: "w-1/4 border-2 border-blue-500",
+        attrs: { user: _vm.user },
+      }),
       _vm._v(" "),
-      _c("messages-component"),
+      _c("messages-component", {
+        staticClass: "w-1/2",
+        attrs: { user: _vm.user, friend: _vm.friend },
+      }),
       _vm._v(" "),
-      _c("active-component"),
+      _c("active-component", { staticClass: "w-1/4 border-2 border-blue-500" }),
     ],
     1
   )
@@ -44363,24 +44424,31 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.friends, function (friend) {
-      return _c(
-        "router-link",
-        { key: friend.id, staticClass: "flex", attrs: { to: _vm.messages } },
-        [
-          _c("img", {
-            staticClass: "w-5 h-5 rounded-full",
-            attrs: { src: "/storage/users/" + friend.avatar, alt: "" },
-          }),
-          _vm._v(" "),
-          _c("p", { staticClass: "text-xl" }, [_vm._v(_vm._s(friend.name))]),
-        ]
-      )
+    _vm._l(10, function (x) {
+      return _c("div", { key: x }, [_vm._m(0, true)])
     }),
-    1
+    0
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex p-2" }, [
+      _c("img", {
+        staticClass: "w-5 h-5 rounded-full m-1",
+        attrs: {
+          src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
+        },
+      }),
+      _vm._v(" "),
+      _c("p", { staticClass: "capitalize text-xl text-first my-auto" }, [
+        _vm._v("getachew fikadu"),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -44407,10 +44475,7 @@ var render = function () {
     _c("div", {}, [
       _c(
         "ul",
-        {
-          directives: [{ name: "chat-scroll", rawName: "v-chat-scroll" }],
-          staticClass: "list-style-none",
-        },
+        { staticClass: "list-style-none" },
         _vm._l(_vm.messages, function (message) {
           return _c("li", { key: message.id }, [
             _c("img", {
@@ -44440,6 +44505,7 @@ var render = function () {
       _c(
         "form",
         {
+          staticClass: "flex m-2",
           on: {
             submit: function ($event) {
               $event.preventDefault()
@@ -44457,6 +44523,7 @@ var render = function () {
                 expression: "text",
               },
             ],
+            staticClass: "p-2.5 w-96",
             attrs: { type: "text", required: "" },
             domProps: { value: _vm.text },
             on: {
@@ -44469,7 +44536,10 @@ var render = function () {
             },
           }),
           _vm._v(" "),
-          _c("input", { attrs: { type: "submit", value: "send" } }),
+          _c("input", {
+            staticClass: "text-white bg-first rounded-r-lg py-2 px-5 text-xl",
+            attrs: { type: "submit", value: "send" },
+          }),
         ]
       ),
     ]),

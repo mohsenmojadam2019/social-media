@@ -12,20 +12,20 @@
 export default {
   data(){
    return{
-    activeusers:[]  
+    activeUsers:[]  
    }  
   },
   mounted(){
     Echo.join('chat')
-   .here(users=>{
-     this.activeUsers=users; 
-   })
-   .joining(user=>{
-    this.activeUsers.unshfit(user);
-   })
-   .leaving(user=>{
-     this.activeUsers.pop(user);
-   });
+    .here(users=>{
+      this.activeUsers=users; 
+    })
+    .joining(user=>{
+     this.activeUsers.unshfit(user);
+    })
+    .leaving(user=>{
+      this.activeUsers.pop(user);
+    });
   },
   methods:{
     
