@@ -15,6 +15,8 @@ class CreateCommentUserTable extends Migration
     {
         Schema::create('comment_user', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('comment_id');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
