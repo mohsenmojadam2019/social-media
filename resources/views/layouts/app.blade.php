@@ -18,7 +18,7 @@
 <body class="bg-gray-100 h-screen antialiased leading-none font-sans">
     <div id="app">
         <header>
-         <navigation-component @auth :user="{{auth()->user()}}" @endauth/>   
+         <navigation-component :user="{{auth()->user()}}"/>   
         </header>
         @yield('content')
     </div>

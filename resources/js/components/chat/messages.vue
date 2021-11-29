@@ -17,7 +17,7 @@
    </div>  
    <div class="absolute bottom-1 w-full">
     <form @submit.prevent="sendMessage" class="flex w-11/12 mx-auto my-1">
-      <input type="text" v-model="text" required placeholder="write a message..." class="outline-none border-b-2 border-gray-300 focus:border-first text-xl p-2.5 w-5/6">
+      <input type="text" v-model="message" required placeholder="write a message..." class="outline-none border-b-2 border-gray-300 focus:border-blue-500 text-xl p-2.5 w-5/6">
       <input type="submit" value="send" class="text-white bg-first rounded-r-3xl py-2 px-4 text-xl">
     </form>
    </div>  
@@ -37,7 +37,7 @@ export default {
   },
     data(){
      return{
-      text:'',
+      message:'',
       messages:[],
      }
     },
@@ -60,7 +60,7 @@ export default {
         })  
       },
       sendMessage(){
-        axios.post('chat/sendMessage',{text:this.text,from:this.userId})
+        axios.post('chat/sendMessage',{message:this.message,from:this.user.id})
         .then(res=>{
           let message=res.data.message;
           this.messages.unshift(message);
