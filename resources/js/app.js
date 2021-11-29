@@ -24,24 +24,24 @@ Vue.component('navigation-component', require('./components/navigation.vue').def
 Vue.component('notification-component', require('./components/notification.vue').default);
 Vue.component('search-component', require('./components/search.vue').default);
 
-Vue.component('active-component', require('./components/chat/active.vue').default);
-Vue.component('chat-component', require('./components/chat/chat.vue').default);
-Vue.component('friends-component', require('./components/chat/friends.vue').default);
-Vue.component('messages-component', require('./components/chat/messages.vue').default);
+// Vue.component('active-component', require('./components/chat/active.vue').default);
+// Vue.component('chat-component', require('./components/chat/chat.vue').default);
+// Vue.component('friends-component', require('./components/chat/friends.vue').default);
+// Vue.component('messages-component', require('./components/chat/messages.vue').default);
 
-Vue.component('addfriend-component', require('./components/friend/addFriend.vue').default);
-Vue.component('cancelfriend-component', require('./components/friend/cancelFriend.vue').default);
-Vue.component('removerequest-component', require('./components/friend/removeRequest.vue').default);
-Vue.component('sendrequest-component', require('./components/sendRequest.vue').default);
+// Vue.component('addfriend-component', require('./components/friend/addFriend.vue').default);
+// Vue.component('cancelfriend-component', require('./components/friend/cancelFriend.vue').default);
+// Vue.component('removerequest-component', require('./components/friend/removeRequest.vue').default);
+// Vue.component('sendrequest-component', require('./components/sendRequest.vue').default);
 
-Vue.component('joingroup-component', require('./components/group/joinGroup.vue').default);
-Vue.component('leavegroup-component', require('./components/roup/leaveGroup.vue').default);
+// Vue.component('joingroup-component', require('./components/group/joinGroup.vue').default);
+// Vue.component('leavegroup-component', require('./components/roup/leaveGroup.vue').default);
 
-Vue.component('joinchannel-component', require('./components/channel/joinChannel.vue').default);
-Vue.component('leavechannel-component', require('./components/channel/leaveChannel.vue').default);
+// Vue.component('joinchannel-component', require('./components/channel/joinChannel.vue').default);
+// Vue.component('leavechannel-component', require('./components/channel/leaveChannel.vue').default);
 
-Vue.component('comment-component', require('./components/post/comment.vue').default);
-Vue.component('like-component', require('./components/comment/like.vue').default);
+// Vue.component('comment-component', require('./components/post/comment.vue').default);
+// Vue.component('like-component', require('./components/comment/like.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
