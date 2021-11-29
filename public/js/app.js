@@ -1855,6 +1855,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1954,6 +1960,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     user: {
@@ -1978,7 +1987,8 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    showMessages: function showMessages(friend) {}
+    showMessages: function showMessages(friend) {},
+    filterFriends: function filterFriends() {}
   }
 });
 
@@ -2051,10 +2061,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     sendMessage: function sendMessage() {
+      var _this2 = this;
+
       axios.post('chat/sendMessage', {
         text: this.text,
         from: this.userId
-      }).then(function (res) {});
+      }).then(function (res) {
+        var message = res.data.message;
+
+        _this2.messages.unshift(message);
+      });
     }
   }
 });
@@ -44348,6 +44364,14 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm.activeUsers.length
+      ? _c("div")
+      : _c("div", [
+          _c("p", { staticClass: "text-2xl text-center my-10 text-gray-600" }, [
+            _vm._v("no active friend is found"),
+          ]),
+        ]),
+    _vm._v(" "),
     _c(
       "ul",
       _vm._l(_vm.activeUsers, function (active) {
@@ -44434,35 +44458,45 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(7, function (x) {
-      return _c("div", { key: x }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "flex space-between py-0.5 hover:bg-gray-200 cursor-pointer px-2",
-            on: {
-              click: function ($event) {
-                return _vm.showMessages()
+    [
+      _c("div", [
+        _c("input", {
+          staticClass: "text-lg w-full bg-gray-200 focus:bg-white py-2 px-3",
+          attrs: { type: "text", placeholder: "search" },
+          on: { input: _vm.filterFriends },
+        }),
+      ]),
+      _vm._v(" "),
+      _vm._l(7, function (x) {
+        return _c("div", { key: x }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "flex justify-between py-0.5 hover:bg-gray-200 cursor-pointer px-2",
+              on: {
+                click: function ($event) {
+                  return _vm.showMessages()
+                },
               },
             },
-          },
-          [
-            _c("img", {
-              staticClass: "w-14 h-14 rounded-full mx-1",
-              attrs: {
-                src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
-              },
-            }),
-            _vm._v(" "),
-            _vm._m(0, true),
-            _vm._v(" "),
-            _vm._m(1, true),
-          ]
-        ),
-      ])
-    }),
-    0
+            [
+              _c("img", {
+                staticClass: "w-14 h-14 rounded-full mx-1",
+                attrs: {
+                  src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
+                },
+              }),
+              _vm._v(" "),
+              _vm._m(0, true),
+              _vm._v(" "),
+              _vm._m(1, true),
+            ]
+          ),
+        ])
+      }),
+    ],
+    2
   )
 }
 var staticRenderFns = [
@@ -44545,7 +44579,7 @@ var render = function () {
         : _c("div", { staticClass: "my-auto" }, [
             _c(
               "p",
-              { staticClass: "text-2xl text-gray-600 text-center my-auto" },
+              { staticClass: "text-2xl text-gray-600 text-center my-10" },
               [_vm._v("please select a chat to start messaging")]
             ),
           ]),
@@ -44574,7 +44608,7 @@ var render = function () {
               },
             ],
             staticClass:
-              "focus:outline-none focus:border-b-2 focus:border-first text-xl p-3 w-5/6",
+              "outline-none border-b-2 border-white focus:border-first text-xl p-2.5 w-5/6",
             attrs: {
               type: "text",
               required: "",
@@ -44680,11 +44714,7 @@ var render = function () {
                 ],
                 staticClass:
                   "w-96 py-2.5 px-3 text-lg lg:text-xl xl:text-xl 2xl:text-xl outline-none focus:border-b-2 border-tiruhakim rounded-l-3xl",
-                attrs: {
-                  type: "text",
-                  required: "",
-                  placeholder: "search channels,videos...",
-                },
+                attrs: { type: "text", required: "", placeholder: "" },
                 domProps: { value: _vm.searchQuery },
                 on: {
                   input: function ($event) {
