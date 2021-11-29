@@ -48,7 +48,7 @@
   <button @click="deleting=false" class="absolute top-0 right-0 text-4xl px-3 text-red-500">x</button>
   <p class="text-2xl text-center mt-10 mb-2 text-gray-900">Delete your comment</p>
   <p class="text-xl text-center m-2 text-gray-900">remember this is unchangeable</p>
-  <form v-if="deleting" @submit.prevent="deleteComment(deletedId))">
+  <form v-if="deleting" @submit.prevent="deleteComment(deletedId)">
     <input type="submit" value="delete anyway" class="rounded bg-red-500 m-auto text-white text-2xl py-1 px-2"> 
   </form> 
   </div>  

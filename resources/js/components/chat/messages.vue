@@ -20,9 +20,8 @@
 </template>
 <script>
 export default {
-  props:['userId','friendId']
-    data()
-    {
+  props:['userId','friendId'],
+    data(){
      return{
       text:'',
       messages:[],
@@ -40,12 +39,9 @@ export default {
     },
     methoids:{
       sendMessage(){
-        axios.post('chat/sendMessage',{text:this.text,from:this.userId,to:})
+        axios.post('chat/sendMessage',{text:this.text,from:this.userId})
         .then(res=>{
 
-        })
-        .catch(err=>{
-          console.log('error in posting messages')
         });
       }
     }

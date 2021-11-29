@@ -17,6 +17,6 @@ class ChatController extends Controller
     }
    public function send(Request $request)
    {
-     event(new ChatEvent());
+     event(new ChatEvent(auth()->user,$request->message));
    }
 }
