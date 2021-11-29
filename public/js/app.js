@@ -1861,8 +1861,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1989,7 +1987,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    showMessages: function showMessages(friend) {},
+    setSelectedFriend: function setSelectedFriend(friend) {},
     filterFriends: function filterFriends() {}
   }
 });
@@ -2047,6 +2045,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    console.log(this.friend);
     this.getMessages();
     this.listen();
   },
@@ -2073,11 +2072,11 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/chat/message/send', {
         message: this.message,
-        user: this.user
+        friend: this.friend
       }).then(function (res) {
         var message = res.data.message;
 
-        _this2.messages.unshift(message);
+        _this2.messages.push(message);
 
         _this2.message = "";
       });
@@ -44377,7 +44376,7 @@ var render = function () {
     _vm.activeUsers.length
       ? _c("div")
       : _c("div", [
-          _c("p", { staticClass: "text-2xl text-center my-10 text-gray-600" }, [
+          _c("p", { staticClass: "text-2xl text-center my-10 text-gray-400" }, [
             _vm._v("no active friend is found"),
           ]),
         ]),
@@ -44385,41 +44384,22 @@ var render = function () {
     _c(
       "ul",
       _vm._l(_vm.activeUsers, function (active) {
-        return _c(
-          "li",
-          {
-            key: active.id,
-            staticClass:
-              "flex justify-between py-0.5 hover:bg-gray-200 cursor-pointer px-2",
-          },
-          [
-            _c("img", {
-              staticClass: "w-14 h-14 rounded-full mx-1",
-              attrs: {
-                src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
-              },
-            }),
-            _vm._v(" "),
-            _vm._m(0, true),
-          ]
-        )
+        return _c("li", { key: active.id, staticClass: "flex" }, [
+          _c("img", {
+            staticClass: "w-5 h-5 rounded-full m-1",
+            attrs: { src: "/storage/users/" + active.id },
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-xl mx-1 my-auto" }, [
+            _vm._v(_vm._s(active.name)),
+          ]),
+        ])
       }),
       0
     ),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "my-auto mx-2 space-y-2" }, [
-      _c("p", { staticClass: "text-lg font-medium my-auto" }, [
-        _vm._v("getachew fikadu"),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -44456,7 +44436,7 @@ var render = function () {
       _vm._v(" "),
       _c("messages-component", {
         staticClass: "w-1/2 overflow-auto border-r border-l border-gray-300",
-        attrs: { user: _vm.user, friend: _vm.activeFriend },
+        attrs: { user: _vm.user, friend: _vm.user },
       }),
       _vm._v(" "),
       _c("active-component", { staticClass: "w-1/4 overflow-auto" }),
@@ -44508,7 +44488,7 @@ var render = function () {
                 "flex justify-between py-0.5 hover:bg-gray-200 cursor-pointer px-2",
               on: {
                 click: function ($event) {
-                  return _vm.showMessages()
+                  return _vm.setSelectedFriend()
                 },
               },
             },
@@ -44578,78 +44558,81 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "relative" }, [
-    _c("div", {}, [
-      _vm.messages.length
-        ? _c("div", [
+    _vm.friend
+      ? _c("div", {}, [
+          _vm.messages.length
+            ? _c("div", [
+                _c(
+                  "ul",
+                  { staticClass: "list-style-none" },
+                  _vm._l(_vm.messages, function (message) {
+                    return _c("li", { key: message }, [
+                      _c(
+                        "p",
+                        { staticClass: "text-lg rounded bg-blue-200 p-2 m-2" },
+                        [_vm._v(_vm._s(message))]
+                      ),
+                    ])
+                  }),
+                  0
+                ),
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "absolute bottom-1 w-full" }, [
             _c(
-              "ul",
-              { staticClass: "list-style-none" },
-              _vm._l(_vm.messages, function (message) {
-                return _c("li", { key: message }, [
-                  _c("p", { staticClass: "text-xl rounded" }, [
-                    _vm._v(_vm._s(message)),
-                  ]),
-                ])
-              }),
-              0
-            ),
-          ])
-        : _c("div", { staticClass: "my-auto" }, [
-            _c(
-              "p",
-              { staticClass: "text-2xl text-gray-600 text-center my-10" },
-              [_vm._v("please select a chat to start messaging")]
+              "form",
+              {
+                staticClass: "flex w-11/12 mx-auto my-1",
+                on: {
+                  submit: function ($event) {
+                    $event.preventDefault()
+                    return _vm.sendMessage($event)
+                  },
+                },
+              },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.message,
+                      expression: "message",
+                    },
+                  ],
+                  staticClass:
+                    "outline-none border-b-2 border-gray-300 focus:border-blue-500 text-xl p-2.5 w-5/6",
+                  attrs: {
+                    type: "text",
+                    required: "",
+                    placeholder: "write a message...",
+                  },
+                  domProps: { value: _vm.message },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.message = $event.target.value
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass:
+                    "text-white bg-first rounded-r-3xl py-2 px-4 text-xl",
+                  attrs: { type: "submit", value: "send" },
+                }),
+              ]
             ),
           ]),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "absolute bottom-1 w-full" }, [
-      _c(
-        "form",
-        {
-          staticClass: "flex w-11/12 mx-auto my-1",
-          on: {
-            submit: function ($event) {
-              $event.preventDefault()
-              return _vm.sendMessage($event)
-            },
-          },
-        },
-        [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.message,
-                expression: "message",
-              },
-            ],
-            staticClass:
-              "outline-none border-b-2 border-gray-300 focus:border-blue-500 text-xl p-2.5 w-5/6",
-            attrs: {
-              type: "text",
-              required: "",
-              placeholder: "write a message...",
-            },
-            domProps: { value: _vm.message },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.message = $event.target.value
-              },
-            },
-          }),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "text-white bg-first rounded-r-3xl py-2 px-4 text-xl",
-            attrs: { type: "submit", value: "send" },
-          }),
-        ]
-      ),
-    ]),
+        ])
+      : _c("div", { staticClass: "my-auto" }, [
+          _c("p", { staticClass: "text-2xl text-gray-600 text-center my-10" }, [
+            _vm._v("please select a chat to start messaging"),
+          ]),
+        ]),
   ])
 }
 var staticRenderFns = []

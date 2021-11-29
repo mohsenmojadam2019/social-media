@@ -4,7 +4,7 @@
         <input type="text" @input="filterFriends" placeholder="search" class="text-gray-700 text-lg w-full bg-gray-200 focus:bg-white py-2 px-3">
       </div>
       <div v-for="x in 7" :key="x">
-        <div @click="showMessages()" class="flex justify-between py-0.5 hover:bg-gray-200 cursor-pointer px-2">
+        <div @click="setSelectedFriend()" class="flex justify-between py-0.5 hover:bg-gray-200 cursor-pointer px-2">
          <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-14 h-14 rounded-full mx-1">
          <div class="my-auto mx-2 space-y-2">
            <p class="text-lg font-medium my-auto">getachew fikadu</p>
@@ -37,7 +37,7 @@ export default {
     });
   },
   methods:{
-    showMessages(friend){
+    setSelectedFriend(friend){
      
     },
     filterFriends(){

@@ -1,23 +1,23 @@
 <template>
   <div class="relative">
-   <div class="">
+   <div class="" v-if="friend">
      <div v-if="messages.length">
       <ul class="list-style-none">
        <li v-for="message in messages" :key="message">
-        <p class="text-xl rounded">{{message}}</p>
+        <p class="text-lg rounded bg-blue-200 p-2 m-2">{{message}}</p>
        </li>
       </ul>   
      </div>
-     <div v-else class="my-auto">
+      <div class="absolute bottom-1 w-full">
+        <form @submit.prevent="sendMessage" class="flex w-11/12 mx-auto my-1">
+          <input type="text" v-model="message" required placeholder="write a message..." class="outline-none border-b-2 border-gray-300 focus:border-blue-500 text-xl p-2.5 w-5/6">
+          <input type="submit" value="send" class="text-white bg-first rounded-r-3xl py-2 px-4 text-xl">
+        </form>
+      </div>
+   </div>   
+   <div v-else class="my-auto">
       <p class="text-2xl text-gray-600 text-center my-10">please select a chat to start messaging</p>
-     </div>
-   </div>  
-   <div class="absolute bottom-1 w-full">
-    <form @submit.prevent="sendMessage" class="flex w-11/12 mx-auto my-1">
-      <input type="text" v-model="message" required placeholder="write a message..." class="outline-none border-b-2 border-gray-300 focus:border-blue-500 text-xl p-2.5 w-5/6">
-      <input type="submit" value="send" class="text-white bg-first rounded-r-3xl py-2 px-4 text-xl">
-    </form>
-   </div>  
+   </div> 
   </div>  
 </template>
 <script>
@@ -57,10 +57,10 @@ export default {
         })  
       },
       sendMessage(){
-        axios.post('/chat/message/send',{message:this.message,user:this.user})
+        axios.post('/chat/message/send',{message:this.message,friend:this.friend})
         .then(res=>{
           let message=res.data.message;
-          this.messages.unshift(message);
+          this.messages.push(message);
           this.message="";
         });
       }
