@@ -44391,21 +44391,20 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "flex border-2 border-blue-500 max-h-screen bg-white" },
+    { staticClass: "flex min-h-96 max-h-screen bg-white" },
     [
       _c("friends-component", {
-        staticClass: "overflow-auto w-1/4 border-2 border-blue-500",
+        staticClass: "overflow-auto w-1/4",
         attrs: { user: _vm.user },
       }),
       _vm._v(" "),
       _c("messages-component", {
-        staticClass: "w-1/2 overflow-auto",
+        staticClass:
+          "w-1/2 overflow-auto border-r-2 border-l-2 border-gray-300",
         attrs: { user: _vm.user, friend: _vm.friend },
       }),
       _vm._v(" "),
-      _c("active-component", {
-        staticClass: "w-1/4 border-2 border-blue-500 overflow-auto",
-      }),
+      _c("active-component", { staticClass: "w-1/4 overflow-auto" }),
     ],
     1
   )
@@ -44435,12 +44434,13 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(20, function (x) {
+    _vm._l(7, function (x) {
       return _c("div", { key: x }, [
         _c(
           "div",
           {
-            staticClass: "flex p-0.5 hover:bg-gray-200 cursor-pointer px-1",
+            staticClass:
+              "flex space-between py-0.5 hover:bg-gray-200 cursor-pointer px-2",
             on: {
               click: function ($event) {
                 return _vm.showMessages()
@@ -44551,7 +44551,7 @@ var render = function () {
           ]),
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "absolute bottom-1 w-full m-1" }, [
+    _c("div", { staticClass: "absolute bottom-1 w-full" }, [
       _c(
         "form",
         {
@@ -44574,7 +44574,7 @@ var render = function () {
               },
             ],
             staticClass:
-              "outline-none border-b-2 border-first text-xl p-3 w-5/6",
+              "focus:outline-none focus:border-b-2 focus:border-first text-xl p-3 w-5/6",
             attrs: {
               type: "text",
               required: "",

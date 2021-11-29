@@ -1,12 +1,18 @@
 <template>
-    <div>
-     <ul>
-      <li v-for="active in activeUsers " :key="active.id" class="flex">
-        <img :src="`/storage/users/${active.id}`" class="w-5 h-5 rounded-full m-1">
-        <p class="text-xl mx-1 my-auto">{{active.name}}</p>
-      </li>
-     </ul>
+  <div>
+    <div v-if="activeUsers.length">
+
     </div>
+    <div v-else>
+      <p class="text-2xl text-center my-10 text-gray-600">no active friend is found</p>
+    </div>
+    <ul>
+    <li v-for="active in activeUsers " :key="active.id" class="flex">
+      <img :src="`/storage/users/${active.id}`" class="w-5 h-5 rounded-full m-1">
+      <p class="text-xl mx-1 my-auto">{{active.name}}</p>
+    </li>
+    </ul>
+  </div>
 </template>
 <script>
 export default {
