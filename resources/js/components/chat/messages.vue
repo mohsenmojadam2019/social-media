@@ -51,7 +51,7 @@ export default {
        });
       },
       listen(){
-        Echo.private('chat')
+        Echo.private(`chat.${this.user.id}.${this.friend.id}`)
         .listen('.NewMessage',(message)=>{
           this.messages.push(message);
         })  

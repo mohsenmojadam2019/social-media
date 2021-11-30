@@ -17,6 +17,14 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
+Broadcast::channel('post.{id}',function($user,$id){
+  return $user;
+});
+
+Broadcast::channel('comment.{id}',function($user,$id){
+  return $user;
+});
+
 Broadcast::channel('chat.{id}.{fid}',function($user,$id,$fid){
   return $user->id==$id;
 });

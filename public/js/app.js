@@ -1904,6 +1904,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2064,7 +2073,7 @@ __webpack_require__.r(__webpack_exports__);
     listen: function listen() {
       var _this2 = this;
 
-      Echo["private"]('chat').listen('.NewMessage', function (message) {
+      Echo["private"]('chat.1.1').listen('.NewMessage', function (message) {
         _this2.messages.push(message);
       });
     },
@@ -44423,27 +44432,56 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass:
-        "md:flex lg:flex xl:flex 2xl:flex min-h-96 max-h-screen bg-white",
-    },
-    [
-      _c("friends-component", {
-        staticClass: "overflow-auto w-1/4",
-        attrs: { user: _vm.user },
-      }),
-      _vm._v(" "),
-      _c("messages-component", {
-        staticClass: "w-1/2 overflow-auto border-r border-l border-gray-300",
-        attrs: { user: _vm.user, friend: _vm.user },
-      }),
-      _vm._v(" "),
-      _c("active-component", { staticClass: "w-1/4 overflow-auto" }),
-    ],
-    1
-  )
+  return _c("div", [
+    _c("div", { staticClass: "bg-first p-2" }, [
+      _c("button", [
+        _c(
+          "svg",
+          {
+            staticClass: "text-white h-10 w-14",
+            attrs: {
+              xmlns: "http://www.w3.org/2000/svg",
+              fill: "none",
+              viewBox: "0 0 24 24",
+              stroke: "currentColor",
+            },
+          },
+          [
+            _c("path", {
+              attrs: {
+                "stroke-linecap": "round",
+                "stroke-linejoin": "round",
+                "stroke-width": "2",
+                d: "M4 6h16M4 12h16M4 18h16",
+              },
+            }),
+          ]
+        ),
+      ]),
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass:
+          "md:flex lg:flex xl:flex 2xl:flex min-h-96 max-h-screen bg-white",
+      },
+      [
+        _c("friends-component", {
+          staticClass: "overflow-auto w-1/4",
+          attrs: { user: _vm.user },
+        }),
+        _vm._v(" "),
+        _c("messages-component", {
+          staticClass: "w-1/2 overflow-auto border-r border-l border-gray-300",
+          attrs: { user: _vm.user, friend: _vm.user },
+        }),
+        _vm._v(" "),
+        _c("active-component", { staticClass: "w-1/4 overflow-auto" }),
+      ],
+      1
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

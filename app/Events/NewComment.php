@@ -2,6 +2,8 @@
 
 namespace App\Events;
 
+use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -19,9 +21,12 @@ class NewComment implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct()
+    public $post;
+    public $comment;
+    public function __construct(Post $post,Comment $comment)
     {
-        //
+      $this->comment=$comment;
+      $this->post=$post;
     }
 
     /**
@@ -31,6 +36,10 @@ class NewComment implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('comment.'.$this->comment->id);
+    }
+    public function broadcastAs()
+    {
+      return "NewComment";  
     }
 }

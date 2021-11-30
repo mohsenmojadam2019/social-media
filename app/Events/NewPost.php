@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Post;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -19,11 +20,11 @@ class NewPost
      *
      * @return void
      */
-    public function __construct()
+    public $post;
+    public function __construct(Post $post)
     {
-        //
+      $this->post=$post;
     }
-
     /**
      * Get the channels the event should broadcast on.
      *
@@ -31,6 +32,10 @@ class NewPost
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('post.'.$this->post->id);
+    }
+    public function broadcastAs()
+    {
+      return 'NewPost';  
     }
 }
