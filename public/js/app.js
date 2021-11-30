@@ -2045,7 +2045,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    console.log(this.friend);
     this.getMessages();
     this.listen();
   },
@@ -2063,12 +2062,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     listen: function listen() {
+      var _this2 = this;
+
       Echo["private"]('chat').listen('.NewMessage', function (message) {
-        console.log(message);
+        _this2.messages.push(message);
       });
     },
     sendMessage: function sendMessage() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.post('/chat/message/send', {
         message: this.message,
@@ -2076,9 +2077,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         var message = res.data.message;
 
-        _this2.messages.push(message);
+        _this3.messages.push(message);
 
-        _this2.message = "";
+        _this3.message = "";
       });
     }
   }

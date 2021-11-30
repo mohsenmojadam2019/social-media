@@ -53,7 +53,7 @@ export default {
       listen(){
         Echo.private('chat')
         .listen('.NewMessage',(message)=>{
-          console.log(message);
+          this.messages.push(message);
         })  
       },
       sendMessage(){
