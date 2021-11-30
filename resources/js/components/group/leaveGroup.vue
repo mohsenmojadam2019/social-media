@@ -1,18 +1,29 @@
 <template>
 <div>
-
+  <button  @click="leaveGroup" class="bg-first text-white text-xl py-2 px-4 rounded-xl" >{{leaveText}}</button>
 </div>
 </temlate>
 <script>
 export default{
  data(){
   return{
-
+   leave:false,
+   leaveText:"leave"
   }
  },
+ mounted(){
+  axios.get('/group/user/status',{params:{groupId:this.groupId,userId:this.userId}})
+  .then(res=>{
+   this.leave=res.data;
+  });
+ }
  methods:{
-  leaveGroup(){
-   
+  joinGroup(){
+    axios.post('/group/joingroup',{groupId:this.groupId,userId:this.userId})
+    .then(res=>{
+       this.leave=res.data;
+       this.leaveText="leave";
+    });
   }
  }
 }
