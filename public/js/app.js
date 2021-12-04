@@ -2073,7 +2073,7 @@ __webpack_require__.r(__webpack_exports__);
     listen: function listen() {
       var _this2 = this;
 
-      Echo["private"]('chat.1.1').listen('.NewMessage', function (message) {
+      Echo["private"]('chat').listen('.NewMessage', function (message) {
         _this2.messages.push(message);
       });
     },
@@ -44870,7 +44870,7 @@ var render = function () {
                 _c(
                   "button",
                   {
-                    staticClass: "my-auto flex",
+                    staticClass: "my-auto flex  items-center",
                     on: {
                       click: function ($event) {
                         _vm.userDropdownMenu = true

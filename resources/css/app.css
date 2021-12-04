@@ -5,12 +5,12 @@
 @import "tailwindcss/utilities";
 
 .bg-first{
- background-color: #3b5998;
+ background-color: #1892d1;
 }
 .text-first{
- color: #3b5998;
+ color: #1892d1;
 }
 .border-first{
  --tw-border-opacity: 1;
- border-color: #3b5998;
+ border-color: #1892d1;
 }

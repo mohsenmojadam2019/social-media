@@ -7,8 +7,9 @@
       <p class="text-2xl text-center my-10 text-gray-400">no active friend is found</p>
     </div>
     <ul>
+      <p class="text-xl font-semibold">active(<span class="text-first">{{activeUsers.length}}</span>)</p>
     <li v-for="active in activeUsers " :key="active.id" class="flex">
-      <img :src="`/storage/users/${active.id}`" class="w-5 h-5 rounded-full m-1">
+      <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-5 h-5 rounded-full m-1">
       <p class="text-xl mx-1 my-auto">{{active.name}}</p>
     </li>
     </ul>

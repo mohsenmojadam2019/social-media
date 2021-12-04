@@ -40,7 +40,7 @@
    </div>
    <div class="mx-3 my-auto"> 
      <div v-if="user" class="my-auto hidden lg:inline xl:inline 2xl:inline">
-       <button @click="userDropdownMenu=true" class="my-auto flex">
+       <button @click="userDropdownMenu=true" class="my-auto flex  items-center">
         <span class="text-xl font-semibold capitalize text-white text-semibold">{{user.name}}</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="my-auto font-medium my-auto text-white h-8 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />

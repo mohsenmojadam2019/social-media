@@ -51,10 +51,10 @@ export default {
        });
       },
       listen(){
-        Echo.private(`chat.${this.user.id}.${this.friend.id}`)
+        Echo.private('chat')
         .listen('.NewMessage',(message)=>{
           this.messages.push(message);
-        })  
+        });
       },
       sendMessage(){
         axios.post('/chat/message/send',{message:this.message,friend:this.friend})
