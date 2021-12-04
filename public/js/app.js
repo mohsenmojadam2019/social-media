@@ -2054,6 +2054,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    console.log("chat.".concat(this.user.id, ".").concat(this.user.id));
     this.getMessages();
     this.listen();
   },
@@ -2073,7 +2074,7 @@ __webpack_require__.r(__webpack_exports__);
     listen: function listen() {
       var _this2 = this;
 
-      Echo["private"]('chat').listen('.NewMessage', function (message) {
+      Echo["private"]("chat.".concat(this.user.id, ".").concat(this.user.id)).listen('.NewMessage', function (message) {
         _this2.messages.push(message);
       });
     },
@@ -44382,31 +44383,57 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "bg-gray-100" }, [
     _vm.activeUsers.length
-      ? _c("div")
+      ? _c("div", [
+          _c(
+            "ul",
+            [
+              _c(
+                "p",
+                {
+                  staticClass:
+                    "text-xl font-semibold text-center border-b-2 border-ray-300 p-2",
+                },
+                [
+                  _vm._v("Active("),
+                  _c("span", { staticClass: "text-first" }, [
+                    _vm._v(_vm._s(_vm.activeUsers.length)),
+                  ]),
+                  _vm._v(")"),
+                ]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.activeUsers, function (active) {
+                return _c(
+                  "li",
+                  {
+                    key: active.id,
+                    staticClass: "flex justify-center items-center p-1",
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "w-14 h-14 rounded-full mx-1",
+                      attrs: {
+                        src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-xl mx-1 my-auto" }, [
+                      _vm._v(_vm._s(active.name)),
+                    ]),
+                  ]
+                )
+              }),
+            ],
+            2
+          ),
+        ])
       : _c("div", [
           _c("p", { staticClass: "text-2xl text-center my-10 text-gray-400" }, [
             _vm._v("no active friend is found"),
           ]),
         ]),
-    _vm._v(" "),
-    _c(
-      "ul",
-      _vm._l(_vm.activeUsers, function (active) {
-        return _c("li", { key: active.id, staticClass: "flex" }, [
-          _c("img", {
-            staticClass: "w-5 h-5 rounded-full m-1",
-            attrs: { src: "/storage/users/" + active.id },
-          }),
-          _vm._v(" "),
-          _c("p", { staticClass: "text-xl mx-1 my-auto" }, [
-            _vm._v(_vm._s(active.name)),
-          ]),
-        ])
-      }),
-      0
-    ),
   ])
 }
 var staticRenderFns = []
