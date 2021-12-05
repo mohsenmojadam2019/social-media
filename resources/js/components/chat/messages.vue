@@ -40,7 +40,6 @@ export default {
     },
     mounted()
     {
-      console.log(`chat.${this.user.id}.${this.user.id}`);
       this.getMessages();
       this.listen();
     },
@@ -52,7 +51,7 @@ export default {
        });
       },
       listen(){
-        Echo.private(`chat.${this.user.id}.${this.user.id}`)
+        Echo.private('chat')
         .listen('.NewMessage',(message)=>{
           this.messages.push(message);
         });

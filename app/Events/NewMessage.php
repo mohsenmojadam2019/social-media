@@ -37,7 +37,7 @@ class NewMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-      return new presenceChannel('chat.'.$this->user->id.'.'.$this->user->id);
+      return new presenceChannel('chat');
     }
     public function broadcastAs()
     {
