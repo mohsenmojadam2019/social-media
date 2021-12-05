@@ -21,6 +21,18 @@ class UserController extends Controller
         //
     }
 
+    public function notifications(Request $request)
+    {
+        $user=User::find($request->userId);
+        $notifications=$user->notifications;
+        return response()->json(['notifications'=>$notifications]);
+    }
+    
+    public function unreadNotification(Request $request)
+     {
+      $user=User::find($request->userId);
+      $user->notifications($request->notificationId)->markAsRead;
+     }
     /**
      * Show the form for creating a new resource.
      *

@@ -74,5 +74,5 @@ Route::prefix('group')->group(function(){
 
   Route::prefix('user')->group(function(){
    Route::get('notifications',[UserController::class,'notifications']);
-   Route::post('notification/unread',[UserController::class,'unreadNotification']);
+   Route::post('notification/mark-as-read',[UserController::class,'markAsRead']);
   });
