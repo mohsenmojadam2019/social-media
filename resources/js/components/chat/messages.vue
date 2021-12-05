@@ -4,7 +4,7 @@
      <div v-if="messages.length">
       <ul class="list-style-none">
        <li v-for="message in messages" :key="message">
-        <p class="text-lg rounded bg-blue-200 p-2 m-2">{{message}}</p>
+        <p class="text-lg rounded bg-blue-100 p-2 m-2">{{message}}</p>
        </li>
       </ul>   
      </div>
@@ -29,7 +29,7 @@ export default {
     },
     friend:{
      type:Object,
-     required:true
+     required:false
     }
   },
     data(){
@@ -42,6 +42,15 @@ export default {
     {
       this.getMessages();
       this.listen();
+    },
+    created(){
+      bus.$on('friend-selected',(friend)=>{
+        this.friend=friend;
+        axios.get('/chat/messages',{params:{userId:this.user.id,friendId:this.friend.id}})
+       .then(res=>{
+         this.messages=res.data.messages;
+       });
+      });
     },
     methods:{
       getMessages(){

@@ -1861,24 +1861,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      activeUsers: []
+      activeUsers: [],
+      loading: true
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    Echo.join('chat').here(function (users) {
-      _this.activeUsers = users;
-    }).joining(function (user) {
-      _this.activeUsers.unshfit(user);
-    }).leaving(function (user) {
-      _this.activeUsers.pop(user);
-    });
+    this.listen();
   },
-  methods: {}
+  methods: {
+    listen: function listen() {
+      var _this = this;
+
+      Echo.join('chat').here(function (users) {
+        _this.activeUsers = users;
+        _this.loading = false;
+      }).joining(function (user) {
+        _this.activeUsers.unshfit(user);
+      }).leaving(function (user) {
+        _this.activeUsers.pop(user);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -44400,55 +44413,81 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", {}, [
-    _vm.activeUsers.length
-      ? _c("div", [
+    _vm.loading
+      ? _c("div", {}, [
           _c(
-            "ul",
+            "svg",
+            {
+              staticClass:
+                "bi bi-circle-half animate-spin w-20 h-20 mx-auto my-5 text-first",
+              attrs: {
+                xmlns: "http://www.w3.org/2000/svg",
+                fill: "currentColor",
+                viewBox: "0 0 16 16",
+              },
+            },
             [
-              _c(
-                "p",
-                {
-                  staticClass:
-                    "text-xl font-semibold text-center border-b-2 border-gray-300 p-2",
+              _c("path", {
+                attrs: {
+                  d: "M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z",
                 },
-                [
-                  _vm._v("Active("),
-                  _c("span", { staticClass: "text-first" }, [
-                    _vm._v(_vm._s(_vm.activeUsers.length)),
-                  ]),
-                  _vm._v(")"),
-                ]
-              ),
-              _vm._v(" "),
-              _vm._l(_vm.activeUsers, function (active) {
-                return _c(
-                  "li",
-                  {
-                    key: active.id,
-                    staticClass: "flex justify-center items-center p-1",
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "w-14 h-14 rounded-full mx-1",
-                      attrs: {
-                        src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "text-xl mx-1 my-auto" }, [
-                      _vm._v(_vm._s(active.name)),
-                    ]),
-                  ]
-                )
               }),
-            ],
-            2
+            ]
           ),
         ])
       : _c("div", [
-          _c("p", { staticClass: "text-2xl text-center my-10 text-gray-400" }, [
-            _vm._v("no active friend is found"),
-          ]),
+          _vm.activeUsers.length
+            ? _c("div", [
+                _c(
+                  "ul",
+                  [
+                    _c(
+                      "p",
+                      {
+                        staticClass:
+                          "text-xl font-semibold text-center border-b-2 border-gray-300 p-2",
+                      },
+                      [
+                        _vm._v("Active("),
+                        _c("span", { staticClass: "text-first" }, [
+                          _vm._v(_vm._s(_vm.activeUsers.length)),
+                        ]),
+                        _vm._v(")"),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.activeUsers, function (active) {
+                      return _c(
+                        "li",
+                        {
+                          key: active.id,
+                          staticClass: "flex justify-center items-center p-1",
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "w-14 h-14 rounded-full mx-1",
+                            attrs: {
+                              src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "text-xl mx-1 my-auto" }, [
+                            _vm._v(_vm._s(active.name)),
+                          ]),
+                        ]
+                      )
+                    }),
+                  ],
+                  2
+                ),
+              ])
+            : _c("div", [
+                _c(
+                  "p",
+                  { staticClass: "text-2xl text-center my-10 text-gray-400" },
+                  [_vm._v("no active friend is found")]
+                ),
+              ]),
         ]),
   ])
 }
@@ -44554,8 +44593,7 @@ var render = function () {
     [
       _c("div", [
         _c("input", {
-          staticClass:
-            "text-gray-700 text-lg w-full bg-gray-200 focus:bg-white py-2 px-3",
+          staticClass: "text-gray-700 text-lg w-full focus:bg-white py-2 px-3",
           attrs: { type: "text", placeholder: "search" },
           on: { input: _vm.filterFriends },
         }),
@@ -44744,7 +44782,7 @@ var render = function () {
     "div",
     {
       staticClass:
-        "flex justify-between items-center bg-first w-full shadow-xl py-1",
+        "flex justify-between items-center bg-first w-full shadow-xl py-2",
     },
     [
       _c("div", { staticClass: "flex items-center" }, [
