@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChannelGroupUserTable extends Migration
+class CreateChannelUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,12 @@ class ChannelGroupUserTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('channel_user', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id');
+            $table->foreignId('channel_id');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class ChannelGroupUserTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('channel_user');
     }
 }

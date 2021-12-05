@@ -18,6 +18,7 @@ class CreateMessagesTable extends Migration
             $table->foreignId('chatroom_id');
             $table->foreignId('from');
             $table->foreignId('to');
+            $table->longText('body');
             $table->timestamps();
         });
     }
