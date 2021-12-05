@@ -2179,6 +2179,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -44829,7 +44845,113 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _vm._m(0),
+        _c(
+          "div",
+          {
+            staticClass:
+              "font-medium my-auto text-white text-xl mx-5 hidden lg:inline xl:inline 2xl:inline",
+          },
+          [
+            _c("ul", { staticClass: "flex list-style-none h-full" }, [
+              _c("li", { staticClass: " my-auto mx-2 h-full p-1" }, [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "bi bi-people text-white h-14 w-14",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      fill: "currentColor",
+                      viewBox: "0 0 16 16",
+                    },
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d: "M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z",
+                      },
+                    }),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "text-2xl my-auto",
+                    attrs: { href: "/friend" },
+                  },
+                  [_vm._v("friends")]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "my-auto mx-2 h-full p-1" }, [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "h-14 w-14 text-white",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      fill: "none",
+                      viewBox: "0 0 24 24",
+                      stroke: "currentColor",
+                    },
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round",
+                        "stroke-width": "2",
+                        d: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z",
+                      },
+                    }),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { staticClass: "text-2xl my-auto", attrs: { href: "/chat" } },
+                  [_vm._v("chat")]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "my-auto mx-2 h-full p-1" }, [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "bi bi-play-btn text-white h-14 w-14",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      fill: "currentColor",
+                      viewBox: "0 0 16 16",
+                    },
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d: "M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z",
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("path", {
+                      attrs: {
+                        d: "M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z",
+                      },
+                    }),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "text-2xl my-auto",
+                    attrs: { href: "/video" },
+                  },
+                  [_vm._v("videos")]
+                ),
+              ]),
+            ]),
+          ]
+        ),
         _vm._v(" "),
         _c(
           "div",
@@ -44972,6 +45094,8 @@ var render = function () {
               { staticClass: "fixed z-20 text-xl bg-gray-100 top-2 right-2" },
               [
                 _c("ul", [
+                  _vm._m(0),
+                  _vm._v(" "),
                   _vm._m(1),
                   _vm._v(" "),
                   _vm._m(2),
@@ -44981,8 +45105,6 @@ var render = function () {
                   _vm._m(4),
                   _vm._v(" "),
                   _vm._m(5),
-                  _vm._v(" "),
-                  _vm._m(6),
                   _vm._v(" "),
                   _c("li", { staticClass: "hover:bg-blue-200 px-5 py-1" }, [
                     _c("button", { on: { click: _vm.logout } }, [
@@ -45010,43 +45132,6 @@ var render = function () {
   )
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "font-medium my-auto text-white text-xl mx-5 hidden lg:inline xl:inline 2xl:inline",
-      },
-      [
-        _c("ul", { staticClass: "flex list-style-none h-full" }, [
-          _c("li", { staticClass: "my-auto mx-2 h-full p-1" }, [
-            _c(
-              "a",
-              { staticClass: "text-2xl my-auto", attrs: { href: "/chat" } },
-              [_vm._v("chat")]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: " my-auto mx-2 h-full p-1" }, [
-            _c("a", {
-              staticClass: "text-2xl my-auto",
-              attrs: { href: "/video/upload" },
-            }),
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "my-auto mx-2 h-full p-1" }, [
-            _c("a", {
-              staticClass: "text-2xl my-auto",
-              attrs: { href: "/collection" },
-            }),
-          ]),
-        ]),
-      ]
-    )
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
