@@ -2195,8 +2195,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -44859,7 +44857,7 @@ var render = function () {
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "mx-4" }, [
-                _c("a", { attrs: { href: "friend" } }, [
+                _c("a", { attrs: { href: "/friend" } }, [
                   _c(
                     "svg",
                     {
@@ -44937,18 +44935,16 @@ var render = function () {
                 ]),
               ]),
               _vm._v(" "),
-              _c("li", [
-                _c(
-                  "div",
-                  { staticClass: "hidden md:inline mx-3" },
-                  [
-                    _c("notification-component", {
-                      attrs: { userId: _vm.user.id },
-                    }),
-                  ],
-                  1
-                ),
-              ]),
+              _c(
+                "li",
+                { staticClass: "mx-4" },
+                [
+                  _c("notification-component", {
+                    attrs: { userId: _vm.user.id },
+                  }),
+                ],
+                1
+              ),
             ]),
           ]
         ),
@@ -45194,7 +45190,7 @@ var render = function () {
     _c(
       "button",
       {
-        staticClass: "relative mx-8 flex",
+        staticClass: "relative flex",
         on: {
           click: function ($event) {
             _vm.notificationPopup = true

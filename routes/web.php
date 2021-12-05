@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\FriendController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -26,10 +27,10 @@ Route::prefix('post')->group(function(){
 });
 
 Route::prefix('friend')->group(function(){
-  Route::get('/',[FriendController::class,'create']);
-  Route::post('follow',[FriendController::class,'store']);
-  Route::get('unfollow',[FriendController::class,'edit']);
-  Route::get('block',[FriendController::class,'delete']);
+  Route::get('/',[FriendController::class,'index']);
+  Route::post('follow',[FriendController::class,'follow']);
+  Route::get('unfollow',[FriendController::class,'unFollow']);
+  Route::get('block',[FriendController::class,'block']);
 });
 
 Route::prefix('group')->group(function(){
