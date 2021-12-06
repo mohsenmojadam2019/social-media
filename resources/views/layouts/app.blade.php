@@ -17,6 +17,7 @@
 </head>
 <body class="bg-gray-100 h-screen antialiased leading-none font-sans">
     <div id="app">
+        <form id="logout-form" action="{{route('logout')}}" method="POST" class="hidden">@csrf</form>
         <header>
          <navigation-component :user="{{auth()->user()}}"/>   
         </header>

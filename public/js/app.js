@@ -1888,8 +1888,12 @@ __webpack_require__.r(__webpack_exports__);
         _this.activeUsers = users;
         _this.loading = false;
       }).joining(function (user) {
+        console.log('joining ' + user);
+
         _this.activeUsers.unshfit(user);
       }).leaving(function (user) {
+        console.log('leaving ' + user);
+
         _this.activeUsers.pop(user);
       });
     }
@@ -44501,11 +44505,11 @@ var render = function () {
                         "li",
                         {
                           key: active.id,
-                          staticClass: "flex justify-center items-center p-1",
+                          staticClass: "flex items-center p-1",
                         },
                         [
                           _c("img", {
-                            staticClass: "w-14 h-14 rounded-full mx-1",
+                            staticClass: "w-12 h-12 rounded-full mx-1",
                             attrs: {
                               src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
                             },
