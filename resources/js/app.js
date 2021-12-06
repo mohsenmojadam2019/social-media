@@ -5,11 +5,13 @@
  */
 
 require('./bootstrap');
+import Vue from 'vue'
 
 window.Vue = require('vue').default;
 
-import Vue from 'vue';
-export const bus=new Vue();
+window.bus = new Vue();      
+
+export default bus;
 
 /**
  * The following block of code may be used to automatically register your

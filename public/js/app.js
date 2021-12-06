@@ -2352,7 +2352,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "bus": () => (/* binding */ bus)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /**
@@ -2362,9 +2362,10 @@ __webpack_require__.r(__webpack_exports__);
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
 
-var bus = new vue__WEBPACK_IMPORTED_MODULE_0__.default();
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
+window.bus = new vue__WEBPACK_IMPORTED_MODULE_0__.default();
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (bus);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -44908,7 +44909,7 @@ var render = function () {
                     "svg",
                     {
                       staticClass:
-                        "font-semibold my-auto text-white w-12 hover:text-green-500",
+                        "font-semibold my-auto text-white w-10 hover:text-green-500",
                       attrs: {
                         xmlns: "http://www.w3.org/2000/svg",
                         fill: "none",
@@ -44935,7 +44936,7 @@ var render = function () {
                   _c(
                     "svg",
                     {
-                      staticClass: "bi bi-people text-white w-12",
+                      staticClass: "bi bi-people text-white w-10",
                       attrs: {
                         xmlns: "http://www.w3.org/2000/svg",
                         fill: "currentColor",
@@ -44958,7 +44959,7 @@ var render = function () {
                   _c(
                     "svg",
                     {
-                      staticClass: "w-12 text-white",
+                      staticClass: "w-10 text-white",
                       attrs: {
                         xmlns: "http://www.w3.org/2000/svg",
                         fill: "none",
@@ -44985,7 +44986,7 @@ var render = function () {
                   _c(
                     "svg",
                     {
-                      staticClass: "bi bi-play-btn text-white w-12",
+                      staticClass: "bi bi-play-btn text-white w-10",
                       attrs: {
                         xmlns: "http://www.w3.org/2000/svg",
                         fill: "currentColor",
@@ -45070,7 +45071,7 @@ var render = function () {
           ? _c("div", { staticClass: "items-center hidden lg:flex" }, [
               _c("button", { staticClass: "flex items-center mx-2" }, [
                 _c("img", {
-                  staticClass: "w-12 h-12 rounded-full m-1",
+                  staticClass: "w-12 h-12 rounded-full mr-2",
                   attrs: {
                     src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
                   },
@@ -45299,7 +45300,7 @@ var render = function () {
         _c(
           "svg",
           {
-            staticClass: "text-white w-12",
+            staticClass: "text-white w-10",
             attrs: {
               xmlns: "http://www.w3.org/2000/svg",
               fill: "none",
