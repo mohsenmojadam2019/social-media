@@ -4,7 +4,8 @@
         <input type="text" @input="filterFriends" placeholder="search" class="text-gray-700 text-lg w-full focus:bg-white py-2 px-3">
       </div>
       <div v-for="friend in friends" :key="friend.id">
-        <div @click="selectFriend(friend)" class="flex justify-between py-0.5 hover:bg-gray-200 cursor-pointer px-2">
+        <div @click="selectFriend(friend)" class="flex justify-between py-0.5 hover:bg-gray-200 cursor-pointer px-2"
+          :class="[friend.id==selectedFriend.id ? 'bg-frist text-white': '']">
          <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-14 h-14 rounded-full mx-1">
          <div class="my-auto mx-2 space-y-2">
            <p class="text-lg font-medium my-auto">{{friend.name}}</p>
@@ -29,7 +30,7 @@ export default {
   data(){
    return{
     friends:[],
-    selectFriend:{}
+    selectedFriend:{}
    }   
   },
   mounted(){

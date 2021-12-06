@@ -57,12 +57,20 @@
    </div>
    <div class="mx-3 my-auto"> 
      <div v-if="user" class="my-auto hidden lg:inline xl:inline 2xl:inline">
-       <button @click="userDropdownMenu=true" class="my-auto flex  items-center">
+       <button @click="userDropdownMenu=true" class="flex  items-center mx-2">
+        <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-5 h-5 rounded-full m-1">
         <span class="text-xl font-semibold capitalize text-white text-semibold">{{user.name}}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="my-auto font-medium my-auto text-white h-8 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
        </button>   
+       <button>
+         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-list w-12 text-white" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+         </svg>
+       </button>
+       <button>
+         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-down-fill w-12 text-white" viewBox="0 0 16 16">
+          <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+        </svg>
+       </button>
      </div>
      <div v-else class="my-auto flex text-white text-xl text-xl">
       <a href="/login" class="text-2xl text-white mx-2 my-auto px-4 py-2">sign in</a>

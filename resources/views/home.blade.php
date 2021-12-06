@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<div>
-  {{-- <div>
+<div class="flex">
+  {{-- <div class="w-1/4">
    @foreach ($friends as $friend)
      <div>
       <img src="/storage/users/profilepicture/{{$user->profile->avatar}}" >
@@ -9,7 +9,7 @@
      </div>  
    @endforeach
   </div>
-  <div>
+  <div class="w-1/2">
     @foreach ($posts as $post)
     <div>
      <p>{{$post->title}}</p>
@@ -20,7 +20,7 @@
    </div>        
    @endforeach
   </div> --}}
-  <div>
+  <div class="w-1/2">
    
   </div>
 </div>

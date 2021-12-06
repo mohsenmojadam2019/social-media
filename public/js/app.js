@@ -1845,6 +1845,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../app */ "./resources/js/app.js");
 //
 //
 //
@@ -1868,6 +1869,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1966,6 +1968,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../app */ "./resources/js/app.js");
 //
 //
 //
@@ -1985,6 +1988,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     user: {
@@ -1994,22 +1998,29 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      friends: []
+      friends: [],
+      selectFriend: {}
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    axios.get('/chat/friends', {
-      params: {
-        userId: this.user.id
-      }
-    }).then(function (res) {
-      _this.friends = res.data.friends;
-    });
+    this.getFriends();
   },
   methods: {
-    setSelectedFriend: function setSelectedFriend(friend) {},
+    getFriends: function getFriends() {
+      var _this = this;
+
+      axios.get('/chat/friends', {
+        params: {
+          userId: this.user.id
+        }
+      }).then(function (res) {
+        _this.friends = res.data.friends;
+      });
+    },
+    selectFriend: function selectFriend(friend) {
+      this.selectFriend = friend;
+      _app__WEBPACK_IMPORTED_MODULE_0__.bus.$emit('friend-selected', friend);
+    },
     filterFriends: function filterFriends() {}
   }
 });
@@ -2057,7 +2068,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     friend: {
       type: Object,
-      required: true
+      required: false
     }
   },
   data: function data() {
@@ -2070,9 +2081,24 @@ __webpack_require__.r(__webpack_exports__);
     this.getMessages();
     this.listen();
   },
+  created: function created() {
+    var _this = this;
+
+    bus.$on('friend-selected', function (friend) {
+      _this.friend = friend;
+      axios.get('/chat/messages', {
+        params: {
+          userId: _this.user.id,
+          friendId: _this.friend.id
+        }
+      }).then(function (res) {
+        _this.messages = res.data.messages;
+      });
+    });
+  },
   methods: {
     getMessages: function getMessages() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/chat/messages', {
         params: {
@@ -2080,18 +2106,18 @@ __webpack_require__.r(__webpack_exports__);
           friendId: this.friendId
         }
       }).then(function (res) {
-        _this.messages = res.data.messages;
+        _this2.messages = res.data.messages;
       });
     },
     listen: function listen() {
-      var _this2 = this;
+      var _this3 = this;
 
       Echo["private"]('chat').listen('.NewMessage', function (message) {
-        _this2.messages.push(message);
+        _this3.messages.push(message);
       });
     },
     sendMessage: function sendMessage() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.post('/chat/message/send', {
         message: this.message,
@@ -2099,9 +2125,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         var message = res.data.message;
 
-        _this3.messages.push(message);
+        _this4.messages.push(message);
 
-        _this3.message = "";
+        _this4.message = "";
       });
     }
   }
@@ -2121,6 +2147,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _notification_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./notification.vue */ "./resources/js/components/notification.vue");
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2284,11 +2318,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/user/notifications', {
-      params: {
-        userId: this.userId
-      }
-    }).then(function (res) {
+    axios.get('/user/notifications').then(function (res) {
       _this.notifications = res.data.notifications;
     });
   },
@@ -2316,8 +2346,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "bus": () => (/* binding */ bus)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -2326,6 +2362,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
+
+var bus = new vue__WEBPACK_IMPORTED_MODULE_0__.default();
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -2337,13 +2375,13 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-Vue.component('navigation-component', __webpack_require__(/*! ./components/navigation.vue */ "./resources/js/components/navigation.vue").default);
-Vue.component('notification-component', __webpack_require__(/*! ./components/notification.vue */ "./resources/js/components/notification.vue").default); //Vue.component('search-component', require('./components/search.vue').default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('navigation-component', __webpack_require__(/*! ./components/navigation.vue */ "./resources/js/components/navigation.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('notification-component', __webpack_require__(/*! ./components/notification.vue */ "./resources/js/components/notification.vue").default); //Vue.component('search-component', require('./components/search.vue').default);
 
-Vue.component('active-component', __webpack_require__(/*! ./components/chat/active.vue */ "./resources/js/components/chat/active.vue").default);
-Vue.component('chat-component', __webpack_require__(/*! ./components/chat/chat.vue */ "./resources/js/components/chat/chat.vue").default);
-Vue.component('friends-component', __webpack_require__(/*! ./components/chat/friends.vue */ "./resources/js/components/chat/friends.vue").default);
-Vue.component('messages-component', __webpack_require__(/*! ./components/chat/messages.vue */ "./resources/js/components/chat/messages.vue").default); // Vue.component('addfriend-component', require('./components/friend/addFriend.vue').default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('active-component', __webpack_require__(/*! ./components/chat/active.vue */ "./resources/js/components/chat/active.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('chat-component', __webpack_require__(/*! ./components/chat/chat.vue */ "./resources/js/components/chat/chat.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('friends-component', __webpack_require__(/*! ./components/chat/friends.vue */ "./resources/js/components/chat/friends.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_0__.default.component('messages-component', __webpack_require__(/*! ./components/chat/messages.vue */ "./resources/js/components/chat/messages.vue").default); // Vue.component('addfriend-component', require('./components/friend/addFriend.vue').default);
 // Vue.component('cancelfriend-component', require('./components/friend/cancelFriend.vue').default);
 // Vue.component('removerequest-component', require('./components/friend/removeRequest.vue').default);
 // Vue.component('sendrequest-component', require('./components/sendRequest.vue').default);
@@ -2360,7 +2398,7 @@ Vue.component('messages-component', __webpack_require__(/*! ./components/chat/me
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
+var app = new vue__WEBPACK_IMPORTED_MODULE_0__.default({
   el: '#app'
 });
 
@@ -44599,8 +44637,8 @@ var render = function () {
         }),
       ]),
       _vm._v(" "),
-      _vm._l(7, function (x) {
-        return _c("div", { key: x }, [
+      _vm._l(_vm.friends, function (friend) {
+        return _c("div", { key: friend.id }, [
           _c(
             "div",
             {
@@ -44608,7 +44646,7 @@ var render = function () {
                 "flex justify-between py-0.5 hover:bg-gray-200 cursor-pointer px-2",
               on: {
                 click: function ($event) {
-                  return _vm.setSelectedFriend()
+                  return _vm.selectFriend(friend)
                 },
               },
             },
@@ -44620,9 +44658,17 @@ var render = function () {
                 },
               }),
               _vm._v(" "),
-              _vm._m(0, true),
+              _c("div", { staticClass: "my-auto mx-2 space-y-2" }, [
+                _c("p", { staticClass: "text-lg font-medium my-auto" }, [
+                  _vm._v(_vm._s(friend.name)),
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-gray-600 text-base" }, [
+                  _vm._v("last message"),
+                ]),
+              ]),
               _vm._v(" "),
-              _vm._m(1, true),
+              _vm._m(0, true),
             ]
           ),
         ])
@@ -44632,20 +44678,6 @@ var render = function () {
   )
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "my-auto mx-2 space-y-2" }, [
-      _c("p", { staticClass: "text-lg font-medium my-auto" }, [
-        _vm._v("getachew fikadu"),
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "text-gray-600 text-base" }, [
-        _vm._v("last message"),
-      ]),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -44689,7 +44721,7 @@ var render = function () {
                     return _c("li", { key: message }, [
                       _c(
                         "p",
-                        { staticClass: "text-lg rounded bg-blue-200 p-2 m-2" },
+                        { staticClass: "text-lg rounded bg-blue-100 p-2 m-2" },
                         [_vm._v(_vm._s(message))]
                       ),
                     ])
@@ -45038,7 +45070,7 @@ var render = function () {
                 _c(
                   "button",
                   {
-                    staticClass: "my-auto flex  items-center",
+                    staticClass: "flex  items-center mx-2",
                     on: {
                       click: function ($event) {
                         _vm.userDropdownMenu = true
@@ -45046,6 +45078,13 @@ var render = function () {
                     },
                   },
                   [
+                    _c("img", {
+                      staticClass: "w-5 h-5 rounded-full m-1",
+                      attrs: {
+                        src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
+                      },
+                    }),
+                    _vm._v(" "),
                     _c(
                       "span",
                       {
@@ -45054,32 +45093,51 @@ var render = function () {
                       },
                       [_vm._v(_vm._s(_vm.user.name))]
                     ),
-                    _vm._v(" "),
-                    _c(
-                      "svg",
-                      {
-                        staticClass:
-                          "my-auto font-medium my-auto text-white h-8 w-6",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          fill: "none",
-                          viewBox: "0 0 24 24",
-                          stroke: "currentColor",
-                        },
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round",
-                            "stroke-width": "2",
-                            d: "M19 9l-7 7-7-7",
-                          },
-                        }),
-                      ]
-                    ),
                   ]
                 ),
+                _vm._v(" "),
+                _c("button", [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "bi bi-list w-12 text-white",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        fill: "currentColor",
+                        viewBox: "0 0 16 16",
+                      },
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "fill-rule": "evenodd",
+                          d: "M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z",
+                        },
+                      }),
+                    ]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("button", [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "bi bi-caret-down-fill w-12 text-white",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        fill: "currentColor",
+                        viewBox: "0 0 16 16",
+                      },
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d: "M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z",
+                        },
+                      }),
+                    ]
+                  ),
+                ]),
               ]
             )
           : _c(
