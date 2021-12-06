@@ -2060,6 +2060,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     user: {
@@ -2095,8 +2100,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/chat/messages', {
         params: {
-          userId: this.user.id,
-          friendId: this.friendId
+          friendId: this.friend.id
         }
       }).then(function (res) {
         _this.messages = res.data.messages;
@@ -44708,25 +44712,33 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", {}, [
     _vm.friend
-      ? _c("div", { staticClass: "flex flex-col items-between h-1/2" }, [
-          _vm.messages.length
-            ? _c("div", [
-                _c(
-                  "ul",
-                  { staticClass: "list-style-none" },
-                  _vm._l(_vm.messages, function (message) {
-                    return _c("li", { key: message }, [
-                      _c(
-                        "p",
-                        { staticClass: "text-lg rounded bg-blue-100 p-2 m-2" },
-                        [_vm._v(_vm._s(message))]
-                      ),
-                    ])
-                  }),
-                  0
-                ),
-              ])
-            : _vm._e(),
+      ? _c("div", { staticClass: "flex flex-col items-between" }, [
+          _c("div", { staticClass: "h-full" }, [
+            _vm.messages.length
+              ? _c("div", { staticClass: "bg-gren-500" }, [
+                  _c(
+                    "ul",
+                    { staticClass: "list-style-none" },
+                    _vm._l(_vm.messages, function (message) {
+                      return _c("li", { key: message.id }, [
+                        _c(
+                          "p",
+                          {
+                            staticClass: "text-lg rounded bg-blue-100 p-2 m-2",
+                          },
+                          [_vm._v(_vm._s(message.body))]
+                        ),
+                      ])
+                    }),
+                    0
+                  ),
+                ])
+              : _c("div", [
+                  _c("p", { staticClass: "text-2xl text-center my-5" }, [
+                    _vm._v("say hello to " + _vm._s(_vm.friend.name)),
+                  ]),
+                ]),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-full" }, [
             _c(

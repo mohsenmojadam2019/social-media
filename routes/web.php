@@ -21,8 +21,6 @@ Auth::routes();
 
 Route::get('/home',[HomeController::class, 'index'])->name('home');
 
-Route::get('chat',[HomeController::class, 'chat'])->name('route');
-
 Route::prefix('post')->group(function(){
   Route::get('create',[PostController::class,'create']);
   Route::post('store',[PostController::class,'store']);
@@ -77,6 +75,7 @@ Route::prefix('group')->group(function(){
   Route::prefix('chat')->group(function(){
     Route::get('/',[ChatController::class,'index'])->name('chat');
     Route::get('friends',[ChatController::class,'friends']);
+    Route::get('messages',[ChatController::class,'messages']);
     Route::post('message/send',[ChatController::class,'sendMessage']);
     Route::post('store',[ChatController::class,'store']);
     Route::get('message/edit',[ChatController::class,'edit']);

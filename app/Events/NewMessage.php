@@ -20,14 +20,14 @@ class NewMessage implements ShouldBroadcast
      *
      * @return void
      */
-    protected $user;
+    protected $userId;
     public $message;
-    protected $friend;
-    public function __construct(User $user,$message,User $friend)
+    protected $friendId;
+    public function __construct($userId,$message,$friendId)
     {
-      $this->user=$user;
+      $this->user=$userId;
       $this->message=$message;
-      $this->friend=$friend;
+      $this->friend=$friendId;
     }
 
     /**

@@ -1,12 +1,17 @@
 <template>
   <div class="">
-   <div class="flex flex-col items-between h-1/2" v-if="friend">
-     <div v-if="messages.length" class="bg-gren-500">
+   <div class="flex flex-col items-between" v-if="friend">
+     <div class="h-full">
+      <div v-if="messages.length" class="bg-gren-500">
       <ul class="list-style-none">
-       <li v-for="message in messages" :key="message">
-        <p class="text-lg rounded bg-blue-100 p-2 m-2">{{message}}</p>
+       <li v-for="message in messages" :key="message.id">
+        <p class="text-lg rounded p-2 m-2" :class="[message.from==user.id ? 'bg-blue-100':'bg-green-100']">{{message.body}}</p>
        </li>
       </ul>   
+     </div>
+     <div v-else>
+       <p class="text-2xl text-center my-5">say hello to {{friend.name}}</p>
+     </div>
      </div>
       <div class="w-full">
         <form @submit.prevent="sendMessage" class="flex w-11/12 mx-auto my-1">
@@ -54,7 +59,7 @@ export default {
     },
     methods:{
       getMessages(){
-       axios.get('/chat/messages',{params:{userId:this.user.id,friendId:this.friendId}})
+       axios.get('/chat/messages',{params:{friendId:this.friend.id}})
        .then(res=>{
          this.messages=res.data.messages;
        });
