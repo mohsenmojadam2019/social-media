@@ -39,7 +39,7 @@ export default {
        .then(res=>{
           let index=notifications.findindex(item=> item.id==notificationId)
           this.notifications.splice(index,1); 
-       }); 
+       });
      }  
    } 
 }

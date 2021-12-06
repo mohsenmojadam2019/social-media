@@ -8,11 +8,15 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test',function(Request $request){
+  
+});
 Auth::routes();
 
 Route::get('/home',[HomeController::class, 'index'])->name('home');
