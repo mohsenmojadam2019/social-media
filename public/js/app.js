@@ -1968,6 +1968,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../app */ "./resources/js/app.js");
 //
 //
 //
@@ -1988,7 +1989,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//import {bus} from '../../app';
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     user: {
@@ -2019,7 +2020,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     selectFriend: function selectFriend(friend) {
       this.selectFriend = friend;
-      bus.$emit('friend-selected', friend);
+      _app__WEBPACK_IMPORTED_MODULE_0__.default.$emit('friend-selected', friend);
     },
     filterFriends: function filterFriends() {}
   }
@@ -2038,6 +2039,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../app */ "./resources/js/app.js");
 //
 //
 //
@@ -2065,15 +2067,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     user: {
       type: Object,
       required: true
-    },
-    friend: {
-      type: Object,
-      required: false
     }
   },
   data: function data() {
@@ -2086,35 +2085,42 @@ __webpack_require__.r(__webpack_exports__);
     this.getMessages();
     this.listen();
   },
-  created: function created() {// bus.$on('friend-selected',(friend)=>{
-    //   this.friend=friend;
-    //   axios.get('/chat/messages',{params:{userId:this.user.id,friendId:this.friend.id}})
-    //  .then(res=>{
-    //    this.messages=res.data.messages;
-    //  });
-    // });
+  created: function created() {
+    var _this = this;
+
+    _app__WEBPACK_IMPORTED_MODULE_0__.default.$on('friend-selected', function (friend) {
+      _this.friend = friend;
+      axios.get('/chat/messages', {
+        params: {
+          userId: _this.user.id,
+          friendId: _this.friend.id
+        }
+      }).then(function (res) {
+        _this.messages = res.data.messages;
+      });
+    });
   },
   methods: {
     getMessages: function getMessages() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/chat/messages', {
         params: {
           friendId: this.friend.id
         }
       }).then(function (res) {
-        _this.messages = res.data.messages;
+        _this2.messages = res.data.messages;
       });
     },
     listen: function listen() {
-      var _this2 = this;
+      var _this3 = this;
 
       Echo["private"]('chat').listen('.NewMessage', function (message) {
-        _this2.messages.push(message);
+        _this3.messages.push(message);
       });
     },
     sendMessage: function sendMessage() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.post('/chat/message/send', {
         message: this.message,
@@ -2122,9 +2128,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         var message = res.data.message;
 
-        _this3.messages.push(message);
+        _this4.messages.push(message);
 
-        _this3.message = "";
+        _this4.message = "";
       });
     }
   }
@@ -44724,7 +44730,12 @@ var render = function () {
                         _c(
                           "p",
                           {
-                            staticClass: "text-lg rounded bg-blue-100 p-2 m-2",
+                            staticClass: "text-base rounded p-2 m-2",
+                            class: [
+                              message.from == _vm.user.id
+                                ? "bg-green-chat"
+                                : "bg-blue-chat text-right",
+                            ],
                           },
                           [_vm._v(_vm._s(message.body))]
                         ),
@@ -44763,7 +44774,7 @@ var render = function () {
                     },
                   ],
                   staticClass:
-                    "outline-none border-b-2 border-gray-300 focus:border-blue-500 text-xl p-2.5 w-5/6",
+                    "outline-none border-b-2 border-gray-300 focus:border-first text-xl p-2.5 w-5/6",
                   attrs: {
                     type: "text",
                     required: "",
@@ -44851,7 +44862,7 @@ var render = function () {
                 ],
                 staticClass:
                   "w-96 py-2.5 px-3 text-lg lg:text-xl xl:text-xl 2xl:text-xl outline-none focus:border-b-2 border-tiruhakim rounded-l-3xl",
-                attrs: { type: "text", required: "", placeholder: "" },
+                attrs: { type: "text", required: "", placeholder: "search..." },
                 domProps: { value: _vm.searchQuery },
                 on: {
                   input: function ($event) {

@@ -11,8 +11,13 @@
  color: #1892d1;
 }
 .border-first{
- --tw-border-opacity: 1;
  border-color: #1892d1;
+}
+.bg-blue-chat{
+  background-color:#deebf5;  ;
+}
+.bg-green-chat{
+  background-color: rgb(225, 245, 230);
 }
 .animate-spin{
  animation: spin 2s linear infinite;

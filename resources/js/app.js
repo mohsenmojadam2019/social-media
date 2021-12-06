@@ -5,8 +5,8 @@
  */
 
 require('./bootstrap');
-import Vue from 'vue'
 
+import Vue from 'vue'
 window.Vue = require('vue').default;
 
 const bus = new Vue();      
