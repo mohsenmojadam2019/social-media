@@ -9,7 +9,7 @@ import Vue from 'vue'
 
 window.Vue = require('vue').default;
 
-window.bus = new Vue();      
+const bus = new Vue();      
 
 export default bus;
 

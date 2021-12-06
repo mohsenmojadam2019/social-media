@@ -20,11 +20,11 @@ class ChatController extends Controller
    {
      $profile=auth()->user()->profile;
      $friends=$profile->users;
-     return response()->json(['friends'=>$friends]);  
+     return response()->json(['friends'=>$friends]); 
    }
    public function sendMessage(Request $request)
    {
-    broadcast(new NewMessage(auth()->user(),$request->message,auth()->user()))->toOthers();
+    broadcast(new NewMessage(auth()->user()->id,$request->message,$request->friendId))->toOthers();
     return response()->json(['message'=>$request->message]);
    }
 }

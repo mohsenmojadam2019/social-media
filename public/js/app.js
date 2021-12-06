@@ -1888,12 +1888,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.activeUsers = users;
         _this.loading = false;
       }).joining(function (user) {
-        console.log('joining ' + user);
-
         _this.activeUsers.unshfit(user);
       }).leaving(function (user) {
-        console.log('leaving ' + user);
-
         _this.activeUsers.pop(user);
       });
     }
@@ -1972,7 +1968,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../app */ "./resources/js/app.js");
 //
 //
 //
@@ -1993,7 +1988,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//import {bus} from '../../app';
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     user: {
@@ -2024,7 +2019,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     selectFriend: function selectFriend(friend) {
       this.selectFriend = friend;
-      _app__WEBPACK_IMPORTED_MODULE_0__.bus.$emit('friend-selected', friend);
+      bus.$emit('friend-selected', friend);
     },
     filterFriends: function filterFriends() {}
   }
@@ -2086,24 +2081,17 @@ __webpack_require__.r(__webpack_exports__);
     this.getMessages();
     this.listen();
   },
-  created: function created() {
-    var _this = this;
-
-    bus.$on('friend-selected', function (friend) {
-      _this.friend = friend;
-      axios.get('/chat/messages', {
-        params: {
-          userId: _this.user.id,
-          friendId: _this.friend.id
-        }
-      }).then(function (res) {
-        _this.messages = res.data.messages;
-      });
-    });
+  created: function created() {// bus.$on('friend-selected',(friend)=>{
+    //   this.friend=friend;
+    //   axios.get('/chat/messages',{params:{userId:this.user.id,friendId:this.friend.id}})
+    //  .then(res=>{
+    //    this.messages=res.data.messages;
+    //  });
+    // });
   },
   methods: {
     getMessages: function getMessages() {
-      var _this2 = this;
+      var _this = this;
 
       axios.get('/chat/messages', {
         params: {
@@ -2111,28 +2099,28 @@ __webpack_require__.r(__webpack_exports__);
           friendId: this.friendId
         }
       }).then(function (res) {
-        _this2.messages = res.data.messages;
+        _this.messages = res.data.messages;
       });
     },
     listen: function listen() {
-      var _this3 = this;
+      var _this2 = this;
 
       Echo["private"]('chat').listen('.NewMessage', function (message) {
-        _this3.messages.push(message);
+        _this2.messages.push(message);
       });
     },
     sendMessage: function sendMessage() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios.post('/chat/message/send', {
         message: this.message,
-        friend: this.friend
+        friendId: this.friend.id
       }).then(function (res) {
         var message = res.data.message;
 
-        _this4.messages.push(message);
+        _this3.messages.push(message);
 
-        _this4.message = "";
+        _this3.message = "";
       });
     }
   }
@@ -2368,7 +2356,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
-window.bus = new vue__WEBPACK_IMPORTED_MODULE_0__.default();
+var bus = new vue__WEBPACK_IMPORTED_MODULE_0__.default();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (bus);
 /**
  * The following block of code may be used to automatically register your
@@ -44718,9 +44706,9 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "relative" }, [
+  return _c("div", {}, [
     _vm.friend
-      ? _c("div", {}, [
+      ? _c("div", { staticClass: "flex flex-col items-between h-1/2" }, [
           _vm.messages.length
             ? _c("div", [
                 _c(
@@ -44740,7 +44728,7 @@ var render = function () {
               ])
             : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "absolute bottom-1 w-full" }, [
+          _c("div", { staticClass: "w-full" }, [
             _c(
               "form",
               {
