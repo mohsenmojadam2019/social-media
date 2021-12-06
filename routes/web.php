@@ -40,6 +40,7 @@ Route::prefix('video')->group(function(){
 
 Route::prefix('friend')->group(function(){
   Route::get('/',[FriendController::class,'index']);
+  Route::get('friends',[FriendController::class,'friends']);
   Route::post('follow',[FriendController::class,'follow']);
   Route::get('unfollow',[FriendController::class,'unFollow']);
   Route::get('block',[FriendController::class,'block']);
@@ -75,6 +76,7 @@ Route::prefix('group')->group(function(){
 
   Route::prefix('chat')->group(function(){
     Route::get('/',[ChatController::class,'index'])->name('chat');
+    Route::get('friends',[ChatController::class,'friends']);
     Route::post('message/send',[ChatController::class,'sendMessage']);
     Route::post('store',[ChatController::class,'store']);
     Route::get('message/edit',[ChatController::class,'edit']);

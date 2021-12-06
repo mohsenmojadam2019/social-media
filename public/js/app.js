@@ -1988,6 +1988,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -1999,7 +2000,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       friends: [],
-      selectFriend: {}
+      selectedFriend: {}
     };
   },
   mounted: function mounted() {
@@ -44644,6 +44645,9 @@ var render = function () {
             {
               staticClass:
                 "flex justify-between py-0.5 hover:bg-gray-200 cursor-pointer px-2",
+              class: [
+                friend.id == _vm.selectedFriend.id ? "bg-frist text-white" : "",
+              ],
               on: {
                 click: function ($event) {
                   return _vm.selectFriend(friend)
@@ -45061,64 +45065,59 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "mx-3 my-auto" }, [
+      _c("div", { staticClass: "flex items-center" }, [
         _vm.user
-          ? _c(
-              "div",
-              { staticClass: "my-auto hidden lg:inline xl:inline 2xl:inline" },
-              [
+          ? _c("div", { staticClass: "items-center hidden lg:flex" }, [
+              _c("button", { staticClass: "flex items-center mx-2" }, [
+                _c("img", {
+                  staticClass: "w-12 h-12 rounded-full m-1",
+                  attrs: {
+                    src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
+                  },
+                }),
+                _vm._v(" "),
                 _c(
-                  "button",
+                  "span",
                   {
-                    staticClass: "flex  items-center mx-2",
-                    on: {
-                      click: function ($event) {
-                        _vm.userDropdownMenu = true
-                      },
+                    staticClass:
+                      "text-xl font-semibold capitalize text-white text-semibold",
+                  },
+                  [_vm._v(_vm._s(_vm.user.name))]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("button", { staticClass: "mx-3" }, [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "bi bi-list w-12 text-white",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      fill: "currentColor",
+                      viewBox: "0 0 16 16",
                     },
                   },
                   [
-                    _c("img", {
-                      staticClass: "w-5 h-5 rounded-full m-1",
+                    _c("path", {
                       attrs: {
-                        src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
+                        "fill-rule": "evenodd",
+                        d: "M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z",
                       },
                     }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        staticClass:
-                          "text-xl font-semibold capitalize text-white text-semibold",
-                      },
-                      [_vm._v(_vm._s(_vm.user.name))]
-                    ),
                   ]
                 ),
-                _vm._v(" "),
-                _c("button", [
-                  _c(
-                    "svg",
-                    {
-                      staticClass: "bi bi-list w-12 text-white",
-                      attrs: {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        fill: "currentColor",
-                        viewBox: "0 0 16 16",
-                      },
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function ($event) {
+                      _vm.userDropdownMenu = true
                     },
-                    [
-                      _c("path", {
-                        attrs: {
-                          "fill-rule": "evenodd",
-                          d: "M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z",
-                        },
-                      }),
-                    ]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("button", [
+                  },
+                },
+                [
                   _c(
                     "svg",
                     {
@@ -45137,9 +45136,9 @@ var render = function () {
                       }),
                     ]
                   ),
-                ]),
-              ]
-            )
+                ]
+              ),
+            ])
           : _c(
               "div",
               { staticClass: "my-auto flex text-white text-xl text-xl" },
@@ -45168,7 +45167,10 @@ var render = function () {
         _vm.userDropdownMenu
           ? _c(
               "div",
-              { staticClass: "fixed z-20 text-xl bg-gray-100 top-2 right-2" },
+              {
+                staticClass:
+                  "rounded-lg fixed z-20 text-xl bg-gray-100 top-0 right-0",
+              },
               [
                 _c("ul", [
                   _vm._m(0),
@@ -45232,7 +45234,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "hover:bg-blue-200 px-5 py-1" }, [
-      _c("a", { attrs: { href: "/video/upload" } }, [_vm._v("upload videos")]),
+      _c("a", { attrs: { href: "/video/create" } }, [_vm._v("upload videos")]),
     ])
   },
   function () {
@@ -45248,7 +45250,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "hover:bg-blue-200 px-5 py-1" }, [
-      _c("a", { attrs: { href: "/order" } }, [_vm._v("order")]),
+      _c("a", { attrs: { href: "/chat" } }, [_vm._v("chat")]),
     ])
   },
   function () {
