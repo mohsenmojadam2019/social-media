@@ -2019,7 +2019,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     selectFriend: function selectFriend(friend) {
-      this.selectFriend = friend;
+      this.selectedFriend = friend;
       _app__WEBPACK_IMPORTED_MODULE_0__.default.$emit('friend-selected', friend);
     },
     filterFriends: function filterFriends() {}
@@ -2078,11 +2078,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       message: '',
-      messages: []
+      messages: [],
+      friend: null
     };
   },
   mounted: function mounted() {
-    this.getMessages();
     this.listen();
   },
   created: function created() {
@@ -2090,14 +2090,8 @@ __webpack_require__.r(__webpack_exports__);
 
     _app__WEBPACK_IMPORTED_MODULE_0__.default.$on('friend-selected', function (friend) {
       _this.friend = friend;
-      axios.get('/chat/messages', {
-        params: {
-          userId: _this.user.id,
-          friendId: _this.friend.id
-        }
-      }).then(function (res) {
-        _this.messages = res.data.messages;
-      });
+
+      _this.getMessages();
     });
   },
   methods: {
@@ -44646,10 +44640,11 @@ var render = function () {
           _c(
             "div",
             {
-              staticClass:
-                "flex justify-between py-0.5 hover:bg-gray-200 cursor-pointer px-2",
+              staticClass: "flex justify-between py-0.5 cursor-pointer px-2",
               class: [
-                friend.id == _vm.selectedFriend.id ? "bg-frist text-white" : "",
+                friend.id == _vm.selectedFriend.id
+                  ? "bg-first text-white hover:bg-first"
+                  : "hover:bg-gray-200",
               ],
               on: {
                 click: function ($event) {
@@ -44670,9 +44665,18 @@ var render = function () {
                   _vm._v(_vm._s(friend.name)),
                 ]),
                 _vm._v(" "),
-                _c("p", { staticClass: "text-gray-600 text-base" }, [
-                  _vm._v("last message"),
-                ]),
+                _c(
+                  "p",
+                  {
+                    staticClass: "text-base",
+                    class: [
+                      friend.id == _vm.selectedFriend.id
+                        ? "text-white"
+                        : "text-gray-600",
+                    ],
+                  },
+                  [_vm._v("last message")]
+                ),
               ]),
               _vm._v(" "),
               _vm._m(0, true),
@@ -44774,7 +44778,7 @@ var render = function () {
                     },
                   ],
                   staticClass:
-                    "outline-none border-b-2 border-gray-300 focus:border-first text-xl p-2.5 w-5/6",
+                    "outline-none border-b-2 border-gray-300 focus:border-blue-500 text-xl p-2.5 w-5/6",
                   attrs: {
                     type: "text",
                     required: "",

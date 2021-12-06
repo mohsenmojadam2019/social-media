@@ -15,7 +15,7 @@
      </div>
       <div class="w-full">
         <form @submit.prevent="sendMessage" class="flex w-11/12 mx-auto my-1">
-          <input type="text" v-model="message" required placeholder="write a message..." class="outline-none border-b-2 border-gray-300 focus:border-first text-xl p-2.5 w-5/6">
+          <input type="text" v-model="message" required placeholder="write a message..." class="outline-none border-b-2 border-gray-300 focus:border-blue-500 text-xl p-2.5 w-5/6">
           <input type="submit" value="send" class="text-white bg-first rounded-r-3xl py-2 px-4 text-xl">
         </form>
       </div>
@@ -38,21 +38,17 @@ export default {
      return{
       message:'',
       messages:[],
-      friend:{}
+      friend:null
      }
     },
     mounted()
     {
-      this.getMessages();
       this.listen();
     },
     created(){
       bus.$on('friend-selected',(friend)=>{
         this.friend=friend;
-        axios.get('/chat/messages',{params:{userId:this.user.id,friendId:this.friend.id}})
-       .then(res=>{
-         this.messages=res.data.messages;
-       });
+        this.getMessages();
       });
     },
     methods:{

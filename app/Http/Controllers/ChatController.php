@@ -26,14 +26,14 @@ class ChatController extends Controller
    public function messages(Request $request)
    {
      $chatroom=auth()->user()->id.$request->friendId;
-     $messages=Message::where('chatroom_id',$chatroom)->latest()->get();
+     $messages=Message::where('chatroom',$chatroom)->latest()->get();
      return response()->json(['messages'=>$messages]);
    }
    public function sendMessage(Request $request)
    {
     broadcast(new NewMessage(auth()->user()->id,$request->message,$request->friendId))->toOthers();
     $message=new Message();
-    $message->chatroom_id=auth()->user()->id.$request->friendId;
+    $message->chatroom=auth()->user()->id.$request->friendId;
     $message->from=auth()->user()->id;
     $message->to=$request->friendId;
     $message->body=$request->message;
