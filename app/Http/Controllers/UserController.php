@@ -21,10 +21,9 @@ class UserController extends Controller
         //
     }
 
-    public function notifications(Request $request)
+    public function notifications()
     {
-        $user=User::find($request->userId);
-        $notifications=$user->notifications;
+        $notifications=auth()->user()->notifications;
         return response()->json(['notifications'=>$notifications]);
     }
     

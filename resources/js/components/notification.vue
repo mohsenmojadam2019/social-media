@@ -28,7 +28,7 @@ export default {
     }   
    },
    mounted(){
-     axios.get('/user/notifications',{params:{userId:this.userId}})
+     axios.get('/user/notifications')
      .then(res=>{
         this.notifications=res.data.notifications;
      })  

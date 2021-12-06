@@ -3,11 +3,11 @@
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FriendController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,6 +24,14 @@ Route::prefix('post')->group(function(){
   Route::post('store',[PostController::class,'store']);
   Route::get('edit/{id}',[PostController::class,'edit']);
   Route::get('delete',[PostController::class,'delete']);
+});
+
+Route::prefix('video')->group(function(){
+  Route::get('',[VideoController::class,'index']);
+  Route::get('create',[VideoController::class,'create']);
+  Route::post('store',[VideoController::class,'store']);
+  Route::get('edit/{id}',[VideoController::class,'edit']);
+  Route::get('delete',[VideoController::class,'delete']);
 });
 
 Route::prefix('friend')->group(function(){
