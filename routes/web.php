@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\GroupController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -49,6 +50,11 @@ Route::prefix('group')->group(function(){
     Route::post('store',[GroupController::class,'store']);
     Route::get('edit/{id}',[GroupController::class,'edit']);
     Route::get('delete',[GroupController::class,'delete']);
+    Route::prefix('member')->group(function(){
+      Route::get('all',[GroupController::class,'members']);
+      Route::post('add',[GroupController::class,'addmemember']);
+      Route::post('remove',[GroupController::class,'removeMember']);
+    });
   });
 
   Route::prefix('channel')->group(function(){
