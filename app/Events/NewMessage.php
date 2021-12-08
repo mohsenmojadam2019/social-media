@@ -23,6 +23,7 @@ class NewMessage implements ShouldBroadcast
     protected $userId;
     public $message;
     protected $friendId;
+    
     public function __construct($userId,$message,$friendId)
     {
       $this->user=$userId;
@@ -37,7 +38,7 @@ class NewMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-      return new privateChannel('chatter');
+      return new privateChannel('chat.'.$this->userId.'.'.$this->friendId);
     }
     public function broadcastAs()
     {

@@ -2,12 +2,12 @@
   <div class="">
    <div class="h-full flex flex-col justify-between" v-if="friend">
      <div class="">
-      <div v-if="messages.length" class="overflow-y-scroll">
+      <div v-if="messages.length" class="">
         <ul class="list-style-none">
         <li v-for="message in messages" :key="message.id">
-          <div class="flex justify-between">
-           <p class="text-base rounded p-2 m-2" :class="[message.from==user.id ? 'bg-green-chat':'bg-blue-chat text-right']">{{message.body}}</p>
-           <span>{{message.date}}</span>
+          <div class="flex items-center justify-between rounded p-2 m-2" :class="[message.from==user.id ? 'bg-green-chat':'bg-blue-chat text-right']">
+           <p class="text-base">{{message.body}}</p>
+           <span class="text-md">{{message.date}}</span>
           </div>
         </li>
         </ul>
@@ -65,8 +65,9 @@ export default {
        });
       },
       listen(){
-        Echo.private('chatter')
+        Echo.private(`chat.${this.chatroom}`)
         .listen('.NewMessage',(message)=>{
+          message.date=message.created_at.substr(0,9);
           this.messages.push(message);
         });
       },
@@ -74,6 +75,7 @@ export default {
         axios.post('/chat/message/send',{message:this.message,friendId:this.friend.id})
         .then(res=>{
           let message=res.data.message;
+          message.date=message.created_at.substr(0,9);
           this.messages.push(message);
           this.message="";
         });

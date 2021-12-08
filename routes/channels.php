@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\Broadcast;
 */
 
 Broadcast::channel('post.{id}',function($user){
-  return true;
+  return $user;
 });
 
 Broadcast::channel('comment.{id}',function($user){
-  return true;
+  return $user;
 });
 
-Broadcast::channel('chatter',function($user){
-  return $user;
+Broadcast::channel('chat.{id}.{fid}',function($user,$id,$fid){
+  return $user->id==$id||$user->id==$fid;
 });

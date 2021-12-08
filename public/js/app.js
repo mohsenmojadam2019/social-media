@@ -1868,8 +1868,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {},
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
+  },
   data: function data() {
     return {
       activeUsers: [],
@@ -2039,6 +2046,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../app */ "./resources/js/app.js");
+//
+//
+//
 //
 //
 //
@@ -44607,16 +44617,22 @@ var render = function () {
                           staticClass: "flex items-center p-1",
                         },
                         [
-                          _c("img", {
-                            staticClass: "w-12 h-12 rounded-full mx-1",
-                            attrs: {
-                              src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text-xl mx-1 my-auto" }, [
-                            _vm._v(_vm._s(active.name)),
-                          ]),
+                          _vm.user.id != active.id
+                            ? _c("div", [
+                                _c("img", {
+                                  staticClass: "w-12 h-12 rounded-full mx-1",
+                                  attrs: {
+                                    src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "p",
+                                  { staticClass: "text-xl mx-1 my-auto" },
+                                  [_vm._v(_vm._s(active.name))]
+                                ),
+                              ])
+                            : _vm._e(),
                         ]
                       )
                     }),
@@ -44699,7 +44715,10 @@ var render = function () {
           attrs: { user: _vm.user, friend: _vm.user },
         }),
         _vm._v(" "),
-        _c("active-component", { staticClass: "w-1/4 overflow-auto" }),
+        _c("active-component", {
+          staticClass: "w-1/4 overflow-auto",
+          attrs: { user: _vm.user },
+        }),
       ],
       1
     ),
@@ -44830,23 +44849,32 @@ var render = function () {
       ? _c("div", { staticClass: "h-full flex flex-col justify-between" }, [
           _c("div", {}, [
             _vm.messages.length
-              ? _c("div", { staticClass: "overflow-y-scroll" }, [
+              ? _c("div", {}, [
                   _c(
                     "ul",
                     { staticClass: "list-style-none" },
                     _vm._l(_vm.messages, function (message) {
                       return _c("li", { key: message.id }, [
                         _c(
-                          "p",
+                          "div",
                           {
-                            staticClass: "text-base rounded p-2 m-2",
+                            staticClass:
+                              "flex items-center justify-between rounded p-2 m-2",
                             class: [
                               message.from == _vm.user.id
                                 ? "bg-green-chat"
                                 : "bg-blue-chat text-right",
                             ],
                           },
-                          [_vm._v(_vm._s(message.body))]
+                          [
+                            _c("p", { staticClass: "text-base" }, [
+                              _vm._v(_vm._s(message.body)),
+                            ]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "text-md" }, [
+                              _vm._v(_vm._s(message.date)),
+                            ]),
+                          ]
                         ),
                       ])
                     }),
