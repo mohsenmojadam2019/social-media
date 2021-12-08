@@ -47,13 +47,15 @@ export default {
     },
     mounted()
     {
-      let userId=parseInt(this.user.id);
-      let friendId=parseInt(this.friend.id);
-      if(userId<friendId){
-        this.chatroom=this.user.id+this.friend.id;
-      }
-      else{
-       this.chatroom=this.friend.id+this.user.id;
+      if(this.friend){
+        let userId=parseInt(this.user.id);
+        let friendId=parseInt(this.friend.id);
+        if(userId<friendId){
+          this.chatroom=this.user.id+this.friend.id;
+        }
+        else{
+        this.chatroom=this.friend.id+this.user.id;
+        }
       }
       this.listen();
     },
@@ -65,7 +67,7 @@ export default {
     },
     methods:{
       getMessages(){
-       axios.get('/chat/messages',{params:{chatrrom:this.chatroom}})
+       axios.get('/chat/messages',{params:{chatroom:this.chatroom}})
        .then(res=>{
          this.messages=res.data.messages;
          this.messages.forEach((message)=>{

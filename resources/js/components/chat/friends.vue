@@ -42,7 +42,7 @@ export default {
       .then(res=>{
         this.friends=res.data.friends;
         this.friends.forEach(friend=>{
-          friend.lastMessage.hour=friend.lastMessage.created_at.substr(11,15);
+          friend.lastMessage.hour=friend.lastMessage.created_at.substr(11,5);
         });
       });
     },

@@ -2123,9 +2123,10 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/chat/messages', {
         params: {
-          chatrrom: this.chatroom
+          chatroom: this.chatroom
         }
       }).then(function (res) {
+        console.log(res.data.messages);
         _this2.messages = res.data.messages;
 
         _this2.messages.forEach(function (message) {
