@@ -12,7 +12,7 @@ use App\Http\Controllers\VideoController;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
 Route::get('/test',function(Request $request){

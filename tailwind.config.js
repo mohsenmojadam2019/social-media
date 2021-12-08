@@ -6,7 +6,12 @@ module.exports = {
     './resources/**/*.vue',
   ],
   theme: {
-    extend: {}
+    extend: {
+      backgroundImage:{
+        'social' : "url('/storage/social.jpg')",
+        'social-media' : "url('/storage/social-media.jpg')"
+      }
+    }
   },
   variants: {},
   plugins: [
