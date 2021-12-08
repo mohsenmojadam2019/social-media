@@ -1,0 +1,31 @@
+<template>
+  <div>
+
+  </div>
+</template>
+<script>
+export default {
+  props:{
+   group:{
+    type:Object,
+    required:true
+   }
+  },
+  data(){
+   return{
+    members:[]
+   }
+  },
+  mounted(){
+   this.getMembers();
+  },
+  methods:{
+   getMembers(){
+    axios.get('/group/member/all',{params:{groupId:this.group.id}})
+    .then(res=>{
+      this.members=res.data.members;
+    });
+   }
+  }
+}
+</script>

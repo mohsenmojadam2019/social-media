@@ -25,8 +25,8 @@ export default bus;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('navigation-component', require('./components/navigation.vue').default);
-Vue.component('notification-component', require('./components/notification.vue').default);
+Vue.component('navigation-component', require('./components/navigation/navigation.vue').default);
+Vue.component('notification-component', require('./components/navigation/notification.vue').default);
 //Vue.component('search-component', require('./components/search.vue').default);
 
 Vue.component('active-component', require('./components/chat/active.vue').default);
