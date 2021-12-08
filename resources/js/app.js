@@ -29,6 +29,8 @@ Vue.component('navigation-component', require('./components/navigation/navigatio
 Vue.component('notification-component', require('./components/navigation/notification.vue').default);
 //Vue.component('search-component', require('./components/search.vue').default);
 
+Vue.component('create-profile-component', require('./components/profile/createProfile.vue').default);
+
 Vue.component('active-component', require('./components/chat/active.vue').default);
 Vue.component('chat-component', require('./components/chat/chat.vue').default);
 Vue.component('friends-component', require('./components/chat/friends.vue').default);

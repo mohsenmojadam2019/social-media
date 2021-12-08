@@ -1,9 +1,5 @@
 <template>
- <div>
-  <form @submit.prevent="createProfile">
-   
-  </form>
- </div>
+ 
 </template>
 <script>
 export default {
