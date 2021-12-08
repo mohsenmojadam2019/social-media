@@ -13,6 +13,9 @@
 .border-first{
  border-color: #1892d1;
 }
+.h-chat{
+  height: 30rem;
+}
 .bg-blue-chat{
   background-color:#deebf5;  ;
 }

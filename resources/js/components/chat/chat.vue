@@ -7,7 +7,7 @@
        </svg>
      </button>
    </div>
-   <div class="md:flex lg:flex xl:flex 2xl:flex min-h-96 max-h-screen bg-white">
+   <div class="md:flex h-chat bg-white">
     <friends-component :user="user" class="overflow-auto w-1/4" />
     <messages-component :user="user" :friend="user" class="w-1/2 overflow-auto border-r border-l border-gray-300" />
     <active-component class="w-1/4 overflow-auto"/>

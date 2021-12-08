@@ -1,14 +1,14 @@
 <template>
   <div class="">
-   <div class="flex flex-col items-between" v-if="friend">
-     <div class="h-full">
-      <div v-if="messages.length" class="bg-gren-500">
-      <ul class="list-style-none">
-       <li v-for="message in messages" :key="message.id">
-        <p class="text-base rounded p-2 m-2" :class="[message.from==user.id ? 'bg-green-chat':'bg-blue-chat text-right']">{{message.body}}</p>
-       </li>
-      </ul>
-     </div>
+   <div class="h-full flex flex-col justify-between" v-if="friend">
+     <div class="">
+      <div v-if="messages.length" class="overflow-y-scroll">
+        <ul class="list-style-none">
+        <li v-for="message in messages" :key="message.id">
+          <p class="text-base rounded p-2 m-2" :class="[message.from==user.id ? 'bg-green-chat':'bg-blue-chat text-right']">{{message.body}}</p>
+        </li>
+        </ul>
+      </div>
      <div v-else>
        <p class="text-2xl text-center my-5">say hello to {{friend.name}}</p>
      </div>
@@ -56,6 +56,9 @@ export default {
        axios.get('/chat/messages',{params:{friendId:this.friend.id}})
        .then(res=>{
          this.messages=res.data.messages;
+         this.messages.forEach((message)=>{
+           message.date=message.created_at.substr(0,9);
+         });
        });
       },
       listen(){

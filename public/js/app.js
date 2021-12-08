@@ -2104,6 +2104,10 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (res) {
         _this2.messages = res.data.messages;
+
+        _this2.messages.forEach(function (message) {
+          message.date = message.created_at.substr(0, 9);
+        });
       });
     },
     listen: function listen() {
@@ -44580,10 +44584,7 @@ var render = function () {
     _vm._v(" "),
     _c(
       "div",
-      {
-        staticClass:
-          "md:flex lg:flex xl:flex 2xl:flex min-h-96 max-h-screen bg-white",
-      },
+      { staticClass: "md:flex h-chat bg-white" },
       [
         _c("friends-component", {
           staticClass: "overflow-auto w-1/4",
@@ -44629,7 +44630,8 @@ var render = function () {
     [
       _c("div", [
         _c("input", {
-          staticClass: "text-gray-700 text-lg w-full focus:bg-white py-2 px-3",
+          staticClass:
+            "text-gray-700 border-b border-gray-300 text-lg w-full focus:bg-white py-2 px-3",
           attrs: { type: "text", placeholder: "search" },
           on: { input: _vm.filterFriends },
         }),
@@ -44722,10 +44724,10 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", {}, [
     _vm.friend
-      ? _c("div", { staticClass: "flex flex-col items-between" }, [
-          _c("div", { staticClass: "h-full" }, [
+      ? _c("div", { staticClass: "h-full flex flex-col justify-between" }, [
+          _c("div", {}, [
             _vm.messages.length
-              ? _c("div", { staticClass: "bg-gren-500" }, [
+              ? _c("div", {}, [
                   _c(
                     "ul",
                     { staticClass: "list-style-none" },

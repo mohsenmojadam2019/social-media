@@ -38,6 +38,6 @@ class ChatController extends Controller
     $message->to=$request->friendId;
     $message->body=$request->message;
     $message->save();
-    return response()->json(['message'=>$request->message]);
+    return response()->json(['message'=>$message]);
    }
 }
