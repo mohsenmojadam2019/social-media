@@ -21,6 +21,6 @@ Broadcast::channel('comment.{id}',function($user){
   return true;
 });
 
-Broadcast::channel('chat',function($user){
+Broadcast::channel('chatter',function($user){
   return $user;
 });

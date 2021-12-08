@@ -5,12 +5,15 @@
       <div v-if="messages.length" class="overflow-y-scroll">
         <ul class="list-style-none">
         <li v-for="message in messages" :key="message.id">
-          <p class="text-base rounded p-2 m-2" :class="[message.from==user.id ? 'bg-green-chat':'bg-blue-chat text-right']">{{message.body}}</p>
+          <div class="flex justify-between">
+           <p class="text-base rounded p-2 m-2" :class="[message.from==user.id ? 'bg-green-chat':'bg-blue-chat text-right']">{{message.body}}</p>
+           <span>{{message.date}}</span>
+          </div>
         </li>
         </ul>
       </div>
-     <div v-else>
-       <p class="text-2xl text-center my-5">say hello to {{friend.name}}</p>
+     <div v-else class="flex content-center">
+       <p class="text-2xl my-5">say hello to {{friend.name}}</p>
      </div>
      </div>
       <div class="w-full">
@@ -62,7 +65,7 @@ export default {
        });
       },
       listen(){
-        Echo.private('chat')
+        Echo.private('chatter')
         .listen('.NewMessage',(message)=>{
           this.messages.push(message);
         });

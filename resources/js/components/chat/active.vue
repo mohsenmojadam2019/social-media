@@ -10,8 +10,10 @@
     <ul>
     <p class="text-xl font-semibold text-center border-b-2 border-gray-300 p-2">Active(<span class="text-first">{{activeUsers.length}}</span>)</p>
     <li v-for="active in activeUsers " :key="active.id" class="flex items-center p-1">
-      <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-12 h-12 rounded-full mx-1">
-      <p class="text-xl mx-1 my-auto">{{active.name}}</p>
+      <div v-if="user.id!=active.id">
+       <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-12 h-12 rounded-full mx-1">
+       <p class="text-xl mx-1 my-auto">{{active.name}}</p>
+      </div>
     </li>
     </ul>
   </div>
@@ -22,8 +24,13 @@
   </div>
 </template>
 <script>
-import {bus} from '../../app';
 export default {
+  props:{
+   user:{
+     type:Object,
+     required:true
+   }
+  },
   data(){
    return{
     activeUsers:[],
