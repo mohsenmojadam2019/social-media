@@ -58,7 +58,16 @@
 </template>
 <script>
 export default {
-   props:['PostId','userId'],
+   props:{
+    post:{
+      type:Object,
+      required:true
+    },
+    user:{
+     type:Object,
+     required:true
+    }
+   },
    data(){
     return{
      body:'',
@@ -80,14 +89,7 @@ export default {
           })
           .catch(err=>{
 
-          });
-      axios.get('/post/like',{params:{userId:this.userId,commentId:this.commentId}})
-           .then(res=>{
-
-           })
-           .catch(err=>{
-
-           });            
+          });           
    },
    methods:{
      addComment()
