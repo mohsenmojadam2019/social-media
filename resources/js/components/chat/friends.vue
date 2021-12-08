@@ -9,10 +9,10 @@
          <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-14 h-14 rounded-full mx-1">
          <div class="my-auto mx-2 space-y-2">
            <p class="text-lg font-medium my-auto" >{{friend.name}}</p>
-           <p class="text-base" :class="[friend.id==selectedFriend.id ? 'text-white' : 'text-gray-600']">last message</p>
+           <p class="text-base" :class="[friend.id==selectedFriend.id ? 'text-white' : 'text-gray-600']">{{friend.lastMessage.body}}</p>
          </div>
          <div>
-           <p class="tetx-gray-500 m-2">12:45</p>
+           <p class="tetx-gray-500 m-2">{{friend.lastMessage.hour}}</p>
          </div>
         </div>
       </div>
@@ -41,6 +41,9 @@ export default {
       axios.get('/chat/friends',{params:{userId:this.user.id}})
       .then(res=>{
         this.friends=res.data.friends;
+        this.friends.forEach(friend=>{
+          friend.lastMessage.hour=friend.lastMessage.created_at.substr(11,15);
+        });
       });
     },
     selectFriend(friend){

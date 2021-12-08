@@ -21,6 +21,17 @@ class ChatController extends Controller
    {
      $profile=auth()->user()->profile;
      $friends=$profile->users;
+     $userId=(int) auth()->user()->id;
+     foreach($friends as $friend){
+      $friendId=(int) $friend->id;
+      if($userId<$friendId){
+         $chatroom=auth()->user()->id.$friend->id;
+       }
+       else{
+         $chatroom=$friend->id.auth()->user()->id;
+       }
+       $friend->lastMessage=Message::where('chatroom',$chatroom)->latest()->first();
+     }
      return response()->json(['friends'=>$friends]);
    }
    public function messages(Request $request)

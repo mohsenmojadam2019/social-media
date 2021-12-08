@@ -2022,6 +2022,10 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (res) {
         _this.friends = res.data.friends;
+
+        _this.friends.forEach(function (friend) {
+          friend.lastMessage.hour = friend.lastMessage.created_at.substr(11, 15);
+        });
       });
     },
     selectFriend: function selectFriend(friend) {
@@ -2088,10 +2092,20 @@ __webpack_require__.r(__webpack_exports__);
     return {
       message: '',
       messages: [],
-      friend: null
+      friend: null,
+      chatroom: ''
     };
   },
   mounted: function mounted() {
+    var userId = parseInt(this.user.id);
+    var friendId = parseInt(this.friend.id);
+
+    if (userId < friendId) {
+      this.chatroom = this.user.id + this.friend.id;
+    } else {
+      this.chatroom = this.friend.id + this.user.id;
+    }
+
     this.listen();
   },
   created: function created() {
@@ -2109,13 +2123,14 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/chat/messages', {
         params: {
-          friendId: this.friend.id
+          chatrrom: this.chatroom
         }
       }).then(function (res) {
         _this2.messages = res.data.messages;
 
         _this2.messages.forEach(function (message) {
           message.date = message.created_at.substr(0, 9);
+          message.hour = message.created_at.substr(11, 15);
         });
       });
     },
@@ -2133,6 +2148,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/chat/message/send', {
         message: this.message,
+        chatroom: this.chatroom,
         friendId: this.friend.id
       }).then(function (res) {
         var message = res.data.message;
@@ -44802,11 +44818,15 @@ var render = function () {
                         : "text-gray-600",
                     ],
                   },
-                  [_vm._v("last message")]
+                  [_vm._v(_vm._s(friend.lastMessage.body))]
                 ),
               ]),
               _vm._v(" "),
-              _vm._m(0, true),
+              _c("div", [
+                _c("p", { staticClass: "tetx-gray-500 m-2" }, [
+                  _vm._v(_vm._s(friend.lastMessage.hour)),
+                ]),
+              ]),
             ]
           ),
         ])
@@ -44815,16 +44835,7 @@ var render = function () {
     2
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("p", { staticClass: "tetx-gray-500 m-2" }, [_vm._v("12:45")]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

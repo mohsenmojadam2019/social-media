@@ -70,6 +70,7 @@ export default {
          this.messages=res.data.messages;
          this.messages.forEach((message)=>{
            message.date=message.created_at.substr(0,9);
+           message.hour=message.created_at.substr(11,15);
          });
        });
       },
