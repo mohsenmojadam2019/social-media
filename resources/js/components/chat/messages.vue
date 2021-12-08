@@ -41,11 +41,20 @@ export default {
      return{
       message:'',
       messages:[],
-      friend:null
+      friend:null,
+      chatroom:''
      }
     },
     mounted()
     {
+      let userId=parseInt(this.user.id);
+      let friendId=parseInt(this.friend.id);
+      if(userId<friendId){
+        this.chatroom=this.user.id+this.friend.id;
+      }
+      else{
+       this.chatroom=this.friend.id+this.user.id;
+      }
       this.listen();
     },
     created(){
@@ -56,7 +65,7 @@ export default {
     },
     methods:{
       getMessages(){
-       axios.get('/chat/messages',{params:{friendId:this.friend.id}})
+       axios.get('/chat/messages',{params:{chatrrom:this.chatroom}})
        .then(res=>{
          this.messages=res.data.messages;
          this.messages.forEach((message)=>{
@@ -72,7 +81,7 @@ export default {
         });
       },
       sendMessage(){
-        axios.post('/chat/message/send',{message:this.message,friendId:this.friend.id})
+        axios.post('/chat/message/send',{message:this.message,chatroom:this.chatroom,friendId:this.friend.id})
         .then(res=>{
           let message=res.data.message;
           message.date=message.created_at.substr(0,9);

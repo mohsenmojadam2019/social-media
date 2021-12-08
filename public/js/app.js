@@ -2122,7 +2122,9 @@ __webpack_require__.r(__webpack_exports__);
     listen: function listen() {
       var _this3 = this;
 
-      Echo["private"]('chat').listen('.NewMessage', function (message) {
+      Echo["private"]("chat.".concat(this.chatroom)).listen('.NewMessage', function (message) {
+        message.date = message.created_at.substr(0, 9);
+
         _this3.messages.push(message);
       });
     },
@@ -2134,6 +2136,7 @@ __webpack_require__.r(__webpack_exports__);
         friendId: this.friend.id
       }).then(function (res) {
         var message = res.data.message;
+        message.date = message.created_at.substr(0, 9);
 
         _this4.messages.push(message);
 
