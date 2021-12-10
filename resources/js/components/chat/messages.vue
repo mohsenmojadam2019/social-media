@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="bg-chat">
    <div class="h-full flex flex-col justify-between" v-if="friend">
      <div class="">
       <div v-if="messages.length" class="">
