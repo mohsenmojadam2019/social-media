@@ -16,11 +16,14 @@
 .h-chat{
   height: 30rem;
 }
+.bg-chat{
+  
+}
 .bg-blue-chat{
-  background-color:#deebf5;  ;
+  background-color:#f8fcff;
 }
 .bg-green-chat{
-  background-color: rgb(225, 245, 230);
+  background-color: rgb(245, 253, 247);
 }
 .inset-center {
   position: fixed;

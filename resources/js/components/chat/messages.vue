@@ -5,9 +5,11 @@
       <div v-if="messages.length" class="">
         <ul class="list-style-none">
         <li v-for="message in messages" :key="message.id">
-          <div class="flex items-center justify-between rounded p-2 m-2" :class="[message.from==user.id ? 'bg-green-chat':'bg-blue-chat text-right']">
-           <p class="text-base">{{message.body}}</p>
-           <span class="text-md">{{message.date}}</span>
+          <div class="flex items-center rounded p-2 m-2" :class="[message.from==user.id ? 'bg-green-chat':'bg-blue-chat text-right']">
+           <p class="text-base" :class="[message.from==user.id ? 'text-left':'text-right']">
+             <span>{{message.body}}</span>
+             <span class="text-sm mx-2">{{message.hour}}</span>
+           </p>
           </div>
         </li>
         </ul>
@@ -76,7 +78,7 @@ export default {
          this.messages=res.data.messages;
          this.messages.forEach((message)=>{
            message.date=message.created_at.substr(0,9);
-           message.hour=message.created_at.substr(11,15);
+           message.hour=message.created_at.substr(11,5);
          });
        });
       },

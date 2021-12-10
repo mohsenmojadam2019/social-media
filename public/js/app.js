@@ -2088,6 +2088,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -2134,7 +2136,6 @@ __webpack_require__.r(__webpack_exports__);
     getMessages: function getMessages() {
       var _this2 = this;
 
-      console.log(this.chatroom);
       axios.get('/chat/messages', {
         params: {
           chatroom: this.chatroom
@@ -2144,7 +2145,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.messages.forEach(function (message) {
           message.date = message.created_at.substr(0, 9);
-          message.hour = message.created_at.substr(11, 15);
+          message.hour = message.created_at.substr(11, 5);
         });
       });
     },
@@ -44888,8 +44889,7 @@ var render = function () {
                         _c(
                           "div",
                           {
-                            staticClass:
-                              "flex items-center justify-between rounded p-2 m-2",
+                            staticClass: "flex items-center rounded p-2 m-2",
                             class: [
                               message.from == _vm.user.id
                                 ? "bg-green-chat"
@@ -44897,13 +44897,24 @@ var render = function () {
                             ],
                           },
                           [
-                            _c("p", { staticClass: "text-base" }, [
-                              _vm._v(_vm._s(message.body)),
-                            ]),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "text-md" }, [
-                              _vm._v(_vm._s(message.date)),
-                            ]),
+                            _c(
+                              "p",
+                              {
+                                staticClass: "text-base",
+                                class: [
+                                  message.from == _vm.user.id
+                                    ? "text-left"
+                                    : "text-right",
+                                ],
+                              },
+                              [
+                                _c("span", [_vm._v(_vm._s(message.body))]),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "text-sm mx-2" }, [
+                                  _vm._v(_vm._s(message.hour)),
+                                ]),
+                              ]
+                            ),
                           ]
                         ),
                       ])
