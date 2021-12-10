@@ -37,7 +37,7 @@ class ChatController extends Controller
    public function messages(Request $request)
    {
      $chatroom=$request->chatroom;
-     $messages=Message::where('chatroom',$chatroom)->latest()->get();
+     $messages=Message::where('chatroom',$chatroom)->get();
      return response()->json(['messages'=>$messages]);
    }
    public function sendMessage(Request $request)

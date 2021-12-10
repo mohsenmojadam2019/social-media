@@ -1,7 +1,7 @@
 <template>
     <div>
       <div>
-        <input type="text" @input="filterFriends" placeholder="search" class="bg-gray-100 border-b border-gray-300 text-lg w-full focus:bg-white py-2 px-3">
+        <input type="text" @input="filterFriends" placeholder="search" class="bg-gray-200 border-b border-gray-300 text-lg w-full focus:bg-white py-2 px-3">
       </div>
       <div v-for="friend in friends" :key="friend.id">
         <div @click="selectFriend(friend)" class="flex justify-between py-0.5 cursor-pointer px-2"

@@ -44658,7 +44658,7 @@ var render = function () {
                           staticClass: "flex items-center p-1",
                         },
                         [
-                          _c("div", [
+                          _c("div", { staticClass: "flex" }, [
                             _c("img", {
                               staticClass: "w-12 h-12 rounded-full mx-1",
                               attrs: {
@@ -44922,8 +44922,8 @@ var render = function () {
                                   "flex items-center rounded p-2 m-2",
                                 class: [
                                   message.from == _vm.user.id
-                                    ? "bg-green-100"
-                                    : "bg-blue-100 text-right",
+                                    ? "bg-chat-green"
+                                    : "bg-chat-blue text-right",
                                 ],
                               },
                               [

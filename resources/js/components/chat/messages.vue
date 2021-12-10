@@ -10,7 +10,7 @@
       <div v-if="messages.length" class="">
         <ul class="list-style-none">
         <li v-for="message in messages" :key="message.id">
-          <div class="flex items-center rounded p-2 m-2" :class="[message.from==user.id ? 'bg-green-100':'bg-blue-100 text-right']">
+          <div class="flex items-center rounded p-2 m-2" :class="[message.from==user.id ? 'bg-chat-green':'bg-chat-blue text-right']">
            <p class="text-base w-max px-2" :class="[message.from==user.id ? 'text-left':'text-right']">
              <span>{{message.body}}</span>
              <!-- <span class="text-sm mx-2">{{message.hour}}</span> -->

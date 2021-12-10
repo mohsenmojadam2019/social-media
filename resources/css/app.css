@@ -19,11 +19,11 @@
 .bg-chat{
  background-color: #eeeeee;
 }
-.bg-blue-chat{
-  background-color:#f0f2f3;
+.bg-chat-blue{
+  background-color:#e6ecff;
 }
-.bg-green-chat{
-  background-color: rgb(223, 226, 224);
+.bg-chat-green{
+  background-color: #e6ffe6;
 }
 .inset-center {
   position: fixed;
