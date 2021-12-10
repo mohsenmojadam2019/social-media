@@ -6,10 +6,13 @@
       <div v-for="friend in friends" :key="friend.id">
         <div @click="selectFriend(friend)" class="flex justify-between py-0.5 cursor-pointer px-2"
           :class="[friend.id==selectedFriend.id ? 'bg-first text-white hover:bg-first' : 'hover:bg-gray-200']">
-         <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-14 h-14 rounded-full mx-1">
-         <div class="my-auto mx-2 space-y-2">
-           <p class="text-lg font-medium my-auto" >{{friend.name}}</p>
-           <p class="text-base" :class="[friend.id==selectedFriend.id ? 'text-white' : 'text-gray-600']">{{friend.lastMessage.body}}</p>
+         <div class="flex items-center mx-2 space-y-2">
+           <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-14 h-14 rounded-full mx-1">
+           <div>
+            <p v-if="friend.id==user.id" class="text-lg font-medium my-auto">saved messages</p>
+            <p v-else class="text-lg font-medium my-auto" >{{friend.name}}</p>
+            <p class="text-base" :class="[friend.id==selectedFriend.id ? 'text-white' : 'text-gray-600']">{{friend.lastMessage.body}}</p>
+           </div>
          </div>
          <div>
            <p class="tetx-gray-500 m-2">{{friend.lastMessage.hour}}</p>

@@ -10,7 +10,7 @@
     <ul>
     <p class="text-xl font-semibold text-center border-b-2 border-gray-300 p-2">Active(<span class="text-first">{{activeUsers.length}}</span>)</p>
     <li v-for="active in activeUsers " :key="active.id" class="flex items-center p-1">
-      <div v-if="user.id!=active.id">
+      <div>
        <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-12 h-12 rounded-full mx-1">
        <p class="text-xl mx-1 my-auto">{{active.name}}</p>
       </div>
@@ -44,7 +44,11 @@ export default {
     listen(){
       Echo.join('chat')
       .here(users=>{
-        this.activeUsers=users;
+        users.forEach(user => {
+          if(this.user.id!=user.id){
+           this.activeUsers.push(user);
+          }
+        });
         this.loading=false;
       })
       .joining(user=>{

@@ -1891,7 +1891,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       Echo.join('chat').here(function (users) {
-        _this.activeUsers = users;
+        users.forEach(function (user) {
+          if (_this.user.id != user.id) {
+            _this.activeUsers.push(user);
+          }
+        });
         _this.loading = false;
       }).joining(function (user) {
         _this.activeUsers.unshfit(user);
@@ -1995,6 +1999,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -2024,7 +2031,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.friends = res.data.friends;
 
         _this.friends.forEach(function (friend) {
-          friend.lastMessage.hour = friend.lastMessage.created_at.substr(11, 15);
+          friend.lastMessage.hour = friend.lastMessage.created_at.substr(11, 5);
         });
       });
     },
@@ -2097,13 +2104,15 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    var userId = parseInt(this.user.id);
-    var friendId = parseInt(this.friend.id);
+    if (this.friend) {
+      var userId = parseInt(this.user.id);
+      var friendId = parseInt(this.friend.id);
 
-    if (userId < friendId) {
-      this.chatroom = this.user.id + this.friend.id;
-    } else {
-      this.chatroom = this.friend.id + this.user.id;
+      if (userId < friendId) {
+        this.chatroom = this.user.id + this.friend.id;
+      } else {
+        this.chatroom = this.friend.id + this.user.id;
+      }
     }
 
     this.listen();
@@ -2126,7 +2135,6 @@ __webpack_require__.r(__webpack_exports__);
           chatroom: this.chatroom
         }
       }).then(function (res) {
-        console.log(res.data.messages);
         _this2.messages = res.data.messages;
 
         _this2.messages.forEach(function (message) {
@@ -44637,22 +44645,18 @@ var render = function () {
                           staticClass: "flex items-center p-1",
                         },
                         [
-                          _vm.user.id != active.id
-                            ? _c("div", [
-                                _c("img", {
-                                  staticClass: "w-12 h-12 rounded-full mx-1",
-                                  attrs: {
-                                    src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
-                                  },
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "p",
-                                  { staticClass: "text-xl mx-1 my-auto" },
-                                  [_vm._v(_vm._s(active.name))]
-                                ),
-                              ])
-                            : _vm._e(),
+                          _c("div", [
+                            _c("img", {
+                              staticClass: "w-12 h-12 rounded-full mx-1",
+                              attrs: {
+                                src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "text-xl mx-1 my-auto" }, [
+                              _vm._v(_vm._s(active.name)),
+                            ]),
+                          ]),
                         ]
                       )
                     }),
@@ -44797,30 +44801,36 @@ var render = function () {
               },
             },
             [
-              _c("img", {
-                staticClass: "w-14 h-14 rounded-full mx-1",
-                attrs: {
-                  src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
-                },
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "my-auto mx-2 space-y-2" }, [
-                _c("p", { staticClass: "text-lg font-medium my-auto" }, [
-                  _vm._v(_vm._s(friend.name)),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  {
-                    staticClass: "text-base",
-                    class: [
-                      friend.id == _vm.selectedFriend.id
-                        ? "text-white"
-                        : "text-gray-600",
-                    ],
+              _c("div", { staticClass: "flex items-center mx-2 space-y-2" }, [
+                _c("img", {
+                  staticClass: "w-14 h-14 rounded-full mx-1",
+                  attrs: {
+                    src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
                   },
-                  [_vm._v(_vm._s(friend.lastMessage.body))]
-                ),
+                }),
+                _vm._v(" "),
+                _c("div", [
+                  friend.id == _vm.user.id
+                    ? _c("p", { staticClass: "text-lg font-medium my-auto" }, [
+                        _vm._v("saved messages"),
+                      ])
+                    : _c("p", { staticClass: "text-lg font-medium my-auto" }, [
+                        _vm._v(_vm._s(friend.name)),
+                      ]),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    {
+                      staticClass: "text-base",
+                      class: [
+                        friend.id == _vm.selectedFriend.id
+                          ? "text-white"
+                          : "text-gray-600",
+                      ],
+                    },
+                    [_vm._v(_vm._s(friend.lastMessage.body))]
+                  ),
+                ]),
               ]),
               _vm._v(" "),
               _c("div", [
@@ -44896,8 +44906,8 @@ var render = function () {
                     0
                   ),
                 ])
-              : _c("div", { staticClass: "flex content-center" }, [
-                  _c("p", { staticClass: "text-2xl my-5" }, [
+              : _c("div", { staticClass: "flex justify-center items-center" }, [
+                  _c("p", { staticClass: "text-3xl" }, [
                     _vm._v("say hello to " + _vm._s(_vm.friend.name)),
                   ]),
                 ]),

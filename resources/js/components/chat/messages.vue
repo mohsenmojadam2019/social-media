@@ -12,8 +12,8 @@
         </li>
         </ul>
       </div>
-     <div v-else class="flex content-center">
-       <p class="text-2xl my-5">say hello to {{friend.name}}</p>
+     <div v-else class="flex justify-center items-center">
+       <p class="text-3xl">say hello to {{friend.name}}</p>
      </div>
      </div>
       <div class="w-full">
