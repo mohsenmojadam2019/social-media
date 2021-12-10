@@ -2105,17 +2105,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    if (this.friend) {
-      var userId = parseInt(this.user.id);
-      var friendId = parseInt(this.friend.id);
-
-      if (userId < friendId) {
-        this.chatroom = this.user.id + this.friend.id;
-      } else {
-        this.chatroom = this.friend.id + this.user.id;
-      }
-    }
-
     this.listen();
   },
   created: function created() {
@@ -2124,13 +2113,28 @@ __webpack_require__.r(__webpack_exports__);
     _app__WEBPACK_IMPORTED_MODULE_0__.default.$on('friend-selected', function (friend) {
       _this.friend = friend;
 
+      _this.setChatroom();
+
       _this.getMessages();
     });
   },
   methods: {
+    setChatroom: function setChatroom() {
+      if (this.friend) {
+        var userId = parseInt(this.user.id);
+        var friendId = parseInt(this.friend.id);
+
+        if (userId < friendId) {
+          this.chatroom = this.user.id + '' + this.friend.id;
+        } else {
+          this.chatroom = this.friend.id + '' + this.user.id;
+        }
+      }
+    },
     getMessages: function getMessages() {
       var _this2 = this;
 
+      console.log(this.chatroom);
       axios.get('/chat/messages', {
         params: {
           chatroom: this.chatroom
@@ -44804,7 +44808,7 @@ var render = function () {
             [
               _c("div", { staticClass: "flex mx-2 space-y-2" }, [
                 _c("img", {
-                  staticClass: "w-14 h-14 rounded-full mr-3",
+                  staticClass: "w-14 h-14 rounded-full mx-1",
                   attrs: {
                     src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
                   },
@@ -44907,15 +44911,19 @@ var render = function () {
                     0
                   ),
                 ])
-              : _c("div", { staticClass: "my-10 flex justify-center" }, [
-                  _vm.friend.id != _vm.user.id
-                    ? _c("p", { staticClass: "text-3xl" }, [
-                        _vm._v("say hello to " + _vm._s(_vm.friend.name)),
-                      ])
-                    : _c("p", { staticClass: "text-3xl" }, [
-                        _vm._v("chat with yourself"),
-                      ]),
-                ]),
+              : _c(
+                  "div",
+                  { staticClass: "my-10 flex justify-center text-gray-400" },
+                  [
+                    _vm.friend.id != _vm.user.id
+                      ? _c("p", { staticClass: "text-3xl" }, [
+                          _vm._v("say hello to " + _vm._s(_vm.friend.name)),
+                        ])
+                      : _c("p", { staticClass: "text-3xl" }, [
+                          _vm._v("chat with yourself"),
+                        ]),
+                  ]
+                ),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-full" }, [
@@ -44968,11 +44976,9 @@ var render = function () {
           ]),
         ])
       : _c("div", { staticClass: "my-10" }, [
-          _c(
-            "p",
-            { staticClass: "text-2xl text-gray-600 text-center my-5 py-5" },
-            [_vm._v("please select a chat to start messaging")]
-          ),
+          _c("p", { staticClass: "text-2xl text-gray-400 text-center my-5" }, [
+            _vm._v("please select a chat to start messaging"),
+          ]),
         ]),
   ])
 }

@@ -12,8 +12,8 @@
         </li>
         </ul>
       </div>
-     <div v-else class="my-10 flex justify-center">
-       <p v-if="friend.id!=user.id" class="text-3xl text-gray-500">say hello to {{friend.name}}</p>
+     <div v-else class="my-10 flex justify-center text-gray-400">
+       <p v-if="friend.id!=user.id" class="text-3xl">say hello to {{friend.name}}</p>
        <p v-else class="text-3xl">chat with yourself</p>
      </div>
      </div>
@@ -25,7 +25,7 @@
       </div>
    </div>   
    <div v-else class="my-10">
-      <p class="text-2xl text-gray-500 text-center my-5">please select a chat to start messaging</p>
+      <p class="text-2xl text-gray-400 text-center my-5">please select a chat to start messaging</p>
    </div> 
   </div>  
 </template>
@@ -48,26 +48,29 @@ export default {
     },
     mounted()
     {
-      if(this.friend){
-        let userId=parseInt(this.user.id);
-        let friendId=parseInt(this.friend.id);
-        if(userId<friendId){
-          this.chatroom=this.user.id+this.friend.id;
-        }
-        else{
-        this.chatroom=this.friend.id+this.user.id;
-        }
-      }
       this.listen();
     },
     created(){
       bus.$on('friend-selected',(friend)=>{
         this.friend=friend;
+        this.setChatroom();
         this.getMessages();
       });
     },
     methods:{
-      getMessages(){
+      setChatroom(){
+       if(this.friend){
+        let userId=parseInt(this.user.id);
+        let friendId=parseInt(this.friend.id);
+        if(userId<friendId){
+          this.chatroom=this.user.id+''+this.friend.id;
+        }
+        else{
+        this.chatroom=this.friend.id+''+this.user.id;
+        }
+      }
+      },
+      getMessages(){ 
        axios.get('/chat/messages',{params:{chatroom:this.chatroom}})
        .then(res=>{
          this.messages=res.data.messages;
