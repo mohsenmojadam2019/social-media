@@ -2090,6 +2090,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -2103,7 +2108,8 @@ __webpack_require__.r(__webpack_exports__);
       message: '',
       messages: [],
       friend: null,
-      chatroom: ''
+      chatroom: '',
+      loading: true
     };
   },
   mounted: function mounted() {
@@ -2144,6 +2150,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.messages = res.data.messages;
 
         _this2.messages.forEach(function (message) {
+          _this2.loading = false;
           message.date = message.created_at.substr(0, 9);
           message.hour = message.created_at.substr(11, 5);
         });
@@ -44783,7 +44790,7 @@ var render = function () {
       _c("div", [
         _c("input", {
           staticClass:
-            "text-gray-700 border-b border-gray-300 text-lg w-full focus:bg-white py-2 px-3",
+            "bg-gray-100 border-b border-gray-300 text-lg w-full focus:bg-white py-2 px-3",
           attrs: { type: "text", placeholder: "search" },
           on: { input: _vm.filterFriends },
         }),
@@ -44875,67 +44882,86 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "bg-chat" }, [
+  return _c("div", {}, [
     _vm.friend
       ? _c("div", { staticClass: "h-full flex flex-col justify-between" }, [
-          _c("div", {}, [
-            _vm.messages.length
-              ? _c("div", {}, [
-                  _c(
-                    "ul",
-                    { staticClass: "list-style-none" },
-                    _vm._l(_vm.messages, function (message) {
-                      return _c("li", { key: message.id }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "flex items-center rounded p-2 m-2",
-                            class: [
-                              message.from == _vm.user.id
-                                ? "bg-green-chat"
-                                : "bg-blue-chat text-right",
-                            ],
-                          },
-                          [
+          _vm.loading
+            ? _c("div", [
+                _c(
+                  "svg",
+                  {
+                    staticClass:
+                      "bi bi-circle-half animate-spin w-20 h-20 mx-auto my-5 text-first",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      fill: "currentColor",
+                      viewBox: "0 0 16 16",
+                    },
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d: "M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z",
+                      },
+                    }),
+                  ]
+                ),
+              ])
+            : _c("div", {}, [
+                _vm.messages.length
+                  ? _c("div", {}, [
+                      _c(
+                        "ul",
+                        { staticClass: "list-style-none" },
+                        _vm._l(_vm.messages, function (message) {
+                          return _c("li", { key: message.id }, [
                             _c(
-                              "p",
+                              "div",
                               {
-                                staticClass: "text-base",
+                                staticClass:
+                                  "flex items-center rounded p-2 m-2",
                                 class: [
                                   message.from == _vm.user.id
-                                    ? "text-left"
-                                    : "text-right",
+                                    ? "bg-green-100"
+                                    : "bg-blue-100 text-right",
                                 ],
                               },
                               [
-                                _c("span", [_vm._v(_vm._s(message.body))]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "text-sm mx-2" }, [
-                                  _vm._v(_vm._s(message.hour)),
-                                ]),
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass: "text-base w-max px-2",
+                                    class: [
+                                      message.from == _vm.user.id
+                                        ? "text-left"
+                                        : "text-right",
+                                    ],
+                                  },
+                                  [_c("span", [_vm._v(_vm._s(message.body))])]
+                                ),
                               ]
                             ),
-                          ]
-                        ),
-                      ])
-                    }),
-                    0
-                  ),
-                ])
-              : _c(
-                  "div",
-                  { staticClass: "my-10 flex justify-center text-gray-400" },
-                  [
-                    _vm.friend.id != _vm.user.id
-                      ? _c("p", { staticClass: "text-3xl" }, [
-                          _vm._v("say hello to " + _vm._s(_vm.friend.name)),
-                        ])
-                      : _c("p", { staticClass: "text-3xl" }, [
-                          _vm._v("chat with yourself"),
-                        ]),
-                  ]
-                ),
-          ]),
+                          ])
+                        }),
+                        0
+                      ),
+                    ])
+                  : _c(
+                      "div",
+                      {
+                        staticClass: "my-10 flex justify-center text-gray-400",
+                      },
+                      [
+                        _vm.friend.id != _vm.user.id
+                          ? _c("p", { staticClass: "text-3xl" }, [
+                              _vm._v("say hello to " + _vm._s(_vm.friend.name)),
+                            ])
+                          : _c("p", { staticClass: "text-3xl" }, [
+                              _vm._v("chat with yourself"),
+                            ]),
+                      ]
+                    ),
+              ]),
           _vm._v(" "),
           _c("div", { staticClass: "w-full" }, [
             _c(
