@@ -2087,6 +2087,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -44801,9 +44802,9 @@ var render = function () {
               },
             },
             [
-              _c("div", { staticClass: "flex items-center mx-2 space-y-2" }, [
+              _c("div", { staticClass: "flex mx-2 space-y-2" }, [
                 _c("img", {
-                  staticClass: "w-14 h-14 rounded-full mx-1",
+                  staticClass: "w-14 h-14 rounded-full mr-3",
                   attrs: {
                     src: "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
                   },
@@ -44906,10 +44907,14 @@ var render = function () {
                     0
                   ),
                 ])
-              : _c("div", { staticClass: "flex justify-center items-center" }, [
-                  _c("p", { staticClass: "text-3xl" }, [
-                    _vm._v("say hello to " + _vm._s(_vm.friend.name)),
-                  ]),
+              : _c("div", { staticClass: "my-10 flex justify-center" }, [
+                  _vm.friend.id != _vm.user.id
+                    ? _c("p", { staticClass: "text-3xl" }, [
+                        _vm._v("say hello to " + _vm._s(_vm.friend.name)),
+                      ])
+                    : _c("p", { staticClass: "text-3xl" }, [
+                        _vm._v("chat with yourself"),
+                      ]),
                 ]),
           ]),
           _vm._v(" "),
@@ -44962,10 +44967,12 @@ var render = function () {
             ),
           ]),
         ])
-      : _c("div", { staticClass: "my-auto" }, [
-          _c("p", { staticClass: "text-2xl text-gray-600 text-center my-10" }, [
-            _vm._v("please select a chat to start messaging"),
-          ]),
+      : _c("div", { staticClass: "my-10" }, [
+          _c(
+            "p",
+            { staticClass: "text-2xl text-gray-600 text-center my-5 py-5" },
+            [_vm._v("please select a chat to start messaging")]
+          ),
         ]),
   ])
 }

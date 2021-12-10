@@ -6,7 +6,7 @@
       <div v-for="friend in friends" :key="friend.id">
         <div @click="selectFriend(friend)" class="flex justify-between py-0.5 cursor-pointer px-2"
           :class="[friend.id==selectedFriend.id ? 'bg-first text-white hover:bg-first' : 'hover:bg-gray-200']">
-         <div class="flex items-center mx-2 space-y-2">
+         <div class="flex mx-2 space-y-2">
            <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-14 h-14 rounded-full mx-1">
            <div>
             <p v-if="friend.id==user.id" class="text-lg font-medium my-auto">saved messages</p>

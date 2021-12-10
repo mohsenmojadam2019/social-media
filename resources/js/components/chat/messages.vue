@@ -12,8 +12,9 @@
         </li>
         </ul>
       </div>
-     <div v-else class="flex justify-center items-center">
-       <p class="text-3xl">say hello to {{friend.name}}</p>
+     <div v-else class="my-10 flex justify-center">
+       <p v-if="friend.id!=user.id" class="text-3xl text-gray-500">say hello to {{friend.name}}</p>
+       <p v-else class="text-3xl">chat with yourself</p>
      </div>
      </div>
       <div class="w-full">
@@ -23,8 +24,8 @@
         </form>
       </div>
    </div>   
-   <div v-else class="my-auto">
-      <p class="text-2xl text-gray-600 text-center my-10">please select a chat to start messaging</p>
+   <div v-else class="my-10">
+      <p class="text-2xl text-gray-500 text-center my-5">please select a chat to start messaging</p>
    </div> 
   </div>  
 </template>
