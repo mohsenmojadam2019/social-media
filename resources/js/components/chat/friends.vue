@@ -44,6 +44,7 @@ export default {
       axios.get('/chat/friends',{params:{userId:this.user.id}})
       .then(res=>{
         this.friends=res.data.friends;
+        this.friends.sort((friend1,friend2)=>(friend1.lastMessage.created_at>friend2.lastMessage.created_at)? -1 : 1);
         this.friends.forEach(friend=>{
           friend.lastMessage.hour=friend.lastMessage.created_at.substr(11,5);
         });

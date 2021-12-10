@@ -2030,6 +2030,14 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         _this.friends = res.data.friends;
 
+        _this.friends.sort(function (friend1, friend2) {
+          return friend1.lastMessage.created_at > friend2.lastMessage.created_at ? -1 : 1;
+        });
+
+        _this.friends.forEach(function (friend) {
+          console.log(friend.name + '----' + friend.lastMessage.created_at);
+        });
+
         _this.friends.forEach(function (friend) {
           friend.lastMessage.hour = friend.lastMessage.created_at.substr(11, 5);
         });
@@ -44790,7 +44798,7 @@ var render = function () {
       _c("div", [
         _c("input", {
           staticClass:
-            "bg-gray-100 border-b border-gray-300 text-lg w-full focus:bg-white py-2 px-3",
+            "bg-gray-200 border-b border-gray-300 text-lg w-full focus:bg-white py-2 px-3",
           attrs: { type: "text", placeholder: "search" },
           on: { input: _vm.filterFriends },
         }),
@@ -44937,7 +44945,15 @@ var render = function () {
                                         : "text-right",
                                     ],
                                   },
-                                  [_c("span", [_vm._v(_vm._s(message.body))])]
+                                  [
+                                    _c("span", [_vm._v(_vm._s(message.body))]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      { staticClass: "text-sm mx-2" },
+                                      [_vm._v(_vm._s(message.hour))]
+                                    ),
+                                  ]
                                 ),
                               ]
                             ),

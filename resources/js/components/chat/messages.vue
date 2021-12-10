@@ -13,7 +13,7 @@
           <div class="flex items-center rounded p-2 m-2" :class="[message.from==user.id ? 'bg-chat-green':'bg-chat-blue text-right']">
            <p class="text-base w-max px-2" :class="[message.from==user.id ? 'text-left':'text-right']">
              <span>{{message.body}}</span>
-             <!-- <span class="text-sm mx-2">{{message.hour}}</span> -->
+             <span class="text-sm mx-2">{{message.hour}}</span>
            </p>
           </div>
         </li>
