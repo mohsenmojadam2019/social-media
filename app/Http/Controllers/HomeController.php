@@ -23,7 +23,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user=auth()->user();
+        $friends=$user->profile->users;
+        $posts=[];
+        foreach($friends as $friend){
+          $friendPosts=$friend->posts;
+          foreach($friendPosts as $post){
+            array_push($posts,$post);
+          }
+        }
+        return view('home',['friends'=>$friends,'posts'=>$posts]);
     }
     public function chat()
     {
