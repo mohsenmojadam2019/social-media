@@ -2035,10 +2035,6 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         _this.friends.forEach(function (friend) {
-          console.log(friend.name + '----' + friend.lastMessage.created_at);
-        });
-
-        _this.friends.forEach(function (friend) {
           friend.lastMessage.hour = friend.lastMessage.created_at.substr(11, 5);
         });
       });
@@ -45147,7 +45143,7 @@ var render = function () {
           [
             _c("ul", { staticClass: "flex items-center list-style-none" }, [
               _c("li", { staticClass: "mx-4" }, [
-                _c("a", { attrs: { href: "/" } }, [
+                _c("a", { attrs: { href: "/home" } }, [
                   _c(
                     "svg",
                     {
