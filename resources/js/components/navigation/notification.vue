@@ -7,6 +7,9 @@
    <span v-if="notifications.length" class="absolute top-0 right-0 w-6 h-6 font-semibold text-white text-lg text-white">{{notifications.length}}</span>
   </button>
    <div v-if="notificationPopup" class="fixed bg-gray-100 z-20 text-xl m-2 rounded-md p-2">
+    <div>
+      <h1 class="text-2xl text-medium">Notifications</h1>
+    </div>
     <ul>
      <li v-for="notification in notifications" :key="notification.id" class="hover:bg-blue-200">
       <a :href="notification.data.href">{{notification.data.data}}</a>

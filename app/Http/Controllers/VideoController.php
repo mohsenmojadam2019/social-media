@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Video;
 use App\Http\Requests\StoreVideoRequest;
 use App\Http\Requests\UpdateVideoRequest;
+use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
@@ -58,7 +59,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        //
+      return view('video.create');
     }
 
     /**
@@ -69,7 +70,15 @@ class VideoController extends Controller
      */
     public function store(StoreVideoRequest $request)
     {
-        //
+      $video=new Video();
+      $video->title=$request->title;
+      $video->description=$request->description;
+      $video->save();
+      $video->photo=$video->id.$request->cover->extension();
+      $video->source=$video->id.$request->video->extension();
+      $video->save();
+      $request->cover->storeAs('photo',$video->photo,'public');
+      $request->video->storeAs('video',$video->source,'public');
     }
 
     /**
@@ -80,7 +89,7 @@ class VideoController extends Controller
      */
     public function show(Video $video)
     {
-        //
+      
     }
 
     /**
@@ -91,7 +100,7 @@ class VideoController extends Controller
      */
     public function edit(Video $video)
     {
-        //
+      return view('video.edit',['video'=>$video]);
     }
 
     /**
@@ -103,7 +112,20 @@ class VideoController extends Controller
      */
     public function update(UpdateVideoRequest $request, Video $video)
     {
-        //
+      $video->title=$request->title;
+      $video->description=$request->description;
+      $video->save();
+      if($request->cover){
+        Storage::delete("/storage/post/{{$video->cover}}");
+        $video->photo=$video->id.$request->cover->extension();
+        $request->cover->storeAs('photo',$video->photo,'public');
+      }
+      if($request->video){
+        Storage::delete("/storage/video/{{$video->source}}");
+        $video->source=$video->id.$request->video->extension();
+        $request->video->storeAs('video',$video->source,'public');
+      }
+      $video->save();
     }
 
     /**

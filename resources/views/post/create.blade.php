@@ -3,6 +3,7 @@
   <div class="w-full lg:w-1/2 mx-auto rounded-xl bg-white p-3 m-3">
     <h1 class="font-bold text-2xl text-center broder-b border-gray-300">Create Post</h1>
    <form action="{{route('post.store')}}" method="POST" enctype="multipart/form-data">
+    @csrf
     <label for="title" class="text-xl">Title:</label> 
     <input type="text" name="title" class="text-xl text-first my-2 w-full text-xl p-2 rounded-xl border-2 border-gray-300">
     <label for="description" class="text-xl">Description:</label>
