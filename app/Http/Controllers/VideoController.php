@@ -19,7 +19,36 @@ class VideoController extends Controller
     }
     public function index()
     {
-      return view('video.index');
+      $user=auth()->user();  
+      $videos=[];  
+      $friends=$user->profile->users;
+      if($friends){
+        foreach($friends as $friend){
+            $videos=$friend->videos;
+            foreach($videos as $video){
+              array_push($videos,$video);
+            }  
+        }  
+      }
+      $groups=$user->groups;
+      if($groups){
+        foreach($groups as $group){
+            $videos=$group->videos;
+            foreach($videos as $video){
+              array_push($videos,$video);
+            }  
+        }  
+      }
+      $channels=$user->channels;
+      if($channels){
+        foreach($channels as $channel){
+            $videos=$channel->videos;
+            foreach($videos as $video){
+              array_push($videos,$video);
+            }  
+        }  
+      }
+      return view('video.index',['videos'=>$videos]);
     }
 
     /**
