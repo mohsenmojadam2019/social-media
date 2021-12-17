@@ -69,18 +69,23 @@
    </div>
   </div>
   <div class="w-1/2">
-    <a href="/post/create" class='hover:no-underline'>
-     <div class="flex bg-white rounded-xl p-2">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-circle text-first w-12" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-      </svg>
-      <div class="my-auto mx-3">
-        <h1 class="text-2xl">create a story</h1>
-        <p class="text-xl">share a photo or write something</p>
-      </div>
-     </div>
-    </a>
+    <div>
+      <a href="/story/create" class='hover:no-underline'>
+        <div class="flex bg-white rounded-xl p-2">
+         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-circle text-first w-12" viewBox="0 0 16 16">
+           <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+           <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+         </svg>
+         <div class="my-auto mx-3">
+           <h1 class="text-2xl">create a story</h1>
+           <p class="text-xl">share a photo or write something</p>
+         </div>
+        </div>
+       </a>
+    </div>
+    <div>
+      
+    </div>
     @foreach ($posts as $post)
      <div>
       <p>{{$post->title}}</p>
