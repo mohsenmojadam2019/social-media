@@ -83,8 +83,16 @@
         </div>
        </a>
     </div>
-    <div>
-      
+    <div class="p-2 bg-white rounded-xl my-3">
+      <div class="flex brorder-b border-gray-300 m-1">
+        <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-12 h-12 rounded-full m-1">
+        <button class="bg-gray-200 rounded-xl py-0 px-4 text-xl">
+          <a href="/post/create" class="hover:no-underline">what's on your mind, {{$user->name}}</a>
+        </button>
+      </div>
+      <div>
+        
+      </div> 
     </div>
     @foreach ($posts as $post)
      <div>
