@@ -9,7 +9,7 @@
  <title>welcome</title>
 </head>
 <body>
- <div class="bg-social-media w-screen h-screen bg-repeat bg-cove flex justify-center items-center">
+ <div class="bg-social-media w-screen h-screen bg-repeat flex justify-center items-center">
   <div class="bg-white">
    <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('login') }}">
     @csrf

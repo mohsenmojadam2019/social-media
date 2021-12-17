@@ -11,9 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Http\Request;
 
-Route::get('/', function () {
-  return view('home');
-})->middleware('auth');
+Route::get('/',[HomeController::class,'index']);
 
 Auth::routes();
 
