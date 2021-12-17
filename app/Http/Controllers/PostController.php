@@ -30,7 +30,6 @@ class PostController extends Controller
     {
       return view('post.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -39,7 +38,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $post=new Post();
+      $post->user_id=auth()->user()->id;
+      $post->title->$request->title;
+      $post->description=$request->description();
+      $post->save();
+      $extension=$request->photo->extension();
+      $post->photo=$post->id.$extension;
+      $post->save();
+      $request->photo->storeAs('post',$post->photo,'public');
     }
 
     /**
