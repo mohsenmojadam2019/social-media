@@ -15,7 +15,7 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-gray-100 h-screen antialiased leading-none font-sans">
+<body class="text-gray-600 bg-gray-100 h-screen antialiased leading-none font-sans">
     <div id="app">
         <form id="logout-form" action="{{route('logout')}}" method="POST" class="hidden">@csrf</form>
         <header>
