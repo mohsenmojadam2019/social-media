@@ -10,7 +10,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
-use Illuminate\Http\Request;
 
 Route::get('/',[HomeController::class,'index']);
 
@@ -20,7 +19,7 @@ Route::get('/home',[HomeController::class, 'index'])->name('home');
 
 Route::prefix('post')->group(function(){
   Route::get('create',[PostController::class,'create']);
-  Route::post('store',[PostController::class,'store']);
+  Route::post('store',[PostController::class,'store'])->name('post.store');
   Route::get('edit/{id}',[PostController::class,'edit']);
   Route::get('delete',[PostController::class,'delete']);
 });
