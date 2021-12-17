@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -43,32 +44,22 @@ class PostController extends Controller
       $post->title->$request->title;
       $post->description=$request->description();
       $post->save();
-      $extension=$request->photo->extension();
-      $post->photo=$post->id.$extension;
-      $post->save();
-      $request->photo->storeAs('post',$post->photo,'public');
+      if($request->photo){
+        $extension=$request->photo->extension();
+        $post->photo=$post->id.$extension;
+        $post->save();
+        $request->photo->storeAs('post',$post->photo,'public');
+      }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function show(Post $post)
     {
-        //
+      return view('post.show');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Post $post)
     {
-        //
+      return view('post.edit',['post'=>$post]);
     }
 
     /**
@@ -80,7 +71,17 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+      $post->user_id=auth()->user()->id;
+      $post->title=$request->title;
+      $post->description=$request->description;
+      if($request->photo){
+        $extension=$request->photo->extension();
+        $post->photo=$post->id.$extension;
+        $post->save();
+        Storage::delete("/storage/post/{{$post->photo}}");
+        $request->photo->storeAs('post',$post->photo,'public');
+      }
+      $post->save();
     }
 
     /**

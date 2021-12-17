@@ -21,7 +21,8 @@ Route::prefix('post')->group(function(){
   Route::get('create',[PostController::class,'create']);
   Route::post('store',[PostController::class,'store'])->name('post.store');
   Route::get('edit/{id}',[PostController::class,'edit']);
-  Route::get('delete',[PostController::class,'delete']);
+  Route::patch('update',[PostController::class,'update'])->name('post.update');
+  Route::delete('delete',[PostController::class,'delete']);
 });
 
 Route::prefix('story')->group(function(){
