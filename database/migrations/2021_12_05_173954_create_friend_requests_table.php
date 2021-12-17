@@ -15,6 +15,8 @@ class CreateFriendRequestsTable extends Migration
     {
         Schema::create('friend_requests', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('from');
+            $table->foreignId('to');
             $table->timestamps();
         });
     }

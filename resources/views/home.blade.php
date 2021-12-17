@@ -93,8 +93,8 @@
     <div class="bg-white my-3 p-3 space-y-2 rounded-xl">
       <h1 class="text-center text-2xl text-bold capitalize">no more posts</h1>
       <p class="text-center text-xl ">add more friends to see more posts in your news feed</p>
-      <button class="bg-first text-white py-2 px-4 text-xl rounded-lg block mx-auto capitalize">
-        <a href="/friend" class="hover:no-underline hover:text-white">find friends</a>
+      <button class="bg-first text-white py-2.5 px-4 text-xl rounded-lg block mx-auto capitalize">
+        <a href="/friend" class="hover:no-underline hover:text-white font-semibold">find friends</a>
       </button>
     </div>
   </div>
