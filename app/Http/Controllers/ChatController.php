@@ -21,7 +21,7 @@ class ChatController extends Controller
    public function friends()
    {
      $userId=auth()->user()->id;
-     $chatrooms=ChatRoom::where('room',"LIKE","%${userId}%");
+     $chatrooms=ChatRoom::where('room',"LIKE","%${userId}%")->get();
      foreach ($chatrooms as $chatroom) {
        $room=$chatroom->room;
        $first_char=substr($room,0,1);
@@ -31,7 +31,7 @@ class ChatController extends Controller
        else{
          $friendId=substr($room,0,1);
        }
-       $chatroom->lastMessage=$chatroom->messages::latest()->first();
+       $chatroom->lastMessage=Message::where('chatroom_id',$chatroom->room)->latest()->first();
        $chatroom->friend=User::where('id',$friendId)->get();
      }
      return response()->json(['chatrooms'=>$chatrooms]);

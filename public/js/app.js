@@ -2012,7 +2012,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      friends: [],
+      chatRooms: [],
       selectedFriend: {}
     };
   },
@@ -2028,14 +2028,16 @@ __webpack_require__.r(__webpack_exports__);
           userId: this.user.id
         }
       }).then(function (res) {
-        _this.friends = res.data.friends;
+        _this.chatRooms = res.data.chatrooms;
+        console.log(_this.chatRooms);
 
-        _this.friends.sort(function (friend1, friend2) {
-          return friend1.lastMessage.created_at > friend2.lastMessage.created_at ? -1 : 1;
+        _this.chatRooms.sort(function (room1, room2) {
+          return room1.lastMessage.created_at > room2.lastMessage.created_at ? -1 : 1;
         });
 
-        _this.friends.forEach(function (friend) {
-          friend.lastMessage.hour = friend.lastMessage.created_at.substr(11, 5);
+        _this.chatRooms.forEach(function (chatRoom) {
+          chatRoom.lastMessage.hour = chatRoom.lastMessage.created_at.substr(11, 5);
+          chatRoom.lastMessage.hour = chatRoom.lastMessage.hour > 12 ? friend.lastMessage.hour - 6 + 'PM' : friend.lastMessage.hour + 'AM';
         });
       });
     },
@@ -44805,7 +44807,7 @@ var render = function () {
         }),
       ]),
       _vm._v(" "),
-      _vm._l(_vm.friends, function (friend) {
+      _vm._l(_vm.chatRooms, function (friend) {
         return _c("div", { key: friend.id }, [
           _c(
             "div",

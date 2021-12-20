@@ -3,7 +3,7 @@
       <div>
         <input type="text" @input="filterFriends" placeholder="search" class="bg-gray-200 border-b border-gray-300 text-lg w-full focus:bg-white py-2 px-3">
       </div>
-      <div v-for="friend in friends" :key="friend.id">
+      <div v-for="friend in chatRooms" :key="friend.id">
         <div @click="selectFriend(friend)" class="flex justify-between py-0.5 cursor-pointer px-2"
           :class="[friend.id==selectedFriend.id ? 'bg-first text-white hover:bg-first' : 'hover:bg-gray-200']">
          <div class="flex mx-2 space-y-2">
@@ -32,7 +32,7 @@ export default {
   },
   data(){
    return{
-    friends:[],
+    chatRooms:[],
     selectedFriend:{}
    }   
   },

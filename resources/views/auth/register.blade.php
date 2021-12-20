@@ -1,4 +1,5 @@
 <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+<div class="bg-social-media w-screen h-screen bg-repeat flex justify-center items-center">
 <main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">
     <div class="flex">
         <div class="w-full">
@@ -87,3 +88,4 @@
         </div>
     </div>
 </main>
+</div>
