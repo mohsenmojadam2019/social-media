@@ -48,7 +48,7 @@ class ChatController extends Controller
     $message->to=$request->friendId;
     $message->body=$request->message;
     $message->save(); 
-    broadcast(new NewMessage(auth()->user()->id,$request->message,$request->friendId))->toOthers();
+    broadcast(new NewMessage($request->message,$request->chatroom))->toOthers();
     return response()->json(['message'=>$message]);
    }
 }

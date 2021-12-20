@@ -25,6 +25,6 @@ Broadcast::channel('chat',function($user){
   return $user;
 });
 
-Broadcast::channel('chat.{id}.{fid}',function($user,$id,$fid){
-  return $user->id==$id||$user->id==$fid;
+Broadcast::channel('chat.{chatroom}',function($user,$chatroom){
+  return $user;
 });
