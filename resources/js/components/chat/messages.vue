@@ -76,17 +76,17 @@ export default {
         else{
         this.chatroom=this.friend.id+''+this.user.id;
         }
-      }
+       }
       },
-      getMessages(){ 
+      getMessages(){
        axios.get('/chat/messages',{params:{chatroom:this.chatroom}})
        .then(res=>{
-        this.messages=res.data.messages;
-         this.messages.forEach((message)=>{
-           this.loading=false;
-           message.date=message.created_at.substr(0,9);
-           message.hour=message.created_at.substr(11,5);
+          this.messages=res.data.messages;
+          this.messages.forEach((message)=>{
+          message.date=message.created_at.substr(0,9);
+          message.hour=message.created_at.substr(11,5);
          });
+         this.loading=false;
        });
       },
       listen(){

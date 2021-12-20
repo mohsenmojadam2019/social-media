@@ -2149,9 +2149,9 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (res) {
         _this2.messages = res.data.messages;
+        _this2.loading = false;
 
         _this2.messages.forEach(function (message) {
-          _this2.loading = false;
           message.date = message.created_at.substr(0, 9);
           message.hour = message.created_at.substr(11, 5);
         });
