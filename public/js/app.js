@@ -2032,7 +2032,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.chatRooms.forEach(function (chatRoom) {
           chatRoom.lastMessage.hour = chatRoom.lastMessage.created_at.substr(11, 5);
-          chatRoom.lastMessage.hour = chatRoom.lastMessage.hour > 12 ? chatRoom.lastMessage.hour - 6 + 'PM' : chatRoom.lastMessage.hour + 'AM';
+          chatRoom.lastMessage.hour = chatRoom.lastMessage.hour > 12 ? parseInt(chatRoom.lastMessage.hour - 12) + 'PM' : chatRoom.lastMessage.hour + 'AM';
         });
       });
     },
@@ -2149,18 +2149,20 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (res) {
         _this2.messages = res.data.messages;
-        _this2.loading = false;
 
         _this2.messages.forEach(function (message) {
           message.date = message.created_at.substr(0, 9);
           message.hour = message.created_at.substr(11, 5);
+          message.hour = parseInt(message.hour > 12) ? message.hour - 12 + 'PM' : message.hour + 'AM';
         });
+
+        _this2.loading = false;
       });
     },
     listen: function listen() {
       var _this3 = this;
 
-      Echo["private"]("chat.".concat(this.chatroom)).listen('.NewMessage', function (message) {
+      Echo["private"](this.chatroom).listen('.NewMessage', function (message) {
         message.date = message.created_at.substr(0, 9);
         message.hour = message.created_at.substr(11, 5);
         message.hour = message.hour > 12 ? message.hour - 6 + 'PM' : message.hour + 'AM';

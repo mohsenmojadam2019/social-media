@@ -85,12 +85,13 @@ export default {
           this.messages.forEach((message)=>{
           message.date=message.created_at.substr(0,9);
           message.hour=message.created_at.substr(11,5);
+          message.hour=(parseInt(message.hour>12))? (message.hour-12)+'PM' : message.hour+'AM';
          });
          this.loading=false;
        });
       },
       listen(){
-        Echo.private(`chat.${this.chatroom}`)
+        Echo.private(this.chatroom)
         .listen('.NewMessage',(message)=>{
           message.date=message.created_at.substr(0,9);
           message.hour=message.created_at.substr(11,5);

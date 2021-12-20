@@ -47,7 +47,7 @@ export default {
         this.chatRooms.sort((room1,room2)=>(room1.lastMessage.created_at>room2.lastMessage.created_at)? -1 : 1);
         this.chatRooms.forEach(chatRoom=>{
           chatRoom.lastMessage.hour=chatRoom.lastMessage.created_at.substr(11,5);
-          chatRoom.lastMessage.hour=(chatRoom.lastMessage.hour>12)? (chatRoom.lastMessage.hour-6)+'PM' : chatRoom.lastMessage.hour+'AM';
+          chatRoom.lastMessage.hour=(chatRoom.lastMessage.hour>12)? (parseInt(chatRoom.lastMessage.hour-12))+'PM' : chatRoom.lastMessage.hour+'AM';
         });
       });
     },
