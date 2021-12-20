@@ -20,11 +20,11 @@ class ChatController extends Controller
     }
    public function friends()
    {
-     $user=auth()->user()->id;
-     $friends=ChatRoom::where('',"LIKE",$user->id);
+     $userId=auth()->user()->id;
+     $friends=ChatRoom::where('room',"LIKE","%${userId}%");
      foreach($friends as $friend){
       $friendId=(int) $friend->id;
-      if($user->id<$friendId){
+      if($userId<$friendId){
          $chatroom=auth()->user()->id.$friend->id;
        }
        else{
@@ -42,8 +42,12 @@ class ChatController extends Controller
    }
    public function sendMessage(Request $request)
    {
+    $chatroom=ChatRoom::where('room',$request->chatroom);
+    if($chatroom){
+
+    }
     $message=new Message();
-    $message->chatroom=$request->chatroom;
+    $message->chatroom=$chatroom;
     $message->from=auth()->user()->id;
     $message->to=$request->friendId;
     $message->body=$request->message;
