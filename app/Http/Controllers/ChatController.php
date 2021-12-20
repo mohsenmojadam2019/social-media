@@ -10,44 +10,48 @@ use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-    public function __construct()
-    {
+   public function __construct()
+   {
         $this->middleware('auth');
-    }
-    public function index()
-    {
+   }
+   public function index()
+   {
         return view('chat.index');
-    }
+   }
    public function friends()
    {
      $userId=auth()->user()->id;
-     $friends=ChatRoom::where('room',"LIKE","%${userId}%");
-     foreach($friends as $friend){
-      $friendId=(int) $friend->id;
-      if($userId<$friendId){
-         $chatroom=auth()->user()->id.$friend->id;
+     $chatrooms=ChatRoom::where('room',"LIKE","%${userId}%");
+     foreach ($chatrooms as $chatroom) {
+       $room=$chatroom->room;
+       $first_char=substr($room,0,1);
+       if($first_char==$userId){
+         $friendId=substr($room,1,1);
        }
        else{
-         $chatroom=$friend->id.auth()->user()->id;
+         $friendId=substr($room,0,1);
        }
-       $friend->lastMessage=Message::where('chatroom',$chatroom)->latest()->first();
+       $chatroom->lastMessage=$chatroom->messages::latest()->first();
+       $chatroom->friend=User::where('id',$friendId)->get();
      }
-     return response()->json(['friends'=>$friends]);
+     return response()->json(['chatrooms'=>$chatrooms]);
    }
    public function messages(Request $request)
    {
-     $chatroom=$request->chatroom;
-     $messages=Message::where('chatroom',$chatroom)->get();
+     $chatroom=Chatroom::where('room',$request->chatroom);
+     $messages=$chatroom->messages;
      return response()->json(['messages'=>$messages]);
    }
    public function sendMessage(Request $request)
    {
     $chatroom=ChatRoom::where('room',$request->chatroom);
-    if($chatroom){
-
+    if(!$chatroom){
+      $chatroom=new ChatRoom();
+      $chatroom->room=$request->chatroom;
+      $chatroom->save();
     }
     $message=new Message();
-    $message->chatroom=$chatroom;
+    $message->chatroom_id=$chatroom->id;
     $message->from=auth()->user()->id;
     $message->to=$request->friendId;
     $message->body=$request->message;

@@ -10,12 +10,17 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
+use App\Models\Message;
 
 Route::get('/',[HomeController::class,'index']);
 
 Auth::routes();
 
 Route::get('/home',[HomeController::class, 'index'])->name('home');
+
+Route::get('/test',function(){
+  
+});
 
 Route::prefix('post')->group(function(){
   Route::get('create',[PostController::class,'create']);

@@ -43,10 +43,11 @@ export default {
     getFriends(){
       axios.get('/chat/friends',{params:{userId:this.user.id}})
       .then(res=>{
-        this.friends=res.data.friends;
-        this.friends.sort((friend1,friend2)=>(friend1.lastMessage.created_at>friend2.lastMessage.created_at)? -1 : 1);
-        this.friends.forEach(friend=>{
-          friend.lastMessage.hour=friend.lastMessage.created_at.substr(11,5);
+        this.chatRooms=res.data.chatrooms;
+        this.chatRooms.sort((room1,room2)=>(room1.lastMessage.created_at>room2.lastMessage.created_at)? -1 : 1);
+        this.chatRooms.forEach(chatRoom=>{
+          chatRoom.lastMessage.hour=chatRoom.lastMessage.created_at.substr(11,5);
+          chatRoom.lastMessage.hour=(chatRoom.lastMessage.hour>12)? (friend.lastMessage.hour-6)+'PM' : friend.lastMessage.hour+'AM';
         });
       });
     },
