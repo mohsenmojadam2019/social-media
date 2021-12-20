@@ -2023,13 +2023,8 @@ __webpack_require__.r(__webpack_exports__);
     getFriends: function getFriends() {
       var _this = this;
 
-      axios.get('/chat/friends', {
-        params: {
-          userId: this.user.id
-        }
-      }).then(function (res) {
+      axios.get('/chat/friends').then(function (res) {
         _this.chatRooms = res.data.chatrooms;
-        console.log(_this.chatRooms);
 
         _this.chatRooms.sort(function (room1, room2) {
           return room1.lastMessage.created_at > room2.lastMessage.created_at ? -1 : 1;
@@ -2037,7 +2032,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.chatRooms.forEach(function (chatRoom) {
           chatRoom.lastMessage.hour = chatRoom.lastMessage.created_at.substr(11, 5);
-          chatRoom.lastMessage.hour = chatRoom.lastMessage.hour > 12 ? friend.lastMessage.hour - 6 + 'PM' : friend.lastMessage.hour + 'AM';
+          chatRoom.lastMessage.hour = chatRoom.lastMessage.hour > 12 ? chatRoom.lastMessage.hour - 6 + 'PM' : chatRoom.lastMessage.hour + 'AM';
         });
       });
     },
@@ -44807,20 +44802,20 @@ var render = function () {
         }),
       ]),
       _vm._v(" "),
-      _vm._l(_vm.chatRooms, function (friend) {
-        return _c("div", { key: friend.id }, [
+      _vm._l(_vm.chatRooms, function (chatRoom) {
+        return _c("div", { key: chatRoom.id }, [
           _c(
             "div",
             {
               staticClass: "flex justify-between py-0.5 cursor-pointer px-2",
               class: [
-                friend.id == _vm.selectedFriend.id
+                chatRoom.friend.id == _vm.selectedFriend.id
                   ? "bg-first text-white hover:bg-first"
                   : "hover:bg-gray-200",
               ],
               on: {
                 click: function ($event) {
-                  return _vm.selectFriend(friend)
+                  return _vm.selectFriend(chatRoom.friend)
                 },
               },
             },
@@ -44834,12 +44829,12 @@ var render = function () {
                 }),
                 _vm._v(" "),
                 _c("div", [
-                  friend.id == _vm.user.id
+                  chatRoom.friend.id == _vm.user.id
                     ? _c("p", { staticClass: "text-lg font-medium my-auto" }, [
                         _vm._v("saved messages"),
                       ])
                     : _c("p", { staticClass: "text-lg font-medium my-auto" }, [
-                        _vm._v(_vm._s(friend.name)),
+                        _vm._v(_vm._s(chatRoom.friend.name)),
                       ]),
                   _vm._v(" "),
                   _c(
@@ -44847,19 +44842,19 @@ var render = function () {
                     {
                       staticClass: "text-base",
                       class: [
-                        friend.id == _vm.selectedFriend.id
+                        chatRoom.friend.id == _vm.selectedFriend.id
                           ? "text-white"
                           : "text-gray-600",
                       ],
                     },
-                    [_vm._v(_vm._s(friend.lastMessage.body))]
+                    [_vm._v(_vm._s(chatRoom.lastMessage.body))]
                   ),
                 ]),
               ]),
               _vm._v(" "),
               _c("div", [
                 _c("p", { staticClass: "tetx-gray-500 m-2" }, [
-                  _vm._v(_vm._s(friend.lastMessage.hour)),
+                  _vm._v(_vm._s(chatRoom.lastMessage.hour)),
                 ]),
               ]),
             ]

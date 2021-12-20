@@ -32,13 +32,13 @@ class ChatController extends Controller
          $friendId=substr($room,0,1);
        }
        $chatroom->lastMessage=Message::where('chatroom_id',$chatroom->room)->latest()->first();
-       $chatroom->friend=User::where('id',$friendId)->get();
+       $chatroom->friend=User::find($friendId);
      }
      return response()->json(['chatrooms'=>$chatrooms]);
    }
    public function messages(Request $request)
    {
-     $chatroom=Chatroom::where('room',$request->chatroom);
+     $chatroom=ChatRoom::where('room',$request->chatroom)->first();
      $messages=$chatroom->messages;
      return response()->json(['messages'=>$messages]);
    }
