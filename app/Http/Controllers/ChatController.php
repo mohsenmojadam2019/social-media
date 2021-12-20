@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Events\NewMessage;
+use App\Models\ChatRoom;
 use App\Models\Message;
 use Illuminate\Http\Request;
 
@@ -19,12 +20,11 @@ class ChatController extends Controller
     }
    public function friends()
    {
-     $profile=auth()->user()->profile;
-     $friends=$profile->users;
-     $userId=(int) auth()->user()->id;
+     $user=auth()->user()->id;
+     $friends=ChatRoom::where('',"LIKE",$user->id);
      foreach($friends as $friend){
       $friendId=(int) $friend->id;
-      if($userId<$friendId){
+      if($user->id<$friendId){
          $chatroom=auth()->user()->id.$friend->id;
        }
        else{
@@ -47,7 +47,7 @@ class ChatController extends Controller
     $message->from=auth()->user()->id;
     $message->to=$request->friendId;
     $message->body=$request->message;
-    $message->save(); 
+    $message->save();
     broadcast(new NewMessage($request->message,$request->chatroom))->toOthers();
     return response()->json(['message'=>$message]);
    }

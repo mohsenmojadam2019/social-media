@@ -94,7 +94,7 @@ export default {
         .listen('.NewMessage',(message)=>{
           message.date=message.created_at.substr(0,9);
           message.hour=message.created_at.substr(11,5);
-          message.hour=(message.hour>12) ? (message.hour-6)
+          message.hour=(message.hour>12) ? (message.hour-6)+'PM' : message.hour+'AM';
           this.messages.push(message);
         });
       },

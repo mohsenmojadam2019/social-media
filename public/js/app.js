@@ -2165,6 +2165,8 @@ __webpack_require__.r(__webpack_exports__);
 
       Echo["private"]("chat.".concat(this.chatroom)).listen('.NewMessage', function (message) {
         message.date = message.created_at.substr(0, 9);
+        message.hour = message.created_at.substr(11, 5);
+        message.hour = message.hour > 12 ? message.hour - 6 + 'PM' : message.hour + 'AM';
 
         _this3.messages.push(message);
       });
@@ -2342,6 +2344,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
 //
 //
 //
@@ -45143,7 +45148,7 @@ var render = function () {
           [
             _c("ul", { staticClass: "flex items-center list-style-none" }, [
               _c("li", { staticClass: "mx-4" }, [
-                _c("a", { attrs: { href: "/home" } }, [
+                _c("a", { attrs: { href: "/" } }, [
                   _c(
                     "svg",
                     {
@@ -45577,6 +45582,8 @@ var render = function () {
           "div",
           { staticClass: "fixed bg-gray-100 z-20 text-xl m-2 rounded-md p-2" },
           [
+            _vm._m(0),
+            _vm._v(" "),
             _c(
               "ul",
               _vm._l(_vm.notifications, function (notification) {
@@ -45621,7 +45628,18 @@ var render = function () {
       : _vm._e(),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("h1", { staticClass: "text-2xl text-medium" }, [
+        _vm._v("Notifications"),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 

@@ -26,5 +26,5 @@ Broadcast::channel('chat',function($user){
 });
 
 Broadcast::channel('chat.{chatroom}',function($user,$chatroom){
-  return $user;
+  return true;
 });
