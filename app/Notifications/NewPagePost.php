@@ -13,11 +13,11 @@ class NewPagePost extends Notification
     use Queueable;
     public $page;
     public $post;
-    
+
     public function __construct(Page $page,Post $post)
     {
-       $this->page=$page; 
-       $this->post=$post;   
+       $this->page=$page;
+       $this->post=$post;
     }
     public function via($notifiable)
     {
@@ -30,7 +30,7 @@ class NewPagePost extends Notification
     public function toArray($notifiable)
     {
       return [
-        'data'=>$this->page->name.' posted '.$this->post->title;   
+        'data'=>$this->page->name.' posted '.$this->post->title
       ];
     }
 }

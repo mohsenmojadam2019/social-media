@@ -15,12 +15,12 @@ class NewGroupPost extends Notification
     public $group;
     public $user;
     public $post;
-    
+
     public function __construct(Group $group,User $user,Post $post)
     {
        $this->group=$group;
        $this->post=$user;
-       $this->post=$post;    
+       $this->post=$post;
     }
     public function via($notifiable)
     {
@@ -33,7 +33,7 @@ class NewGroupPost extends Notification
     public function toArray($notifiable)
     {
       return [
-        'data'=>$this->user->name.'to group '$this->group->name.' posted '.$this->post->title;   
+        'data'=>$this->user->name.'to group '.$this->group->name.' posted '.$this->post->title
       ];
     }
 }
