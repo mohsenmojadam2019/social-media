@@ -3,7 +3,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
+import {vuetify} from "@/vuetify";
 import './bootstrap';
 
 import Vue from 'vue'
@@ -57,4 +57,4 @@ Vue.component('messages-component', require('./components/chat/messages.vue').de
 
 const app = new Vue({
     el: '#app',
-});
+}).use(vuetify);
