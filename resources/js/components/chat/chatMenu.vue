@@ -3,24 +3,12 @@
 
  </div>
 </template>
-<script>
-export default {
- props:{
+<script setup>
+defineProps({
   user:{
    type:Object,
    required:true
   }
- },
- data(){
-  return{
+})
 
-  }
- },
- mounted(){
-
- },
- methods:{
-  
- }
-}
 </script>

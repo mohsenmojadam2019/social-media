@@ -10,37 +10,33 @@
     <ul>
      <li v-for="notification in notifications" :key="notification.id" class="hover:bg-blue-200">
       <a :href="notification.data.href">{{notification.data.data}}</a>
-      <button @click="readNotification(notification.id)">x</button>    
-     </li>    
-    </ul> 
+      <button @click="readNotification(notification.id)">x</button>
+     </li>
+    </ul>
    </div>
-    <div v-if="notificationPopup" @click="notificationPopup=false" class="absolute -inset-x-0 -inset-y-full opacity-50 bg-black z-10"></div> 
-  </div>  
+    <div v-if="notificationPopup" @click="notificationPopup=false" class="absolute -inset-x-0 -inset-y-full opacity-50 bg-black z-10"></div>
+  </div>
 </template>
-<script>
-export default {
-   props:['userId'],
-   data(){
-    return{
-      notifications:[],
-      selectedCategories:[],
-      notificationPopup:false  
-    }   
-   },
-   mounted(){
-     axios.get('/user/notifications')
+<script setup>
+defineProps({userId})
+
+let notifications=$ref([])
+let selectedCategories=$ref([])
+let notificationPopup=$ref(false)
+
+onMounted(() => {
+    axios.get('/user/notifications')
      .then(res=>{
-        this.notifications=res.data.notifications;
-     })  
-   },
-   methods:{
-     unreadNotification(notificationId){
-       axios.post('/user/notification/unread',{notificationId:notificationId,userId:this.userId})
-       .then(res=>{
-          let index=notifications.findindex(item=> item.id==notificationId)
-          this.notifications.splice(index,1); 
-       });
-     }  
-   } 
+        notifications=res.data.notifications
+     })
+})
+
+const unreadNotification=(notificationId)=>{
+    axios.post('/user/notification/unread',{notificationId:notificationId,userId:userId})
+    .then(res=>{
+        let index=notifications.findindex(item=> item.id==notificationId)
+        notifications.splice(index,1)
+    })
 }
+
 </script>

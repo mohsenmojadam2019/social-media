@@ -23,41 +23,32 @@
   </div>
   </div>
 </template>
-<script>
-export default {
-  props:{
-   user:{
+<script setup>
+defineProps({
+    user:{
      type:Object,
      required:true
    }
-  },
-  data(){
-   return{
-    activeUsers:[],
-    loading:true,  
-   }  
-  },
-  mounted(){
-    this.listen();
-  },
-  methods:{
-    listen(){
-      Echo.join('chat')
-      .here(users=>{
-        users.forEach(user => {
-          if(this.user.id!=user.id){
-           this.activeUsers.push(user);
-          }
-        });
-        this.loading=false;
-      })
-      .joining(user=>{
-        this.activeUsers.unshfit(user);
-      })
-      .leaving(user=>{
-        this.activeUsers.pop(user);
-      });
-    }    
-  }
+})
+
+let activeUsers=$ref([])
+let loading=$ref(true)
+
+let listen=()=>{
+    Echo.join('chat')
+    .here(users=>{
+    users.forEach(user => {
+        if(user.id!=user.id){
+        activeUsers.push(user)
+        }
+    })
+    loading=false
+    })
+    .joining(user=>{
+    activeUsers.unshfit(user)
+    })
+    .leaving(user=>{
+    activeUsers.pop(use)
+    })
 }
 </script>

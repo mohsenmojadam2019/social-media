@@ -9,23 +9,13 @@
     </div>
   </div>
 </template>
-<script>
-export default {
- data(){
-  return{
-   posts:[]
-  }
- },
- mounted(){
-  this.getPosts();
- },
- methods:{
-  getPosts(){
-    axios.get('/post/all',{params:{userId:this.user.id}})
+<script setup>
+let posts=$ref([])
+
+onMounted(() => {
+    axios.get('/post/all',{params:{userId:user.id}})
     .then(res=>{
-      this.posts=res.data.posts;
-    });
-  }
- }
-}
+      posts=res.data.posts
+    })
+})
 </script>

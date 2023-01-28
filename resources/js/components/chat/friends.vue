@@ -22,44 +22,44 @@
       </div>
     </div>
 </template>
-<script>
-import bus from '../../app';
-export default {
-  props:{
-   user:{
+<script setup>
+
+import bus from '../../app'
+
+defineProps({
+  user:{
      type:Object,
      required:true
-   }
-  },
-  data(){
-   return{
-    chatRooms:[],
-    selectedFriend:{}
-   }   
-  },
-  mounted(){
-    this.getFriends();
-  },
-  methods:{
-    getFriends(){
-      axios.get('/chat/friends')
-      .then(res=>{
-        this.chatRooms=res.data.chatrooms;
-        this.chatRooms.sort((room1,room2)=>(room1.lastMessage.created_at>room2.lastMessage.created_at)? -1 : 1);
-        this.chatRooms.forEach(chatRoom=>{
-          chatRoom.friend.firstLetter=chatRoom.friend.name.substr(0,1);
-          chatRoom.lastMessage.hour=chatRoom.lastMessage.created_at.substr(11,5);
-          chatRoom.lastMessage.hour=(chatRoom.lastMessage.hour>12)? (parseInt(chatRoom.lastMessage.hour-12))+'PM' : chatRoom.lastMessage.hour+'AM';
-        });
-      });
-    },
-    selectFriend(friend){
-     this.selectedFriend=friend;
-     bus.$emit('friend-selected',friend);
-    },
-    filterFriends(){
-
-    }
   }
+})
+
+let chatRooms=$ref([])
+let selectedFriend=$ref({})
+
+onMounted(() => {
+    axios.get('/chat/friends')
+    .then(res=>{
+    chatRooms=res.data.chatrooms
+    chatRooms.sort((room1,room2)=>(room1.lastMessage.created_at>room2.lastMessage.created_at)? -1 : 1)
+    chatRooms.forEach(chatRoom=>{
+        chatRoom.friend.firstLetter=chatRoom.friend.name.substr(0,1)
+        chatRoom.lastMessage.hour=chatRoom.lastMessage.created_at.substr(11,5)
+        chatRoom.lastMessage.hour=(chatRoom.lastMessage.hour>12)? (parseInt(chatRoom.lastMessage.hour-12))+'PM' : chatRoom.lastMessage.hour+'AM'
+    })
+    })
+})
+
+const getFriends=()=>{
+
 }
+
+const selectFriend=(friend)=>{
+ selectedFriend=friend
+ bus.$emit('friend-selected',friend)
+}
+
+const filterFriends=()=>{
+
+}
+
 </script>

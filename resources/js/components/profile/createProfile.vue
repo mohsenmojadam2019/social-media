@@ -1,23 +1,15 @@
 <template>
- 
+
 </template>
-<script>
-export default {
- props:{
+<script setup>
+defineProps({
   user:{
    type:Object,
    required:true
   }
- },
- data(){
-  return{
+})
 
-  }
- },
- methods:{
-  createProfile(){
+const createProfile=()=>{
 
-  }
- }
 }
 </script>

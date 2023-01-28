@@ -1,6 +1,6 @@
 <template>
  <div class="flex justify-between items-center bg-first w-full shadow-xl py-2">
-  <div class="flex items-center"> 
+  <div class="flex items-center">
     <div class="rounded-4xl mx-3">
       <form @submit.prevent="search" class="flex">
        <input type="text" v-model="searchQuery" required class="w-96 py-2.5 px-3 text-lg lg:text-xl xl:text-xl 2xl:text-xl outline-none focus:border-b-2 border-tiruhakim rounded-l-3xl" placeholder="search...">
@@ -41,11 +41,11 @@
           <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
         </svg>
         </a>
-      </li>   
-      <li class="mx-4">
-        <notification-component :userId="user.id"/>   
       </li>
-     </ul>   
+      <li class="mx-4">
+        <notification-component :userId="user.id"/>
+      </li>
+     </ul>
     </div>
     <div class="block right-0 lg:hidden xl:hidden 2xl:hidden">
       <button @click="userDropdownMenu=true">
@@ -55,12 +55,12 @@
       </button>
     </div>
    </div>
-   <div class="flex items-center"> 
+   <div class="flex items-center">
      <div v-if="user" class="items-center hidden lg:flex">
        <button class="flex items-center mx-2">
         <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="w-12 h-12 rounded-full mr-2">
         <span class="text-xl font-semibold capitalize text-white text-semibold">{{user.name}}</span>
-       </button>   
+       </button>
        <button class="mx-3">
          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-list w-12 text-white" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
@@ -74,7 +74,7 @@
      </div>
      <div v-else class="my-auto flex text-white text-xl text-xl">
       <a href="/login" class="text-2xl text-white mx-2 my-auto px-4 py-2">sign in</a>
-      <a href="/register" class="my-auto text-2xl my-auto text-white bg-second mx-2 my-2 rounded-3xl px-4 py-2">sign up</a>  
+      <a href="/register" class="my-auto text-2xl my-auto text-white bg-second mx-2 my-2 rounded-3xl px-4 py-2">sign up</a>
      </div>
      <div v-if="userDropdownMenu" class="rounded-lg fixed z-20 text-xl bg-gray-100 top-0 right-0">
       <ul>
@@ -85,46 +85,35 @@
        <li class="hover:bg-blue-200 px-5 py-1"><a href="/chat">chat</a></li>
        <li class="hover:bg-blue-200 px-5 py-1"><a href="/about">contact us</a></li>
        <li class="hover:bg-blue-200 px-5 py-1">
-        <button @click="logout">logout</button>  
-       </li>  
+        <button @click="logout">logout</button>
+       </li>
       </ul>
      </div>
      <div v-if="userDropdownMenu" @click="userDropdownMenu=false" class="absolute z-10 -inset-y-0 -inset-x-0 bg-black opacity-50"></div>
-    </div> 
+    </div>
  </div>
 </template>
-<script>
-import notification from'./notification.vue';
-export default {
-   props:{
+<script setup>
+import notification from'./notification.vue'
+
+defineProps({
     user:{
      type:Object,
      required:true
     }
-   },
-   components:{
-    notification
-   },
-   data(){
-    return{
-      searchQuery:'',
-      userDropdownMenu:false,
+})
+
+let searchQuery=$ref('')
+let userDropdownMenu=$ref(false)
+
+const search=()=>{
+    if(searchQuery){
+      document.getElementById('searchQuery').value=searchQuery
+      document.getElementById('category').value=categoryId
+      document.getElementById('search-form').submit()
     }
-   },
-   mounted(){
-    
-   },
-   methods:{
-    search(){
-      if(this.searchQuery){
-      document.getElementById('searchQuery').value=this.searchQuery;
-      document.getElementById('category').value=this.categoryId;
-      document.getElementById('search-form').submit();
-      }
-    },
-    logout(){
-      document.getElementById('logout-form').submit(); 
-    }
-   }
+}
+const logout=()=>{
+    document.getElementById('logout-form').submit()
 }
 </script>

@@ -3,18 +3,6 @@
 
  </div>
 </template>
-<script>
- export default{
-  props:{
-
-  },
-  data(){
-   return{
-
-   }
-  },
-  methods:{
-   
-  }
- }
+<script setup>
+ 
 </script>

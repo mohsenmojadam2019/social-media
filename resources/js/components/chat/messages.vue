@@ -4,7 +4,7 @@
      <div v-if="loading">
        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-circle-half animate-spin w-20 h-20 mx-auto my-5 text-first" viewBox="0 0 16 16">
         <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
-       </svg>  
+       </svg>
      </div>
      <div v-else class="">
       <div v-if="messages.length" class="">
@@ -30,84 +30,80 @@
           <input type="submit" value="send" class="text-white bg-first rounded-r-3xl py-2 px-4 text-xl">
         </form>
       </div>
-   </div>   
+   </div>
    <div v-else class="my-10">
       <p class="text-2xl text-gray-400 text-center my-5">please select a chat to start messaging</p>
-   </div> 
-  </div>  
+   </div>
+  </div>
 </template>
-<script>
-import bus from '../../app';
-export default {
-  props:{
+<script setup>
+import bus from '../../app'
+
+defineProps({
     user:{
      type:Object,
      required:true
     }
-  },
-    data(){
-     return{
-      message:'',
-      messages:[],
-      friend:null,
-      chatroom:'',
-      loading:true
-     }
-    },
-    mounted()
-    {
-      this.listen();
-    },
-    created(){
-      bus.$on('friend-selected',(friend)=>{
-        this.friend=friend;
-        this.setChatroom();
-        this.getMessages();
-      });
-    },
-    methods:{
-      setChatroom(){
-       if(this.friend){
-        let userId=parseInt(this.user.id);
-        let friendId=parseInt(this.friend.id);
-        if(userId<friendId){
-          this.chatroom=this.user.id+''+this.friend.id;
-        }
-        else{
-        this.chatroom=this.friend.id+''+this.user.id;
-        }
-       }
-      },
-      getMessages(){
-       axios.get('/chat/messages',{params:{chatroom:this.chatroom}})
-       .then(res=>{
-          this.messages=res.data.messages;
-          this.messages.forEach((message)=>{
-          message.date=message.created_at.substr(0,9);
-          message.hour=message.created_at.substr(11,5);
-          message.hour=(parseInt(message.hour>12))? (message.hour-12)+'PM' : message.hour+'AM';
-         });
-         this.loading=false;
-       });
-      },
-      listen(){
-        Echo.private(this.chatroom)
-        .listen('.NewMessage',(message)=>{
-          message.date=message.created_at.substr(0,9);
-          message.hour=message.created_at.substr(11,5);
-          message.hour=(message.hour>12) ? (message.hour-6)+'PM' : message.hour+'AM';
-          this.messages.push(message);
-        });
-      },
-      sendMessage(){
-        axios.post('/chat/message/send',{message:this.message,chatroom:this.chatroom,friendId:this.friend.id})
-        .then(res=>{
-          let message=res.data.message;
-          message.date=message.created_at.substr(0,9);
-          this.messages.push(message);
-          this.message="";
-        });
-      }
+})
+
+let message=$ref('')
+let messages=$ref([])
+let friend=$ref(null)
+let chatroom=$ref('')
+let loading=$ref(true)
+
+onCreated(()=>{
+    bus.$on('friend-selected',(friend)=>{
+    friend=friend
+    setChatroom()
+    getMessages()
+    })
+})
+
+const setChatroom=()=>{
+    if(friend){
+    let userId=parseInt(user.id)
+    let friendId=parseInt(friend.id)
+    if(userId<friendId){
+        chatroom=user.id+''+friend.id
+    }
+    else{
+    chatroom=friend.id+''+user.id
+    }
     }
 }
+
+const getMessages=()=>{
+    axios.get('/chat/messages',{params:{chatroom:chatroom}})
+    .then(res=>{
+        messages=res.data.messages
+        messages.forEach((message)=>{
+        message.date=message.created_at.substr(0,9)
+        message.hour=message.created_at.substr(11,5)
+        message.hour=(parseInt(message.hour>12))? (message.hour-12)+'PM' : message.hour+'AM'
+        })
+        loading=false
+    })
+}
+
+const listen=()=>{
+    Echo.private(chatroom)
+    .listen('.NewMessage',(message)=>{
+        message.date=message.created_at.substr(0,9)
+        message.hour=message.created_at.substr(11,5)
+        message.hour=(message.hour>12) ? (message.hour-6)+'PM' : message.hour+'AM'
+        messages.push(message)
+    })
+}
+
+const sendMessage=()=>{
+    axios.post('/chat/message/send',{message:message,chatroom:chatroom,friendId:friend.id})
+    .then(res=>{
+        let message=res.data.message
+        message.date=message.created_at.substr(0,9)
+        messages.push(message)
+        message=""
+    })
+}
+
 </script>

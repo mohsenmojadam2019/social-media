@@ -3,20 +3,9 @@
    <button @click="follow"></button>
   </div>
 </template>
-<script>
-export default {
- data(){
-  return{
+<script setup>
+const follow=()=>{
 
-  }
- },
- mounted(){
-
- },
- methods:{
-  follow(){
-   
-  }
- }
 }
+
 </script>

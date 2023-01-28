@@ -4,11 +4,10 @@
   <span>{{totalLikes}}</span>
   <button @click="dislike">dislike</button>
   <span>{{totalDislikes}}</span>
- </div>      
+ </div>
 </template>
-<script>
-export default {
-    props:{
+<script setup>
+defineProps({
     post:{
       type:Object,
       required:true
@@ -17,36 +16,30 @@ export default {
      type:Object,
      required:true
     }
-   },
-    data(){
-     return{
-      totalLikes:null,
-      totalDislikes:null
-     }      
-    },
-    mounted(){
-     this.getLikes();
-    },
-    methods:{
-     getLikes(){
-       axios.get('/post/likes',{params:{postId:this.post.id,userId:this.user.id}})
-       .then(res=>{
-         this.totalLikes=res.data.totalLikes;
-         this.totalDislikes=res.data.totalDislikes;
-       });
-     },
-     like(){
-      axios.post('/post/like',{postId:this.post.id,userId:this.user.id})
-      .then(res=>{
-        
-      });
-     },
-     dislike(){
-      axios.post('/post/dislike',{postId:this.post.id,userId:this.user.id})
-      .then(res=>{
-        
-      });        
-     }    
-    }   
+})
+
+let totalLikes=$ref(null)
+let totalDislikes=$ref(null)
+
+onMounted(() => {
+    axios.get('/post/likes',{params:{postId:post.id,userId:user.id}})
+    .then(res=>{
+        totalLikes=res.data.totalLikes
+        totalDislikes=res.data.totalDislikes
+    })
+})
+
+const like=()=>{
+    axios.post('/post/like',{postId:post.id,userId:user.id})
+    .then(res=>{
+
+    })
 }
+const dislike=()=>{
+    axios.post('/post/dislike',{postId:post.id,userId:user.id})
+    .then(res=>{
+
+    })
+}
+
 </script>

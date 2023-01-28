@@ -14,35 +14,22 @@
    </div>
  </div>
 </template>
-<script>
+<script setup>
+
 import messages from "./messages.vue";
 import friends from "./friends.vue";
 import active from "./active.vue"
-export default {
-  components: {
-    messages,
-    friends,
-    active
-  },
-  props:{
+
+defineProps({
     user:{
       type:Object,
       required:true
     }
-  },
-  data(){
-   return {
-    text:'',
-    activeFriend:{},
-    message:{},
-    messages:[]
-   }
-  },
-  mounted(){
-   
-  },
-  methods:{
-   
-  }
-}
+})
+
+let text=$ref('')
+let activeFriend=$ref({})
+let message=$ref({})
+let messages=$ref([])
+
 </script>

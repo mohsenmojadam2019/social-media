@@ -3,29 +3,21 @@
 
   </div>
 </template>
-<script>
-export default {
-  props:{
+<script setup>
+defineProps({
    group:{
     type:Object,
     required:true
    }
-  },
-  data(){
-   return{
-    members:[]
-   }
-  },
-  mounted(){
-   this.getMembers();
-  },
-  methods:{
-   getMembers(){
-    axios.get('/group/member/all',{params:{groupId:this.group.id}})
+})
+
+let members=$ref([])
+
+onMounted(() => {
+    axios.get('/group/member/all',{params:{groupId:group.id}})
     .then(res=>{
-      this.members=res.data.members;
+      members=res.data.members
     });
-   }
-  }
-}
+})
+
 </script>

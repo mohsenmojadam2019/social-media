@@ -5,9 +5,8 @@
     </form>
   </div>
 </template>
-<script>
-export default {
- props:{
+<script setup>
+defineProps({
   group:{
    type:Object,
    required:true
@@ -16,19 +15,14 @@ export default {
    type:Object,
    required:true
   }
- },
- data(){
-  return{
-   added:false
-  }
- },
- methods:{
-  addMember(){
-   axios.post('/group/member/add',{groupId:this.group.id,userId:this.user.id})
+})
+
+let added=$ref(false)
+
+const addMember=()=>{
+   axios.post('/group/member/add',{groupId:group.id,userId:user.id})
    .then(res=>{
-     this.added=true;
-   });
-  }
- }
+     added=true
+   })
 }
 </script>

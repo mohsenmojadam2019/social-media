@@ -2,29 +2,25 @@
 <div>
   <button  @click="leaveGroup" class="bg-first text-white text-xl py-2 px-4 rounded-xl" >{{leaveText}}</button>
 </div>
-</temlate>
-<script>
-export default{
- data(){
-  return{
-   leave:false,
-   leaveText:"leave"
-  }
- },
- mounted(){
-  axios.get('/group/user/status',{params:{groupId:this.groupId,userId:this.userId}})
+</template>
+<script setup>
+
+let leave=$ref(false)
+let leaveText=$ref("leave")
+
+onMounted(()=>{
+  axios.get('/group/user/status',{params:{groupId:groupId,userId:userId}})
   .then(res=>{
-   this.leave=res.data;
-  });
- }
- methods:{
-  joinGroup(){
-    axios.post('/group/joingroup',{groupId:this.groupId,userId:this.userId})
+   leave=res.data
+  })
+})
+
+const joinGroup=()=>{
+    axios.post('/group/joingroup',{groupId:groupId,userId:userId})
     .then(res=>{
-       this.leave=res.data;
-       this.leaveText="leave";
-    });
-  }
- }
+       leave=res.data
+       leaveText="leave"
+    })
 }
+
 </script>

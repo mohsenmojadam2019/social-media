@@ -4,17 +4,8 @@
    <input type="submit" value="search" class="">
   </form>
 </template>
-<script>
-export default {
-  data(){
-    return{
-     text:'',
-    }
-  },
-  methods:{
-    search(){
-
-    }
-  }
+<script setup>
+const search=()=>{
+    
 }
 </script>
